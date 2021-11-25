@@ -47,7 +47,7 @@
         
     ";
 
-    $column = array('id_pasta', 'tipo_acao', 'global_rating', 'global_comissao', 'cg_vm', 'global_mde');
+    $column = array('id_pasta', 'tipo_acao','ramo', 'global_rating', 'global_comissao', 'cg_vm', 'global_mde');
     
     if(isset($_POST['filter_mes_aval'], $_POST['filter_ano_aval']) && $_POST['filter_mes_aval'] != '' && $_POST['filter_ano_aval'] != '')
     {
@@ -87,6 +87,7 @@
         $sub_array = array();
         $sub_array[] = $row['id_pasta'];
         $sub_array[] = $row['tipo_acao'];
+        $sub_array[] = $row['ramo'];
         $sub_array[] = $row['global_rating'];
         $sub_array[] = $row['global_comissao'];
         $sub_array[] = $row['cg_vm'];

@@ -4,53 +4,7 @@
 ?>
 
 
-<style>
-    body{
-        background: linear-gradient(to right, rgb(16, 100, 140), rgb(17, 54, 71));
-        color: white;
-        text-align: left;
-        margin: 40px;
-        font-family: Arial, Helvetica, sans-serif;
-    }
 
-
-    a:link, a:visited {
-    background-color: white;
-    color: black;
-    border: 2px solid dodgerblue;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 6px;
-    }
-
-    a:hover, a:active {
-    background-color: dodgerblue;
-    color: white;
-    }
-
-    .links {
-        padding: 15px;
-    }
-
-    .botoesAcoes{
-        border: 2px solid white;
-        color:dodgerblue;
-        font-size: 15px;
-        cursor: pointer;
-        border-radius: 10px;
-    }
-
-    .containers{
-        margin: 40px;
-    }
-
-    .botoesAcoes2{
-    position: relative;}
-
-
-</style>
 
 <body>
 <a class="botoesAcoes" href="index.php">Procurar Outra Pasta</a>

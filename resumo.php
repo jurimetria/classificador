@@ -2,6 +2,7 @@
     session_start();
 
     include('config2.php');
+    include('style.css');
     $pdo = conectar();
 
     $state_prep = '
@@ -321,6 +322,7 @@
                 <tr>
                     <th scope="col">Pasta</th>
                     <th scope="col">Tipo de Pedido</th>
+                    <th scope="col">Ramo</th>
                     <th scope="col">Classificação Relacionamento - Rating da Pasta</th>
                     <th scope="col">Comissão</th>
                     <th scope="col">Classificação Global (Valor Médio)</th>
@@ -334,6 +336,7 @@
         
         echo "<td>".$row['id_pasta']."</td>";
         echo "<td>".$row['tipo_acao']."</td>";
+        echo "<td>".$row['ramo']."</td>";
         echo "<td>".$row['global_rating']."</td>";
         echo "<td>".$row['global_comissao']."</td>";
         echo "<td class='myDIV'>".$row['cg_vm']."</td>";
