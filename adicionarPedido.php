@@ -1,4 +1,5 @@
 <?php
+ include('style.css');
     if(!empty($_GET['id_pasta']))
     {
         include_once('config.php');

@@ -3,6 +3,7 @@
     
 
         include('config2.php');
+        include('style.css');
         $pdo = conectar();
         
        

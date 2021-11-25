@@ -1,6 +1,7 @@
 <?php
     session_start();
     include_once('config.php');
+    include('style.css');
 ?>
 
 

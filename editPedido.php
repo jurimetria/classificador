@@ -2,6 +2,7 @@
 
 <?php
     session_start();
+    include('style.css');
     if(!empty($_GET['n_registro']))
     {
         include('config2.php');

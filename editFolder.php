@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include('style.css');
     
     if(!empty($_GET['id_pasta']))
     {
