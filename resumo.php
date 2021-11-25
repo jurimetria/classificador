@@ -281,7 +281,7 @@
     <!-- TITULO DA PAGINA -->
     <h1>Resumo das Classificações</h1>
     <!-- RESULTADOS DA FILTRAGEM -->
-    <?php if ($teste="1"){echo "Resultados de "; echo $mes_aval; echo "de "; echo $ano_aval;} else{} ?>
+    <?php if ($teste="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{} ?>
 
     <!-- BUSCAR PASTA SEARCH BOX -->
     <div  class="buscar">
