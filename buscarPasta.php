@@ -4,15 +4,49 @@
     include('style.css');
 ?>
 
-
-
-
+<head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>L&P | CLassificador</title>
+    
+</head>
 <body>
-<a class="botoesAcoes" href="index.php">Procurar Outra Pasta</a>
+<!-- BARRA DE NAVEGAÇÃO -->
+<div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="d-flex">
+                <a href="login.php" class="btn btn-danger me-5">Sair</a>
+            </div>
+        </nav>
+    </div>  
+
+
+
+<div class='alingLeft alingTop'>
 <br><br>
-<a class="botoesAcoes" href="novaPasta.php">Cadastrar Nova Pasta</a>
+    <div>
+    
+    <a class="botoesAcoes" href="index.php">Procurar Outra Pasta</a>
+    </div>
+
+    <div>
+    <br><br>
+    <a class="botoesAcoes" href="novaPasta.php">Cadastrar Nova Pasta</a>
+    </div>
+
+</div>
+
+
 <br><br><br><br>
-<h1>Resultados da busca</h1>  
+<h1 class='alingLeft'>Resultados da busca</h1>  
 <br>
 
 
@@ -26,14 +60,14 @@
             $result = mysqli_query($conexao,$sql6);
             $queryResults = mysqli_num_rows($result);
 
-            echo "<h2>Foram encontrados ".$queryResults." resultados:</h2>";
+            echo "<h2 class='alingLeft'>Foram encontrados ".$queryResults." resultados:</h2>";
 
             if($queryResults > 0) 
             {
                 while ($rowx = mysqli_fetch_assoc($result)) 
                 {
-                    echo "<a href='sistema.php?id_pasta=".$rowx['id_pasta'].
-                    "'<div class='containers'>".$rowx['id_pasta']."</div>" 
+                    echo "<div class='alingLeft'><a class='resultBusca' href='sistema.php?id_pasta=".$rowx['id_pasta'].
+                    "'<div class='alingLeft '>".$rowx['id_pasta']."<br><br></div></div>" 
                     ;
                 }
 
@@ -41,8 +75,7 @@
             
             else 
                 {
-                    echo "<br><br> Sem resultados na busca! <br><br>
-                    Confira se a pasta foi cadastrada no Judice até a meia noite de ontem";
+                    echo "<br><br> Sem resultados na busca! <br><br>";
                 }
 
         }

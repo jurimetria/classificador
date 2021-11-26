@@ -32,11 +32,6 @@
     }
     //print_r($result);
     header('Location: sistema.php?id_pasta='.$id_pasta);
- 
-    
-
-
-
 
 
 ?>

@@ -101,159 +101,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>L&P | CLassificador</title>
-    <style>
-        body{
-            background: linear-gradient(to right, rgb(16, 100, 140), rgb(17, 54, 71));
-            color: white;
-            text-align: center;
-            font-size: 18px;
-        }
-        .table-bg{
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px 15px 0 0;
-        }
-
-        .botaoMais{
-            cursor: pointer;
-
-        }
-        .botaoMais:hover {
-        opacity: 0.6;
-        }
-
-        .editFolder{
-            cursor: pointer;
-            margin-left: 55;
-            font-size: 15px;  
-        }
-
-        .editFolder:hover {
-        opacity: 0.8;
-                }
-
-        * {
-        box-sizing: border-box;
-        }
-
-        .buscar{
-            padding-left: 50px;
-        }
-
-        /* Style the search field */
-        form.example input[type=text] {
-        padding: 10px;
-        font-size: 17px;
-        border: none;
-        float: left;
-        width: 10%;
-        background: #f1f1f1;
-        height: 45px;
-        border-radius: 5px 0px 0px 5px;
     
- 
-        
-
-        }
-
-        /* Style the submit button */
-        form.example button {
-        float: left;
-        width: 5%;
-        height: 45px;
-        padding: 10px;
-        background: dodgerblue;
-        color: white;
-        font-size: 17px;
-        border: none;
-        border-left: none; /* Prevent double borders */
-        cursor: pointer;
-        border-radius: 0px 5px 5px 0px;
-
-        }
-
-        form.example button:hover {
-        background: #0b7dda;
-        }
-
-        /* Clear floats */
-        form.example::after {
-        content: "";
-        clear: both;
-        display: table;
-        }
-
-        .pasta{
-        padding-bottom: 30px;
-
-        }
-        /* Create three unequal columns that floats next to each other */
-        .column {
-
-        text-align: left;
-        padding-left: 60px;
-        
-        }
-
-        /* Left and right column */
-        .column.side {
-        width: 33%;
-        
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-        content: "";
-        display: table;
-        clear: both;
-        
-        }
-
-        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 400px) {
-        .column.side{
-            width: 100%;
-            
-        }
-        }
-        .currSign:before {
-            content: 'R$ ';
-        }
-        .racon {
-            color: #f0bc4a;
-        }
-        
-        .button {
-        border: none;
-        padding: 8px 12px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 18px;
-        margin: 2px 1px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-        border-radius: 5px;
-        }
-
-
-
-        .button2 {
-        background-color: #f1f1f1; 
- 
-        border: 2px solid dodgerblue;
-        }
-
-        .button2:hover {
-        background-color: dodgerblue;
-        color: white;
-        }
-
-        .alingLeft {
-            text-align: left;
-            padding-left: 48px;
-        }
-
-    </style>
+    
 </head>
 
 
@@ -281,37 +130,45 @@
 <br>
     <!-- TITULO DA PAGINA -->
     <h1>Resumo das Classificações</h1>
+
     <!-- RESULTADOS DA FILTRAGEM -->
-    <?php if ($teste="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{} ?>
+    <p><?php if ($teste="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "Escolha um período";} ?></p>
 
     <!-- BUSCAR PASTA SEARCH BOX -->
-    <div  class="buscar">
+    <div  class="buscar alingLeft">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <form class="example" action="buscarPasta.php" method="GET">
+            <form class="searchF" action="buscarPasta.php" method="GET">
                 <input type="text" name="search" placeholder="buscar pasta...">
                 <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
             </form>
     </div>
-    <br>
 
 
 
 
  <!-- FILTRO MES E ANO -->
-    <form name="search_form" action="resumo.php" method="POST"> 
-        <select name="search_mes" id="search_mes"  required>
-            <option value="">Selecione o Mês</option>
-            <?php echo $ver_mes_aval; ?>
-        </select>
-
-        <select name="search_ano" id="search_ano"  required>
-            <option value="">Selecione o Ano</option>
-            <?php echo $ver_ano_aval; ?>
-        </select>
-
-    <button type="submit" name="enviar_busca" id="filter" class="btn btn-info">Filtrar</button>
-    </form>
-
+ <div class='row'>
+    <section class="column-center">
+            <div>
+            <form name="search_form" action="resumo.php" method="POST"> 
+                <select name="search_mes" id="search_mes"  required>
+                    <option value="">Selecione o Mês</option>
+                    <?php echo $ver_mes_aval; ?>
+                </select>
+            </div>
+            <div>
+                <select name="search_ano" id="search_ano"  required>
+                    <option value="">Selecione o Ano</option>
+                    <?php echo $ver_ano_aval; ?>
+                </select>
+            </div>
+            <div>
+                <button type="submit" name="enviar_busca" id="filter" class="botaoFiltro ">Filtrar</button>
+            </div>
+            </form>
+        
+    </section>
+</div>
 
 
 
@@ -333,13 +190,12 @@
             <tbody>
                 <?php foreach($data_tb as $row)
     {echo "<tr>";
-        
         echo "<td>".$row['id_pasta']."</td>";
         echo "<td>".$row['tipo_acao']."</td>";
         echo "<td>".$row['ramo']."</td>";
         echo "<td>".$row['global_rating']."</td>";
         echo "<td>".$row['global_comissao']."</td>";
-        echo "<td class='myDIV'>".$row['cg_vm']."</td>";
+        echo "<td>R$ ".number_format($row['cg_vm'],2,",",".")."</td>";
         echo "<td>".$row['global_mde']."</td>";
         echo "<td>
         <a class='btn btn-sm btn-primary ' href='sistema.php?id_pasta=$row[id_pasta]' name='id_pasta' title='Ver Pasta'>
@@ -359,18 +215,7 @@
      
 
     <br><br><br><br>
-    <!-- SCRIPT FORMATA CURRENCY -->
-    <script>
-        let x = document.querySelectorAll(".myDIV");
-        for (let i = 0, len = x.length; i < len; i++) {
-            let num = Number(x[i].innerHTML)
-                      .toLocaleString('br');
-            x[i].innerHTML = num;
-            x[i].classList.add("currSign");
-        }
 
-        
-</script>
 </body>
 </html>
 

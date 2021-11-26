@@ -81,7 +81,8 @@
         // CRIA A VARIAVEL = CLASSIFICAÇÃO GLOBAL (Visão gerencial)
         $cgvg = $sum_val_rel_con_med_v3_return['valor'].': '.$sum_val_rel_con_med_v2_return['valor'];
     }
-    
+
+
     ?>
 
     
@@ -94,6 +95,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>L&P | CLassificador</title>
     
+    
 </head>
 
 
@@ -104,7 +106,7 @@
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">L&P | Classificador de Pastas</a>
+                <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -124,14 +126,14 @@
 
     <!-- LINK PÁGINA RESUMO -->
     <div class="alingLeft">
-        <button type="button" class="button button2" onclick="location.href='resumo.php'">Ir para Resumo</button>
+        <button type="button" class="button" onclick="location.href='resumo.php'">Ir para Resumo</button>
     </div>
     <br>
 
     <!-- BUSCAR PASTA SEARCH BOX -->
-    <div  class="buscar">
+    <div  class="buscar alingLeft">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <form class="example" action="buscarPasta.php" method="GET">
+            <form class="searchF" action="buscarPasta.php" method="GET">
                 <input type="text" name="search" placeholder="buscar pasta...">
                 <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
             </form>
@@ -149,10 +151,11 @@
             <?php echo "<b>Reclamante: </b>", $db_f['reclamante'];?><br>
             <?php echo "<b>Reclamada: </b>", $db_f['reclamada'];?><br>
             <?php echo "<b>Ramo: </b>", $db_f['ramo'];?><br>
+            <?php echo "<b>É binária: </b>", $db_f['binaria'];?><br>
             <?php echo "<b>Cargo: </b>", $db_f['cargo'];?><br>
             <?php echo "<b>Período Discutido: </b>", $db_f['periodo'];?><br>
             <?php echo "<b>Comarca: </b>", $db_f['comarca'];?><br>
-            <?php echo "<b>Última Remuneração: </b>", $db_f['salario'];?><br>
+            <?php echo "<b>Última Remuneração: </b>R$ ", number_format( $db_f['salario'],2,",",".");?><br>
             <?php echo "<b>Tipo de Ação: </b>", $db_f['tipo_acao'];?><br>
             <?php echo "<b>Obs: </b>", $db_f['obs'];?><br><br>
             <?php echo "<a class='btn btn-sm btn-primary' href='editFolder.php?id_pasta=$db_f[id_pasta]' title='Editar Pasta'>
@@ -167,10 +170,10 @@
         <!--     TABELA CLASSIFICACAO RELATIVA        -->
         <div  class="column side" >
         <h3>Classificação Global</h3>
-            <?php echo "<b>Valor Global: </b>", $sum_val_rel_total_return['valor'];?><br><br>
+            <?php echo "<b>Valor Global: </b>R$ ", number_format( $sum_val_rel_total_return['valor'],2,",",".");?><br><br>
             <?php echo "<b>Classificação Global (Probabilidade): </b>", $cgvg;?><br><br>
             <?php echo "<b>Classificação Relacionamento - Rating da Pasta: </b>", $result_selection_rating_val_rel_return['valor'];?><br><br>
-            <?php echo "<b>Comissão a ser paga: </b>", $result_selection_comiss_val_rel_return['valor'];?><br>
+            <?php echo "<b>Comissão a ser paga: </b>R$ ", number_format( $result_selection_comiss_val_rel_return['valor'],2,",",".");?><br>
         </div>
 
     </div>
@@ -195,10 +198,10 @@
                         echo "<tr>";
                         echo "<td>".$row['n_registro']."</td>";
                         echo "<td>".$row['tipo_pedido']."</td>";
-                        echo "<td class='myDIV'>".$row['valor_pedido']."</td>";
+                        echo "<td>R$ ".number_format($row['valor_pedido'],2,",",".")."</td>";
                         echo "<td>".$row['prob_txt']."</td>";
                         echo "<td>".$row['prob_med']."</td>";
-                        echo "<td class='myDIV'>".$row['ValorEstimadocomMDE']."</td>";
+                        echo "<td>R$ ".number_format($row['ValorEstimadocomMDE'],2,",",".")."</td>";
                         echo "<td>
                             <a class='btn btn-sm btn-primary' href='editPedido.php?n_registro=$row[n_registro]' name='n_registro2' title='Editar Pedido'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
@@ -233,15 +236,7 @@
         
     </div>
     <br><br><br><br>
-    <!-- SCRIPT FORMATA CURRENCY -->
-    <script>
-        let x = document.querySelectorAll(".myDIV");
-        for (let i = 0, len = x.length; i < len; i++) {
-            let num = Number(x[i].innerHTML)
-                      .toLocaleString('br');
-            x[i].innerHTML = num;
-            x[i].classList.add("currSign");
-        }
-</script>
+    
+   
 </body>
 </html>

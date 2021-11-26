@@ -9,11 +9,6 @@
         $valor_pedido = $_POST['valor_pedido'];
         $probabilidade = $_POST['probabilidade'];
 
-
-
-
-
-
         $sqlUpdate = "UPDATE tb_dados_valores SET tipo_pedido='$tipo_pedido', valor_pedido='$valor_pedido', probabilidade='$probabilidade'
         WHERE n_registro='$n_registro'";
 

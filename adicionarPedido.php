@@ -1,8 +1,8 @@
 <?php
- include('style.css');
     if(!empty($_GET['id_pasta']))
     {
         include_once('config.php');
+        
 
         $id_pasta = $_GET['id_pasta'];
         $sqlSelect = "SELECT * FROM tb_dados_valores WHERE id_pasta=$id_pasta";
@@ -29,25 +29,37 @@
             }
         }
     }
-        
+    include('style.css');
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pasta do Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>L&P | CLassificador</title>
     
 </head>
 <body>
-
-    <div>
+<!-- BARRA DE NAVEGAÇÃO -->
+<div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="d-flex">
+                <a href="login.php" class="btn btn-danger me-5">Sair</a>
+            </div>
+        </nav>
+    </div>  
+    <div class='alingLeft alingTop'>
         <?php
-                {echo "<a class='btn btn-sm btn-primary' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
+                {echo "<a class='voltar' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
                 }
         ?>
     </div>
