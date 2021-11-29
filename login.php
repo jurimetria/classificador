@@ -1,3 +1,9 @@
+
+<?php
+
+        include('style.css');
+       ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,20 +17,22 @@
 <body>
     <div class="tela-login">
         <div class='img'>
-        <img src="https://lp-classificador.s3.amazonaws.com/img/LogoBranco+-+P1.png" alt="logo" width="46" height="46">
+        <img src="https://lp-classificador.s3.amazonaws.com/img/LogoBranco+-+P1.png" alt="logo" width="70" height="70">
         <br>
         </div>
     
 
         <h1>Login</h1>
-        <form action="testLogin.php" method="POST">
-            <input type="text" name="email" placeholder="email">
+        <form action="testLogin.php" method="POST" class='inputBox'>
+            <input class='inputUser' type="text" name="email" placeholder="email">
+            
             <br><br>
-            <input type="password" name="senha" placeholder="senha">
+            <input class='inputUser' type="password" name="senha" placeholder="senha">
             <br><br>
-            <input class="inputSubmit" type="submit" name="submit" value="Enviar">
+            <input class="inputSubmit" id="submit" type="submit" name="submit" value="Entrar">
         </form>
     </div>
     
 </body>
 </html>
+

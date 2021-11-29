@@ -32,5 +32,6 @@
     {
         // Não acessa
         header('Location: login.php');
+        print_r("Erro de login");
     }
 ?>
