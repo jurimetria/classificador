@@ -8,7 +8,7 @@
         // Acessa
         include_once('config.php');
         $email = addslashes($_POST['email']);
-        $senha = $_POST['senha'];
+        $senha = addslashes($_POST['senha']);
         
         $sql = "SELECT * FROM tb_usuarios WHERE email = '$email' and senha = '$senha'";
 
