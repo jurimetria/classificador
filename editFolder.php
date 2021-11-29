@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('style.css');
+    include('script.js');
     
     if(!empty($_GET['id_pasta']))
     {
@@ -134,6 +135,15 @@
                     <option value="Não Bancário" <?php if($db_f['ramo']=="Não Bancário") echo 'selected="selected"'; ?>>Não Bancário</option>
                     </select>
                 </div>
+
+                <br>
+                <div class="inputBox" class="container">
+                <label for="binaria" >É Binária: </label>
+                    <select id="binaria" name="binaria">
+                    <option value="Sim" <?php if($db_f['binaria']=="Sim") echo 'selected="selected"'; ?>>Sim</option>
+                    <option value="Não" <?php if($db_f['binaria']=="Não") echo 'selected="selected"'; ?>>Não</option>
+                    </select>
+                </div>
                 <br><br>
 
                 <div class="inputBox">
@@ -186,10 +196,7 @@
         </form>
     </div>
 
-    <script type="text/javascript">
-            document.getElementById("voltar").onclick = function () {
-            window.location.href="sistema.php?id_pasta="+'<?php echo $db_f['id_pasta'];?>';}
-    </script>
+    
 
 
 </body>

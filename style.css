@@ -110,10 +110,12 @@ padding-top: 50px;
 
 
 /* Tabela pedidos bg */
+
+
 .table-bg{
 background: rgba(0, 0, 0, 0.3);
 border-radius: 15px 15px 0 0;
-font-size: 20px;
+font-size: 18px;
 }
 
 /* Sistema.php = colunas nos dados detalhes */
@@ -260,6 +262,22 @@ border-radius:5px;
 .botaoFiltro:hover {
 background: #0b7dda;
 }
+
+.botaoFiltro2{
+    width: 170px;
+    height: 40px;
+    background: dodgerblue;
+    color: white;
+    font-size: 17px;
+    border: none;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+    border-radius:5px;
+    }
+    
+    .botaoFiltro2:hover {
+    background: #0b7dda;
+    }
 
 
 /* CAIXAS DE INPUT */

@@ -4,6 +4,7 @@
 
         include('config2.php');
         include('style.css');
+        include('script.js');
         $pdo = conectar();
         
        
@@ -91,7 +92,7 @@
 
 
 <div class='alingLeft alingTop'>
-<button class='voltar' onclick="goBack()">Voltar</button>
+<a class='voltar' onclick="goBack()">Voltar</a>
     </div>
 
     <div class='alingLeft alingTop'>
@@ -244,10 +245,6 @@
             </fieldset>
         </form>
     </div>
-    <script type="text/javascript">
-    document.getElementById("outraPasta").onclick = function () {
-        location.href = "index.php";
-    };
-    </script>
+
 </body>
 </html>

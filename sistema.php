@@ -3,6 +3,7 @@
 
     include('config2.php');
     include('style.css');
+    include('script.js');
     $pdo = conectar();
    
 
@@ -107,6 +108,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -176,11 +178,12 @@
 
         <!--     TABELA CLASSIFICACAO RELATIVA        -->
         <div  class="column side" >
-        <h3>Classificação Global</h3>
+            <h3>Classificação Global</h3>
             <?php echo "<b>Valor Global: </b>R$ ", number_format( $sum_val_rel_total_return['valor'],2,",",".");?><br><br>
             <?php echo "<b>Classificação Global (Probabilidade): </b>", $cgvg;?><br><br>
             <?php echo "<b>Classificação Relacionamento - Rating da Pasta: </b>", $result_selection_rating_val_rel_return['valor'];?><br><br>
-            <?php echo "<b>Comissão a ser paga: </b>R$ ", number_format( $result_selection_comiss_val_rel_return['valor'],2,",",".");?><br>
+            <?php if ($db_f['binaria']==="Não") {echo "<b>Comissão a ser paga: </b>R$ ", number_format( $result_selection_comiss_val_rel_return['valor'],2,",",".");} else {echo "<b>Comissão a ser paga: </b>R$ 300,00";}?><br>
+
         </div>
 
     </div>
@@ -188,6 +191,7 @@
        
     <!-- TABELA PEDIDOS -->
     <div class="m-5">
+    <h3>Tabela de Pedidos</h3><br>
         <table class="table text-white table-bg">
             <thead>
                 <tr>
@@ -195,8 +199,8 @@
                     <th scope="col">Tipo de Pedido</th>
                     <th scope="col">Valor Estimado do Pedido</th>
                     <th scope="col">Probabilidade de Êxito</th>
-                    <th scope="col">Probabilidade Média</th>
-                      <th scope="col">Valor Estimado com MDE %</th>
+                    <th scope="col">Faixa</th>
+                      <th scope="col">Valor com Média Êxito</th>
                     <th scope="col">...</th>
                 </tr>
             </thead>
@@ -206,8 +210,8 @@
                         echo "<td>".$row['n_registro']."</td>";
                         echo "<td>".$row['tipo_pedido']."</td>";
                         echo "<td>R$ ".number_format($row['valor_pedido'],2,",",".")."</td>";
+                        echo "<td>".$row['probabilidade']."</td>";
                         echo "<td>".$row['prob_txt']."</td>";
-                        echo "<td>".$row['prob_med']."</td>";
                         echo "<td>R$ ".number_format($row['ValorEstimadocomMDE'],2,",",".")."</td>";
                         echo "<td>
                             <a class='btn btn-sm btn-primary' href='editPedido.php?n_registro=$row[n_registro]' name='n_registro2' title='Editar Pedido'>

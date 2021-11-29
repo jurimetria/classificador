@@ -3,6 +3,7 @@
 <?php
     session_start();
     include('style.css');
+    include('script.js');
     if(!empty($_GET['n_registro']))
     {
         include('config2.php');
@@ -83,6 +84,7 @@
                     <input type = "text" name="valor_pedido" id="valor_pedido" class="inputUser" value="<?php echo $db_v['valor_pedido'] ?>" required>
                     <label for="valor_pedido" class="labelInput">Valor pedido</label>
                 </div>
+                
                 <br>
                 <div class="inputBox" class="container">
                 <label for="probabilidade" >Probabilidade de Êxito</label>
@@ -101,9 +103,6 @@
             </fieldset>
         </form>
     </div>
-    <script type="text/javascript">
-            document.getElementById("voltar").onclick = function () {
-            window.location.href="sistema.php?id_pasta="+'<?php echo $db_v['id_pasta'];?>';}
-    </script>
+    
 </body>
 </html>

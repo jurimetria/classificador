@@ -2,47 +2,13 @@
     session_start();
 
     include('config2.php');
-    include('style.css');
     $pdo = conectar();
 
-    $state_prep = '
-    SELECT *
-    ,SUM(valor_pedido*prob_med) as cg_vm
-    ,IF(SUM(valor_pedido*prob_med)>=1000000, "AAA",
-    IF((SUM(valor_pedido*prob_med)>=700000 AND SUM(valor_pedido*prob_med)<1000000), "AAB",
-    IF((SUM(valor_pedido*prob_med)>=500000 AND SUM(valor_pedido*prob_med)<700000), "ABB",
-    IF((SUM(valor_pedido*prob_med)>=300000 AND SUM(valor_pedido*prob_med)<500000), "BBB",
-    IF((SUM(valor_pedido*prob_med)>=200000 AND SUM(valor_pedido*prob_med)<300000), "BBC",
-    IF((SUM(valor_pedido*prob_med)>=100000 AND SUM(valor_pedido*prob_med)<200000), "BCC",
-    IF((SUM(valor_pedido*prob_med)>=500000 AND SUM(valor_pedido*prob_med)<100000), "CCC",
-    IF((SUM(valor_pedido*prob_med)<50000), "D",
-    IF((SUM(valor_pedido*prob_med)=0), "E",
-    "F"
-    ))))))))) as global_rating
-    
-    ,IF(SUM(valor_pedido*prob_med)>=1000000, "R$ 1.000",
-    IF((SUM(valor_pedido*prob_med)>=700000 AND SUM(valor_pedido*prob_med)<1000000), "R$ 850",
-    IF((SUM(valor_pedido*prob_med)>=500000 AND SUM(valor_pedido*prob_med)<700000), "R$ 700",
-    IF((SUM(valor_pedido*prob_med)>=300000 AND SUM(valor_pedido*prob_med)<500000), "R$ 500",
-    IF((SUM(valor_pedido*prob_med)>=200000 AND SUM(valor_pedido*prob_med)<300000), "R$ 400",
-    IF((SUM(valor_pedido*prob_med)>=100000 AND SUM(valor_pedido*prob_med)<200000), "R$ 300",
-    IF((SUM(valor_pedido*prob_med)>=500000 AND SUM(valor_pedido*prob_med)<100000), "R$ 250",
-    IF((SUM(valor_pedido*prob_med)<50000), 0,
-    IF((SUM(valor_pedido*prob_med)=0), "R$ 0","R$ 300"
-    ))))))))) as global_comissao
-    
-    ,IF(AVG(prob_med)>=0.9, "ALTA: 90%-100%",
-    IF((AVG(prob_med)>=0.7 AND AVG(prob_med)<0.9), "PROVÁVEL: 70% a 90%",
-    IF((AVG(prob_med)>=0.5 AND AVG(prob_med)<0.7),"POSSÍVEL: 50% a 70%",
-    IF((AVG(prob_med)>=0.2 AND AVG(prob_med)<0.5), "BAIXA: 20% a 50%",
-    IF((AVG(prob_med)<0.2), "REMOTA: abaixo de 20%",""
-    ))))) as global_mde
-    
-    FROM tb_dados_valores v 
-    INNER JOIN  tb_folder f ON v.id_pasta=f.id_pasta
-    INNER JOIN tb_probabilidade p ON p.probabilidade=v.probabilidade
+    include('select.php');
+    include('style.css');
+    include('script.js');
 
-';
+    
 // GROUP BY f.id_pasta 
 
     $ver_ano_aval = '';
@@ -102,7 +68,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>L&P | CLassificador</title>
     
-    
+    <script src="table2excel.js"></script>
 </head>
 
 
@@ -113,7 +79,7 @@
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">L&P | Classificador de Pastas</a>
+                <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -132,7 +98,7 @@
     <h1>Resumo das Classificações</h1>
 
     <!-- RESULTADOS DA FILTRAGEM -->
-    <p><?php if ($teste="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "Escolha um período";} ?></p>
+    <p><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "Escolha um período";} ?></p>
 
     <!-- BUSCAR PASTA SEARCH BOX -->
     <div  class="buscar alingLeft">
@@ -141,6 +107,9 @@
                 <input type="text" name="search" placeholder="buscar pasta...">
                 <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
             </form>
+
+            <button class="botaoFiltro2" id="downloadExcel">Exportar Tabela </button>
+
     </div>
 
 
@@ -163,7 +132,7 @@
                 </select>
             </div>
             <div>
-                <button type="submit" name="enviar_busca" id="filter" class="botaoFiltro ">Filtrar</button>
+                <button type="submit" name="enviar_busca" id="filter" class="botaoFiltro">Filtrar</button>
             </div>
             </form>
         
@@ -172,9 +141,10 @@
 
 
 
+
     <!-- TABELA PEDIDOS -->
     <div class="m-5">
-        <table class="table text-white table-bg">
+        <table id="tabelaResumo" class="table text-white table-bg">
             <thead>
                 <tr>
                     <th scope="col">Pasta</th>
@@ -187,8 +157,9 @@
                     <th scope="col">Ir</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
                 <?php foreach($data_tb as $row)
+          
     {echo "<tr>";
         echo "<td>".$row['id_pasta']."</td>";
         echo "<td>".$row['tipo_acao']."</td>";
@@ -218,4 +189,9 @@
 
 </body>
 </html>
-
+<script>
+document.getElementById('downloadExcel').addEventListener('click',function(){
+    var table2excel = new Table2Excel();
+    table2excel.export(document.querySelectorAll("#tabelaResumo"));
+});
+</script>
