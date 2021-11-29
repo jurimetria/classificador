@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
@@ -44,11 +44,11 @@
         <!-- CADASTRAR NOVA PASTA -->
         <br>
         <div class='alingLeft alingTop'>
-        <a class="botoesAcoes " href="novaPasta.php">Cadastrar Nova Pasta</a>
+        <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
         </div>
     
 
-<br><br><br><br>
+<br><br>
 <h2 class=" alingLeft">Procure uma pasta:</h2><br>
 
 
@@ -57,7 +57,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <form class="searchF" action="buscarPasta.php" method="GET">
                 <input type="text" name="search" placeholder="buscar pasta...">
-                <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
+                <button type="submit" name="submit-search"><i class="fa fa-search "></i></button>
             </form>
     </div>
 

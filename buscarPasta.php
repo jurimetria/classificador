@@ -34,18 +34,18 @@
 <br><br>
     <div>
     
-    <a class="botoesAcoes" href="index.php">Procurar Outra Pasta</a>
+    <a class="button2" href="index.php">Procurar Outra Pasta</a>
     </div>
 
     <div>
-    <br><br>
-    <a class="botoesAcoes" href="novaPasta.php">Cadastrar Nova Pasta</a>
+    <br>
+    <a class="button2" href="novaPasta.php">Cadastrar Nova Pasta</a>
     </div>
 
 </div>
 
 
-<br><br><br><br>
+<br><br>
 <h1 class='alingLeft'>Resultados da busca</h1>  
 <br>
 
@@ -60,7 +60,7 @@
             $result = mysqli_query($conexao,$sql6);
             $queryResults = mysqli_num_rows($result);
 
-            echo "<h2 class='alingLeft'>Foram encontrados ".$queryResults." resultados:</h2>";
+            echo "<h2 class='alingLeft'>Foram encontrados ".$queryResults." resultados:</h2><br>";
 
             if($queryResults > 0) 
             {

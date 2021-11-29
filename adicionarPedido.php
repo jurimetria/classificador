@@ -44,7 +44,7 @@
 </head>
 <body>
 <!-- BARRA DE NAVEGAÇÃO -->
-<div>
+    <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
@@ -57,6 +57,7 @@
             </div>
         </nav>
     </div>  
+
     <div class='alingLeft alingTop'>
         <?php
                 {echo "<a class='voltar' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
@@ -65,13 +66,14 @@
     </div>
 
 
+<!-- CAIXA DE INPUTS -->
     <div class="box">
         <form action="" method="POST">
             <fieldset>
-                <legend><b>Novo pedido <a></a> - Pasta # <?php echo $id_pasta ?> </b></legend>
-                <br><br>
+                <legend id='padding12'><a><b>Novo pedido - Pasta: <?php echo $id_pasta ?> </b></a></legend>
+                <br>
 
-                <div class="inputBox" class="container">
+                <div class="inputBox">
                 <label for="tipo_pedido" >Pedido</label>
                     <select id="tipo_pedido" name="tipo_pedido">
                         <option value="">Escolha</option>
@@ -90,15 +92,15 @@
                     </select>
                 </div>
                 
-                <br><br>
+                <br>
                 <div class="inputBox">
                     <input type = "text" name="valor_pedido" id="valor_pedido" class="inputUser"  required>
                     <label for="valor_pedido" class="labelInput">Valor pedido</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox" class="container">
-                <label for="probabilidade" >Probabilidade de Êxito: </label>
+                    <label for="probabilidade" >Probabilidade de Êxito: </label>
                     <select id="probabilidade" name="probabilidade">
                         <option value="">Escolha</option>
                         <option value="Alta">Alta: 90% a 100%</option>
@@ -115,6 +117,7 @@
             </fieldset>
         </form>
     </div>
+    
     
 </body>
 </html>

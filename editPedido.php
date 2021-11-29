@@ -46,15 +46,17 @@
     </div>  
     
     
-    <div>
-    
-        <button id="voltar">Voltar</button><br>
+    <div class='alingLeft alingTop'>
+        <?php
+                {echo "<a class='voltar' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
+                }
+        ?>
     </div>
 
     <div class="box">
         <form action="saveEditPedido.php" method="POST">
             <fieldset>
-                <legend><b>Editar pedido # <a><?php echo $n_registro ?></a> - Pasta # <?php echo $id_pasta ?> </b></legend>
+                <legend id='padding12'><a><b>Editar pedido # <?php echo $n_registro ?> - Pasta # <?php echo $id_pasta ?> </b></a></legend>
                 <br><br>
 
 
@@ -76,15 +78,12 @@
                     </select>
                 </div>
                 
-                <br><br>
+                <br>
                 <div class="inputBox">
                     <input type = "text" name="valor_pedido" id="valor_pedido" class="inputUser" value="<?php echo $db_v['valor_pedido'] ?>" required>
                     <label for="valor_pedido" class="labelInput">Valor pedido</label>
                 </div>
-                <br><br>
-
-
-
+                <br>
                 <div class="inputBox" class="container">
                 <label for="probabilidade" >Probabilidade de Êxito</label>
                     <select id="probabilidade" name="probabilidade">
@@ -95,13 +94,10 @@
                         <option value="REMOTA" <?php if($db_v['probabilidade']=="REMOTA") echo 'selected="selected"'; ?>>Remota: abaixo de 20%</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 
                 <input type="hidden" name="n_registro" id="n_registro" value="<?php echo $n_registro;?>">
-
-               
-                <input type="submit" name="update" id="update">
-                
+                <input type="submit" name="update" id="submit">
             </fieldset>
         </form>
     </div>

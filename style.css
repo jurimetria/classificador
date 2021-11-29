@@ -1,337 +1,412 @@
-    <style>
+<style>
 
-    body{
-    background: linear-gradient(to right, rgb(16, 100, 140), rgb(17, 54, 71));
-    color: white;
-    text-align: center;
-    font-size: 20px;
-    }
-
-
-    .table-bg{
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 15px 15px 0 0;
-    font-size: 20px;
-    }
+/* Geral */
+body{
+background: linear-gradient(to right, rgb(16, 100, 140), rgb(17, 54, 71));
+color: white;
+text-align: center;
+font-size: 17px;
+}
 
 
-    h1{
+a{
     color:white;
+    font-size: 19px;
     }
 
-    h2{
-    color:white;
-    }
+h1{
+color:white;
+}
 
-    h3{
-    color:white;
-    }
+h2{
+color:white;
+}
 
-    p{
-    color:white;
-    }
+h3{
+color:white;
+}
 
+p{
+color:white;
+}
 
-    /* Create three unequal columns that floats next to each other */
-    .column {
-    text-align: left;
-    color:white;
-    font-size: 20px;
-    }
-
-    /* Left and right column */
-    .column.side {
-    width: 50%;
-    }
-
-
-    .row{
-    padding-left: 50px;
-    }
-
-    /* Clear floats after the columns */
-    .row:after {
-    content: "";
-    display: table;
-    clear: both;
-    }
-
-
-    .button {
-    height: 40px;
-    border: none;
-    padding: 8px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    margin: 2px 1px;
-    transition-duration: 0.25s;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #f1f1f1; 
-    }
-
-    .button:hover {
-    background-color: dodgerblue;
-    color: white;
-    }
-
-    .alingLeft{
-    text-align: left;
-    padding-left: 50px;
-
-    }
-
-    
-    .alingCenter{
-        text-align: center;
-    
-    }
-   
-    
-
-    .alingTop{
-    padding-top: 50px;
-    }
-
-    /* Style the search field */
-    form.searchF input[type=text] {
-    padding: 8px;
+#fontSize17{
     font-size: 17px;
-    border: none;
-    float: left;
-    width: 170px;
-    height: 40px;
-    background: #f1f1f1;
-    border-radius: 5px 0px 0px 5px;
-    }
+}
 
-    /* Style the submit button */
-    form.searchF button {
-    float: left;
-    width: 45px;
-    height: 40px;
-    padding: 8px;
-    background: dodgerblue;
-    color: white;
-    font-size: 17px;
-    border: none;
-    border-left: none; /* Prevent double borders */
-    cursor: pointer;
-    border-radius: 0px 5px 5px 0px;
-    }
+#fontSize19{
+    font-size: 19px;
+}
 
-    form.searchF button:hover {
-    background: #0b7dda;
-    }
+#fontSize20{
+    font-size: 20px;
+}
 
-    /* Clear floats */
-    form.searchF::after {
-    content: "";
-    clear: both;
-    display: table;
-    }
+#fontSize22{
+    font-size: 22px;
+}
 
+.button {
+height: 44px;
+color:black;
+border: none;
+padding: 8px 12px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 17px;
 
-    /* SELETORES */
+transition-duration: 0.25s;
+cursor: pointer;
+border-radius: 5px;
+background-color: #f1f1f1; 
+}
 
-    $glass: rgba(255, 255, 255, 0.2);
-    $glass-icon: rgba(255, 255, 255, 0.3);
-    $gradient: linear-gradient(35deg, red, purple);
-    $option: #320a28;
+.button:hover {
+background-color: dodgerblue;
+color: white;
+}
 
-    body {
-    background: $gradient;
-    }
+.button2 {
+height: 44px;
+color:black;
+border: none;
+padding: 8px 12px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 18px;
 
-    /* <select> styles */
-    select {
-    /* Reset */
-    appearance: none;
-    border: 0;
-    outline: 0;
-    font: inherit;
-    /* Personalize */
-    width: 295px;
-    height: 40px;
-    padding: 0 4em 0 1em;
-    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
-    no-repeat right 0.8em center / 1.4em,
-    linear-gradient(to left, $glass-icon 3em, $glass 3em);
-    color: black;
-    border-radius: 0.25em;
-    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    /* <option> colors */
-    option {
-    color: inherit;
-    background-color: $option;
-    }
-    /* Remove focus outline */
-    &:focus {
-    outline: none;
-    }
-    /* Remove IE arrow */
-    &::-ms-expand {
-    display: none;
-    }
-    }
+transition-duration: 0.25s;
+cursor: pointer;
+border-radius: 5px;
+background-color: #f1f1f1; 
+}
 
-    /* centering with CSS Grid */
-    .column-center {
-    display: grid;
-    justify-content: center;
-    gap: 4px;
-    align-content: center;
-    grid-auto-flow: column;
-    }
-
-    .item-center {
-    display: grid;
-    grid-auto-flow: column;
-    gap: 4px;
-    align-items: center;
-    justify-items: center;
-    }
-
-    .botaoFiltro{
-    width: 70px;
-    height: 40px;
-    background: dodgerblue;
-    color: white;
-    font-size: 17px;
-    border: none;
-    border-left: none; /* Prevent double borders */
-    cursor: pointer;
-    border-radius:5px;
-    }
-
-    .botaoFiltro:hover {
-    background: #0b7dda;
-    }
+.button2:hover {
+background-color: dodgerblue;
+color: white;
+}
 
 
-    .box{
-    color: white;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 15px;
-    border-radius: 15px;
-    width: 320px;
-    text-align: left;
-    }
 
-    fieldset{
-    border: 3px solid dodgerblue;
-    }
-    legend{
-    border: 1px solid dodgerblue;
-    padding: 10px;
-    text-align: center;
-    background-color: dodgerblue;
-    border-radius: 8px;
-    }
-    .inputBox{
-    position: relative;
-    }
+.alingLeft{
+text-align: left;
+padding-left: 50px;
 
-    .inputUser{
+}
+
+
+.alingCenter{
+text-align: center;
+
+}
+
+.alingTop{
+padding-top: 50px;
+}
+
+
+
+
+/* Tabela pedidos bg */
+.table-bg{
+background: rgba(0, 0, 0, 0.3);
+border-radius: 15px 15px 0 0;
+font-size: 20px;
+}
+
+/* Sistema.php = colunas nos dados detalhes */
+.column {
+text-align: left;
+color:white;
+font-size: 20px;
+}
+
+/* Left and right column */
+.column.side {
+width: 50%;
+}
+
+.row{
+padding-left: 50px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+
+
+
+
+/* SEARCH */
+form.searchF input[type=text] {
+padding: 8px;
+font-size: 17px;
+border: none;
+float: left;
+width: 170px;
+height: 40px;
+background: #f1f1f1;
+border-radius: 5px 0px 0px 5px;
+}
+
+/* SUBMIT */
+form.searchF button {
+float: left;
+width: 45px;
+height: 40px;
+padding: 8px;
+background: dodgerblue;
+color: white;
+font-size: 17px;
+border: none;
+border-left: none; /* Prevent double borders */
+cursor: pointer;
+border-radius: 0px 5px 5px 0px;
+}
+
+form.searchF button:hover {
+background: #0b7dda;
+}
+
+/* Clear floats */
+form.searchF::after {
+content: "";
+clear: both;
+display: table;
+}
+
+
+/* GERAL SELETORES */
+$glass: rgba(255, 255, 255, 0.2);
+$glass-icon: rgba(255, 255, 255, 0.3);
+$gradient: linear-gradient(35deg, red, purple);
+$option: #320a28;
+
+body {
+background: $gradient;
+}
+/* <select> styles */
+select {
+/* Reset */
+appearance: none;
+border: 0;
+outline: 0;
+font: inherit;
+/* Personalize */
+width: 100%;
+height: 40px;
+padding: 0 4em 0 1em;
+background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
+no-repeat right 0.8em center / 1.4em,
+linear-gradient(to left, $glass-icon 3em, $glass 3em);
+color: black;
+border-radius: 0.25em;
+box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+cursor: pointer;
+/* <option> colors */
+option {
+color: inherit;
+background-color: $option;
+}
+/* Remove focus outline */
+&:focus {
+outline: none;
+}
+/* Remove IE arrow */
+&::-ms-expand {
+display: none;
+}
+}
+
+/* centering with CSS Grid */
+.column-center {
+display: grid;
+justify-content: center;
+gap: 4px;
+align-content: center;
+grid-auto-flow: column;
+}
+
+.item-center {
+display: grid;
+grid-auto-flow: column;
+gap: 4px;
+align-items: center;
+justify-items: center;
+}
+
+
+
+
+
+.botaoFiltro{
+width: 70px;
+height: 40px;
+background: dodgerblue;
+color: white;
+font-size: 17px;
+border: none;
+border-left: none; /* Prevent double borders */
+cursor: pointer;
+border-radius:5px;
+}
+
+.botaoFiltro:hover {
+background: #0b7dda;
+}
+
+
+/* CAIXAS DE INPUT */
+.box{
+margin-left: auto;
+margin-right: auto;
+margin-top: 60px;
+margin-bottom: 60px;
+background-color: rgba(0, 0, 0, 0.6);
+border-radius: 15px;
+width: 350px;
+padding: 12px;
+color: white;
+text-align: left;
+font-size: 18;
+}
+
+#padding12{
+    padding: 12px;}
+
+legend{
+text-align: center;
+padding: 12px;
+border: 1px solid dodgerblue;
+color:white;
+border-radius: 8px;
+
+background-color: black;
+}
+
+.inputBox{
+position: relative;
+}
+
+.inputUser{
+background: none;
+border: none;
+border-bottom: 1px solid white;
+outline: none;
+color: white;
+font-size: 17px;
+width: 100%;
+letter-spacing: 1px;
+}
+
+.labelInput{
+position: absolute;
+top: 0px;
+left: 0px;
+pointer-events: none;
+transition: .5s;
+}
+.inputUser:focus ~ .labelInput,
+.inputUser:valid ~ .labelInput{
+top: -20px;
+font-size: 17px;
+color: dodgerblue;
+}
+
+#submit{
+background-color: dodgerblue;
+width: 100%;
+border: none;
+padding: 13px;
+color: white;
+font-size: 19px;
+cursor: pointer;
+border-radius: 10px;
+
+}
+#submit:hover{
+background-image: linear-gradient(to right,dodgerblue, rgb(19, 74, 156));
+transition-duration: 0.25s;
+}
+
+.obsBox {
     background: none;
     border: none;
-    border-bottom: 1px solid white;
+    border: 1px solid white;
     outline: none;
     color: white;
     font-size: 15px;
+    width:100%;
+    letter-spacing: 1px;
     width: 100%;
-    letter-spacing: 2px;
-    }
+    height: 120px;
+    border-radius: 4px;
+    work-break: break-all;
 
-    .labelInput{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    pointer-events: none;
-    transition: .5s;
-    }
-    .inputUser:focus ~ .labelInput,
-    .inputUser:valid ~ .labelInput{
-    top: -20px;
-    font-size: 12px;
-    color: dodgerblue;
-    }
+}
 
-    #submit{
-    background-color: dodgerblue;
-    width: 100%;
-    border: none;
-    padding: 15px;
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-    border-radius: 10px;
-    }
-    #submit:hover{
-    background-image: linear-gradient(to right,dodgerblue, rgb(19, 74, 156));
-    }
+/*BOTOES VOLTAR */
+.voltar{
+background-color: rgb(221, 215, 215);
+width: 70px;
+height: 44px;
+text-align: center;
+font-size: 17px;
+border: none;
+padding: 12px;
+top:20px;
+color: black;
+cursor: pointer;
+border-radius: 10px;
+text-decoration: none;
+}
 
+.voltar:hover{
+background-color: dodgerblue;
+color: white;
+transition-duration: 0.25s;
+}
 
-    .voltar{
-    background-color: dodgerblue;
-    width: 70px;
-    text-align: center;
-    font-size: 20px;
-    border: none;
-    padding: 15px;
-    top:20px;
-    color: white;
-    cursor: pointer;
-    border-radius: 10px;
-    text-decoration: none;
+.botoesAcoes{
+background-color: dodgerblue;
+text-decoration: none;
+color: white;
+padding: 15px;
+width: 70px;
+height: 40px;
+text-align: center;
+font-size: 20px;
+border-radius: 10px;
+}
 
-    }
+.botoesAcoes:hover{
+background-color: rgb(23, 119, 214);
+color: white;
 
-    .voltar:hover{
-    background-color: rgb(23, 119, 214);
-
-    }
-
-    .botoesAcoes{
-    background-color: dodgerblue;
-    text-decoration: none;
-    color: white;
-    padding: 15px;
-    width: 70px;
-    height: 40px;
-    text-align: center;
-    font-size: 20px;
-    border-radius: 10px;
-    }
-
-    .botoesAcoes:hover{
-    background-color: rgb(23, 119, 214);
-    color: white;
-
-    }
+}
 
 .resultBusca{
-    
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-    
+
+text-decoration: none;
+color: white;
+font-size: 20px;
+
 }
 
 .resultBusca:hover{
-    font-size: 22px;
-    padding: 2px;
-    text-align: center;
-    text-decoration: none;
-    color: goldenrod;
-    }
+font-size: 20px;
+padding: 2px;
+text-align: center;
+text-decoration: none;
+color: goldenrod;
+transition-duration: 0.25s;
+}
 
 
-    </style>
+</style>

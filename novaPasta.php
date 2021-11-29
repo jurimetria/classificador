@@ -87,14 +87,22 @@
                 <a href="login.php" class="btn btn-danger me-5">Sair</a>
             </div>
         </nav>
-    </div>  
-    <div>
-    <button onclick="goBack()">Voltar</button><br>
-    <button id="outraPasta">Procurar Outra Pasta</button><br>
-    
-    <div>
+</div>  
 
+
+<div class='alingLeft alingTop'>
+<button class='voltar' onclick="goBack()">Voltar</button>
     </div>
+
+    <div class='alingLeft alingTop'>
+        <?php
+                {echo "<a class='voltar' href='index.php' title='Procurar Outra Pasta'> Procurar Outra Pasta</a>";
+                }
+        ?>
+    </div>
+
+
+
 
 
     <div class="box">
@@ -102,14 +110,14 @@
 
 
             <fieldset>
-                <legend><b>Cadastrar Nova Pasta </b></legend>
-                <br>
+                <legend id='padding12'><a><b>Cadastrar Nova Pasta </b></a></legend>
+                <br><br>
 
                 <div class="inputBox">
                     <input type = "text" name="id_pasta" id="id_pasta" class="inputUser" required>
                     <label for="id_pasta" class="labelInput">Número da Pasta</label>
                 </div>
-                <br><br>
+                <br>
 
 
                 <div class="inputBox" class="container" >
@@ -123,7 +131,7 @@
                     <option value="José">José</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox" class="container">
                 <label for="area" >Área: </label>
@@ -133,7 +141,7 @@
                         <option value="Previdenciário" <?php if($db_f['area']=="Previdenciário") echo 'selected="selected"'; ?>>Previdenciário</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox" class="container">
                 <label for="ano_aval" >Ano da Avaliação: </label>
@@ -142,7 +150,7 @@
                         
                     </select>
                 </div>
-                <br><br>
+                <br>
 
                 
                 <div class="inputBox" class="container">
@@ -162,20 +170,20 @@
                         <option value="Janeiro"<?php if($data=="Janeiro") echo 'selected="selected"'; ?>>Janeiro</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 
 
                 <div class="inputBox">
                     <input type = "text" name="reclamante" id="reclamante" class="inputUser"  required>
                     <label for="reclamante" class="labelInput">Reclamante</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox">
                     <input type = "text" name="reclamada" id="reclamada" class="inputUser"  required>
                     <label for="reclamada" class="labelInput">Reclamada</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox" class="container">
                 <label for="ramo" >Ramo: </label>
@@ -185,31 +193,31 @@
                     <option value="Não Bancário" >Não Bancário</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox">
                     <input type = "text" name="cargo" id="cargo" class="inputUser" required>
                     <label for="cargo" class="labelInput">Cargo</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox">
                     <input type = "text" name="periodo" id="periodo" class="inputUser" required >
                     <label for="periodo" class="labelInput">Período Discutido</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox">
                     <input type = "text" name="comarca" id="comarca" class="inputUser" required>
                     <label for="comarca" class="labelInput">Comarca</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox">
                     <input type = "text" name="salario" id="salario" class="inputUser" required >
                     <label for="salario" class="labelInput">Última Remuneração</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox" class="container">
                 <label for="tipo_acao" >Tipo de Ação </label>
@@ -229,7 +237,7 @@
                     <textarea name="obs" id="obs" class="obsBox" rows="4" cols="50" ></textarea>
                     <label for="obs" class="labelInput">Observações</label>
                 </div>
-                <br><br>
+                <br>
             
                 
                 <input type="submit" name="submit" id="submit">

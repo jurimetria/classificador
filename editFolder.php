@@ -48,16 +48,19 @@
 
     <div>
 
-    <div>
-    <button id="voltar">Voltar</button><br>
+    <div class='alingLeft alingTop'>
+        <?php
+                {echo "<a class='voltar' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
+                }
+        ?>
     </div>
 
 
     <div class="box">
         <form action="saveEditFolder.php" method="POST">
             <fieldset>
-                <legend><b>Editar Pasta # <a><?php echo $id_pasta ?></a></b></legend>
-                <br>
+                <legend id='padding12'><a><b>Editar Pasta: <?php echo $id_pasta ?></b></a></legend>
+                
                 <div class="inputBox" class="container" >
                 <label for="avaliador" >Avaliador: </label>
                     <select id="avaliador" name="avaliador" >
@@ -68,7 +71,7 @@
                     <option value="José" <?php if($db_f['avaliador']=="José") echo 'selected="selected"'; ?>>José</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox" class="container">
                 <label for="area" >Área: </label>
@@ -78,7 +81,7 @@
                         <option value="Previdenciário" <?php if($db_f['area']=="Previdenciário") echo 'selected="selected"'; ?>>Previdenciário</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox" class="container">
                 <label for="ano_aval" >Ano da Avaliação: </label>
@@ -89,7 +92,7 @@
                         <option value="2020" <?php if($db_f['ano_aval']=="2020") echo 'selected="selected"'; ?>>2020</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 
                 
                 <div class="inputBox" class="container">
@@ -122,7 +125,7 @@
                     <input type = "text" name="reclamada" id="reclamada" class="inputUser" value="<?php echo $db_f['reclamada'] ?>" required>
                     <label for="reclamada" class="labelInput">Reclamada</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox" class="container">
                 <label for="ramo" >Ramo: </label>
@@ -143,19 +146,19 @@
                     <input type = "text" name="periodo" id="periodo" class="inputUser" value="<?php echo $db_f['periodo'] ?>" >
                     <label for="periodo" class="labelInput">Período Discutido</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox">
                     <input type = "text" name="comarca" id="comarca" class="inputUser" value="<?php echo $db_f['comarca'] ?>" >
                     <label for="comarca" class="labelInput">Comarca</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox">
                     <input type = "text" name="salario" id="salario" class="inputUser" value="<?php echo $db_f['salario'] ?>" >
                     <label for="salario" class="labelInput">Última Remuneração</label>
                 </div>
-                <br><br>
+                <br>
 
                 <div class="inputBox" class="container">
                 <label for="tipo_acao" >Tipo de Ação </label>
@@ -168,20 +171,17 @@
                     <option value="VÍNCULO" <?php if($db_f['tipo_acao']=="VÍNCULO") echo 'selected="selected"'; ?>>VÍNCULO</option>
                     </select>
                 </div>
-                <br><br>
+                <br>
 
 
                 <div class="inputBox">
                 <label for="obs" class="label">Observações</label>
                     <textarea name="obs" id="obs" class="obsBox" rows="4" cols="50"><?php echo $db_f['obs'] ?></textarea>
-                    
                 </div>
-                <br><br>
-                
-                <br><br>
-            
+                <br>
+
                 <input type="hidden" name="id_pasta" id="id_pasta" value="<?php echo $id_pasta;?>">
-                <input type="submit" name="update" id="update">
+                <input type="submit" name="update" id="submit">
             </fieldset>
         </form>
     </div>

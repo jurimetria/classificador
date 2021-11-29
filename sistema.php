@@ -124,20 +124,27 @@
     </div>
 <br>
 
-    <!-- LINK PÁGINA RESUMO -->
-    <div class="alingLeft">
+        <!-- LINK PÁGINA RESUMO -->
+        <div class="alingLeft">
         <button type="button" class="button" onclick="location.href='resumo.php'">Ir para Resumo</button>
-    </div>
-    <br>
+        </div><br>
 
-    <!-- BUSCAR PASTA SEARCH BOX -->
-    <div  class="buscar alingLeft">
+
+        <!-- CADASTRAR NOVA PASTA -->
+        <div class='alingLeft '>
+        <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
+        </div>
+        <br>
+
+        <!-- BUSCAR PASTA SEARCH BOX -->
+        <div  class="buscar alingLeft">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <form class="searchF" action="buscarPasta.php" method="GET">
-                <input type="text" name="search" placeholder="buscar pasta...">
-                <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
-            </form>
-    </div>
+        <form class="searchF" action="buscarPasta.php" method="GET">
+        <input type="text" name="search" placeholder="buscar pasta...">
+        <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
+        </form>
+        </div>
+
 <br>
     <!-- TABELAS CENTRAIS -->
     <div class="row">
