@@ -16,6 +16,11 @@
         $id_pasta = $db_v['id_pasta'];
     }
 
+    // Salva dados da última alteração
+    $logado = $_SESSION['email'];
+    date_default_timezone_set('America/Sao_Paulo');
+    $horario = date('m/d/Y h:i:s a', time());
+  
 ?>
 
 
@@ -97,8 +102,9 @@
                     </select>
                 </div>
                 <br>
-
                 <input type="hidden" name="n_registro" id="n_registro" value="<?php echo $n_registro;?>">
+                <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
+                <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
                 <input type="submit" name="update" id="submit">
             </fieldset>
         </form>

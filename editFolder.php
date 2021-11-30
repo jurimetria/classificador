@@ -2,21 +2,27 @@
     session_start();
     include('style.css');
     include('script.js');
-    
+    include('config2.php');
+
+    $pdo = conectar();
+        $id_pasta = $_GET['id_pasta'];
+
     if(!empty($_GET['id_pasta']))
     {
-        include('config2.php');
-        $pdo = conectar();
-        $id_pasta = $_GET['id_pasta'];
-       
-        
+
         $stmt = $pdo->prepare('SELECT * FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
         $stmt->execute();
         $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
 
     }
 
-    
+// Salva dados da última alteração
+    $logado = $_SESSION['email'];
+    date_default_timezone_set('America/Sao_Paulo');
+    $horario = date('m/d/Y h:i:s a', time());
+ 
+
+
 ?>
 
 
@@ -191,6 +197,8 @@
                 <br>
 
                 <input type="hidden" name="id_pasta" id="id_pasta" value="<?php echo $id_pasta;?>">
+                <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
+                <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
                 <input type="submit" name="update" id="submit">
             </fieldset>
         </form>

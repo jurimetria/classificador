@@ -34,11 +34,6 @@
         }
 
 
-    if($mes_aval=""){}
-    if($ano_aval=""){}
-        $teste = "0";
- 
-
 
     if (isset($_POST['enviar_busca']))
     {
@@ -48,12 +43,16 @@
         $state_prep .= 'WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\') GROUP BY f.id_pasta ';
         $teste = "1";
 
+    } 
+    else{$state_prep .= 'WHERE * GROUP BY f.id_pasta ';
+        $teste = "0";
+
     }
+
     $state= $pdo->prepare($state_prep);
     $state->execute();
     $data_tb = $state->fetchAll();
 
-   
     ?>
 
 
@@ -94,11 +93,23 @@
  
     </div>
 <br>
+    <!-- BOTÃO VOLTAR -->
+    <div class='alingLeft alingTop'>
+        <button class='voltar' onclick="goBack()">Voltar</button>
+    </div>
     <!-- TITULO DA PAGINA -->
     <h1>Resumo das Classificações</h1>
 
     <!-- RESULTADOS DA FILTRAGEM -->
     <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "Escolha um período";} ?></p>
+
+
+
+            <!-- CADASTRAR NOVA PASTA -->
+            <div class='alingLeft '>
+        <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
+        </div>
+        <br>
 
     <!-- BUSCAR PASTA SEARCH BOX -->
     <div  class="buscar alingLeft">
@@ -108,6 +119,9 @@
                 <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
             </form>
 
+
+             <!-- EXPORTAR TABELA EXCEL -->
+             <br>
             <button class="botaoFiltro2" id="downloadExcel">Exportar Tabela </button>
 
     </div>
@@ -165,7 +179,7 @@
         echo "<td>".$row['tipo_acao']."</td>";
         echo "<td>".$row['ramo']."</td>";
         echo "<td>".$row['global_rating']."</td>";
-        echo "<td>".$row['global_comissao']."</td>";
+        echo "<td>R$ ".number_format($row['global_comissao'],2,",",".")."</td>";
         echo "<td>R$ ".number_format($row['cg_vm'],2,",",".")."</td>";
         echo "<td>".$row['global_mde']."</td>";
         echo "<td>
@@ -194,4 +208,9 @@ document.getElementById('downloadExcel').addEventListener('click',function(){
     var table2excel = new Table2Excel();
     table2excel.export(document.querySelectorAll("#tabelaResumo"));
 });
+</script>
+<script>
+function goBack() {
+  window.history.back();
+}
 </script>

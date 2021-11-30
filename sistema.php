@@ -2,92 +2,97 @@
     session_start();
 
     include('config2.php');
-    include('style.css');
+    
     include('script.js');
     $pdo = conectar();
    
-
-    $id_pasta = $_GET['id_pasta'];
-
-
-    $stmt_vp = $pdo->prepare('SELECT * FROM tb_dados_valores v  
-    INNER JOIN tb_probabilidade p
-        ON v.probabilidade=p.probabilidade 
-     WHERE id_pasta=\''.$id_pasta.'\'');
-    $stmt_vp->execute(array('id_pasta' => $id_pasta));
-    $db_vp =$stmt_vp->fetch(PDO::FETCH_ASSOC);
-
-    $stmt_f = $pdo->prepare('SELECT * FROM tb_folder f  
-     WHERE id_pasta=\''.$id_pasta.'\'');
-    $stmt_f->execute(array('id_pasta' => $id_pasta));
-    $db_f = $stmt_f->fetch(PDO::FETCH_ASSOC);
-
-    $data_tb = $pdo->query('SELECT *, valor_pedido*prob_med as ValorEstimadocomMDE FROM tb_dados_valores v  
-    INNER JOIN tb_probabilidade p
-        ON v.probabilidade=p.probabilidade 
-    WHERE id_pasta=\''.$id_pasta.'\'')->fetchAll();
-
-
-
-    $count = count($data_tb);
-
-    // print_r('Linhas: '.$count);
-
-    if ($count === 0)
+    if(!empty($id_pasta = $_GET['id_pasta']))
     {
-        $sum_val_rel_total_return['valor']= "0";
-        $sum_val_rel_considerado_return['valor'] = "0";
-        $cgvg="Adicione Pedidos";
-        $result_selection_rating_val_rel_return['valor']="Adicione Pedidos";
-        $result_selection_comiss_val_rel_return['valor']="0";
-
-    }
-      else
-    {
-
         
-        // CLASSIFICAÇÃO GLOBAL - VARIÁVEIS
-        // VALOR TOTAL 
-        $sum_val_total = $pdo->prepare('SELECT SUM(valor_pedido) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p
-        ON v.probabilidade=p.probabilidade WHERE id_pasta=\''.$id_pasta.'\'');
-        $sum_val_total->execute();
-        $sum_val_total_return = $sum_val_total->fetch(PDO::FETCH_ASSOC);
 
-        // VALOR TOTAL COM MÉDIA DE EXITO
-        $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_pedido*prob_med) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p
-        ON v.probabilidade=p.probabilidade WHERE id_pasta=\''.$id_pasta.'\'');
-        $sum_val_total_cme->execute();
-        $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
 
-        // MÉDIA DE EXITO GLOBAL
-        $med_exito = $sum_val_total_cme_return['valor']/ $sum_val_total_return['valor'];
+        $stmt_vp = $pdo->prepare('SELECT * FROM tb_dados_valores v  
+        INNER JOIN tb_probabilidade p
+            ON v.probabilidade=p.probabilidade 
+        WHERE id_pasta=\''.$id_pasta.'\'');
+        $stmt_vp->execute(array('id_pasta' => $id_pasta));
+        $db_vp =$stmt_vp->fetch(PDO::FETCH_ASSOC);
 
-        // PRBABILIDADE % (ALTA,BX,etc)
-        $prob_perc = $pdo->prepare('SELECT probabilidade AS valor FROM tb_probabilidade WHERE (prob_max>='.$med_exito.' AND prob_min<='.$med_exito.')');
-        $prob_perc->execute();
-        $prob_perc_return = $prob_perc->fetch(PDO::FETCH_ASSOC);
+        $stmt_f = $pdo->prepare('SELECT * FROM tb_folder f  
+        WHERE id_pasta=\''.$id_pasta.'\'');
+        $stmt_f->execute(array('id_pasta' => $id_pasta));
+        $db_f = $stmt_f->fetch(PDO::FETCH_ASSOC);
 
-        // PRBABILIDADE  TXT
-        $prob_txt = $pdo->prepare('SELECT prob_txt AS valor FROM tb_probabilidade WHERE (prob_max>='.$med_exito.' AND prob_min<='.$med_exito.')');
-        $prob_txt->execute();
-        $prob_txt_return = $prob_txt->fetch(PDO::FETCH_ASSOC);
+        $data_tb = $pdo->query('SELECT *, valor_pedido*prob_med as ValorEstimadocomMDE FROM tb_dados_valores v  
+        INNER JOIN tb_probabilidade p
+            ON v.probabilidade=p.probabilidade 
+        WHERE id_pasta=\''.$id_pasta.'\'')->fetchAll();
 
-        // CRIA A VARIAVEL = CLASSIFICAÇÃO GLOBAL (Visão gerencial)
-        $cgvg = $prob_perc_return['valor'].': '.$prob_txt_return['valor'];
 
-        // Classificação Relacionamento - Rating da Pasta
-        $pasta_rating = $pdo->prepare('SELECT rating AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_total_cme_return['valor'].' AND val_min<='.$sum_val_total_cme_return['valor'].')');
-        $pasta_rating->execute();
-        $pasta_rating_return = $pasta_rating->fetch(PDO::FETCH_ASSOC);
 
-        // COMISSAO A SER PAGA
-        $comiss = $pdo->prepare('SELECT comissao AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_total_cme_return['valor'].' AND val_min<='.$sum_val_total_cme_return['valor'].')');
-        $comiss->execute();
-        $comiss_return = $comiss->fetch(PDO::FETCH_ASSOC);
+        $count = count($data_tb);
+
+        // print_r('Linhas: '.$count);
+
+        if ($count === 0)
+        {
+            $sum_val_rel_total_return['valor']= "0";
+            $sum_val_rel_considerado_return['valor'] = "0";
+            $cgvg="Adicione Pedidos";
+            $result_selection_rating_val_rel_return['valor']="Adicione Pedidos";
+            $result_selection_comiss_val_rel_return['valor']="0";
+
+        }
+        else
+        {
+
+            
+            // CLASSIFICAÇÃO GLOBAL - VARIÁVEIS
+            // VALOR TOTAL 
+            $sum_val_total = $pdo->prepare('SELECT SUM(valor_pedido) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p
+            ON v.probabilidade=p.probabilidade WHERE id_pasta=\''.$id_pasta.'\'');
+            $sum_val_total->execute();
+            $sum_val_total_return = $sum_val_total->fetch(PDO::FETCH_ASSOC);
+
+            // VALOR TOTAL COM MÉDIA DE EXITO
+            $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_pedido*prob_med) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p
+            ON v.probabilidade=p.probabilidade WHERE id_pasta=\''.$id_pasta.'\'');
+            $sum_val_total_cme->execute();
+            $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
+
+            // MÉDIA DE EXITO GLOBAL
+            $med_exito = $sum_val_total_cme_return['valor']/ $sum_val_total_return['valor'];
+
+            // PRBABILIDADE % (ALTA,BX,etc)
+            $prob_perc = $pdo->prepare('SELECT probabilidade AS valor FROM tb_probabilidade WHERE (prob_max>='.$med_exito.' AND prob_min<='.$med_exito.')');
+            $prob_perc->execute();
+            $prob_perc_return = $prob_perc->fetch(PDO::FETCH_ASSOC);
+
+            // PRBABILIDADE  TXT
+            $prob_txt = $pdo->prepare('SELECT prob_txt AS valor FROM tb_probabilidade WHERE (prob_max>='.$med_exito.' AND prob_min<='.$med_exito.')');
+            $prob_txt->execute();
+            $prob_txt_return = $prob_txt->fetch(PDO::FETCH_ASSOC);
+
+            // CRIA A VARIAVEL = CLASSIFICAÇÃO GLOBAL (Visão gerencial)
+            $cgvg = $prob_perc_return['valor'].': '.$prob_txt_return['valor'];
+
+            // Classificação Relacionamento - Rating da Pasta
+            $pasta_rating = $pdo->prepare('SELECT rating AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_total_cme_return['valor'].' AND val_min<='.$sum_val_total_cme_return['valor'].')');
+            $pasta_rating->execute();
+            $pasta_rating_return = $pasta_rating->fetch(PDO::FETCH_ASSOC);
+
+            // COMISSAO A SER PAGA
+            $comiss = $pdo->prepare('SELECT comissao AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_total_cme_return['valor'].' AND val_min<='.$sum_val_total_cme_return['valor'].')');
+            $comiss->execute();
+            $comiss_return = $comiss->fetch(PDO::FETCH_ASSOC);
+
+        }
 
     }
-
-
+ else {
+    header('Location: index.php');
+ }
+ include('style.css');
 ?>
 
     
@@ -124,7 +129,7 @@
         <br>
 
         <?php
-            echo "<h2>Pasta: $id_pasta</h2>";
+            echo "<h1>Pasta: $id_pasta</h1>";
         ?>
  
     </div>
@@ -132,7 +137,7 @@
 
         <!-- LINK PÁGINA RESUMO -->
         <div class="alingLeft">
-        <button type="button" class="button" onclick="location.href='resumo.php'">Ir para Resumo</button>
+        <button type="button2" class="button" onclick="location.href='resumo.php'">Ir para Resumo</button>
         </div><br>
 
 
@@ -203,7 +208,7 @@
                     <th scope="col">Tipo de Pedido</th>
                     <th scope="col">Valor Estimado do Pedido</th>
                     <th scope="col">Probabilidade de Êxito</th>
-                    <th scope="col">Faixa</th>
+                    <th scope="col">Faixa de Êxito</th>
                       <th scope="col">Valor com Média Êxito</th>
                     <th scope="col">...</th>
                 </tr>

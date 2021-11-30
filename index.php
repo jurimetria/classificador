@@ -40,12 +40,20 @@
             </div>
         </nav>
     </div>  
-    
+    <br><br>
+        <!-- LINK PÁGINA RESUMO -->
+        <div class="alingLeft">
+        <button type="button" class="button" onclick="location.href='resumo.php'">Ir para Resumo</button>
+        </div><br>
+
+
         <!-- CADASTRAR NOVA PASTA -->
-        <br>
-        <div class='alingLeft alingTop'>
+        <div class='alingLeft '>
         <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
         </div>
+        <br>
+
+
     
 
 <br><br>

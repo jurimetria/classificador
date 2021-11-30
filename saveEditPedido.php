@@ -4,12 +4,14 @@
 
     if(isset($_POST['update']))
     {
+        $logado = $_POST['logado'];
+        $horario = $_POST['horario'];
         $n_registro = $_POST['n_registro'];
         $tipo_pedido = $_POST['tipo_pedido'];
         $valor_pedido = $_POST['valor_pedido'];
         $probabilidade = $_POST['probabilidade'];
 
-        $sqlUpdate = "UPDATE tb_dados_valores SET tipo_pedido='$tipo_pedido', valor_pedido='$valor_pedido', probabilidade='$probabilidade'
+        $sqlUpdate = "UPDATE tb_dados_valores SET logado='$logado',horario='$horario',tipo_pedido='$tipo_pedido', valor_pedido='$valor_pedido', probabilidade='$probabilidade'
         WHERE n_registro='$n_registro'";
 
         $result = $conexao->query($sqlUpdate);

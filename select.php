@@ -12,21 +12,21 @@ $state_prep = '
     IF((SUM(valor_pedido*prob_med)>=200000 AND SUM(valor_pedido*prob_med)<300000), "BBC",
     IF((SUM(valor_pedido*prob_med)>=100000 AND SUM(valor_pedido*prob_med)<200000), "BCC",
     IF((SUM(valor_pedido*prob_med)>=500000 AND SUM(valor_pedido*prob_med)<100000), "CCC",
-    IF((SUM(valor_pedido*prob_med)<50000), "D",
+    IF((SUM(valor_pedido*prob_med)<50000 AND SUM(valor_pedido*prob_med)>0), "D",
     IF((SUM(valor_pedido*prob_med)=0), "E",
     ""
     )))))))))) as global_rating
     
-    ,IF(f.binaria="Sim","R$ 300",
-    IF(SUM(valor_pedido*prob_med)>=1000000, "R$ 1.000",
-    IF((SUM(valor_pedido*prob_med)>=700000 AND SUM(valor_pedido*prob_med)<1000000), "R$ 850",
-    IF((SUM(valor_pedido*prob_med)>=500000 AND SUM(valor_pedido*prob_med)<700000), "R$ 700",
-    IF((SUM(valor_pedido*prob_med)>=300000 AND SUM(valor_pedido*prob_med)<500000), "R$ 500",
-    IF((SUM(valor_pedido*prob_med)>=200000 AND SUM(valor_pedido*prob_med)<300000), "R$ 400",
-    IF((SUM(valor_pedido*prob_med)>=100000 AND SUM(valor_pedido*prob_med)<200000), "R$ 300",
-    IF((SUM(valor_pedido*prob_med)>=500000 AND SUM(valor_pedido*prob_med)<100000), "R$ 250",
+    ,IF(f.binaria="Sim","300",
+    IF(SUM(valor_pedido*prob_med)>=1000000, "1000",
+    IF((SUM(valor_pedido*prob_med)>=700000 AND SUM(valor_pedido*prob_med)<1000000), "850",
+    IF((SUM(valor_pedido*prob_med)>=500000 AND SUM(valor_pedido*prob_med)<700000), "700",
+    IF((SUM(valor_pedido*prob_med)>=300000 AND SUM(valor_pedido*prob_med)<500000), "500",
+    IF((SUM(valor_pedido*prob_med)>=200000 AND SUM(valor_pedido*prob_med)<300000), "400",
+    IF((SUM(valor_pedido*prob_med)>=100000 AND SUM(valor_pedido*prob_med)<200000), "300",
+    IF((SUM(valor_pedido*prob_med)>=500000 AND SUM(valor_pedido*prob_med)<100000), "250",
     IF((SUM(valor_pedido*prob_med)<50000), 0,
-    IF((SUM(valor_pedido*prob_med)=0), "R$ 0",""
+    IF((SUM(valor_pedido*prob_med)=0), "0",""
     )))))))))) as global_comissao
     
     ,IF(AVG(prob_med)>=0.9, "ALTA: 90%-100%",
