@@ -1,21 +1,21 @@
 <style>
 
 .tela-login{
-    background-color: rgba(0, 0, 0, 0.45);
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    padding: 80px;
-    border-radius: 15px;
-    color: white;
+background-color: rgba(0, 0, 0, 0.45);
+position: absolute;
+top:50%;
+left:50%;
+transform: translate(-50%,-50%);
+padding: 80px;
+border-radius: 15px;
+color: white;
 }
 
 img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    }
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
 
 /* Geral */
 body{
@@ -27,9 +27,9 @@ font-size: 17px;
 
 
 a{
-    color:white;
-    font-size: 19px;
-    }
+color:white;
+font-size: 19px;
+}
 
 h1{
 color:white;
@@ -49,19 +49,19 @@ color:white;
 }
 
 #fontSize17{
-    font-size: 17px;
+font-size: 17px;
 }
 
 #fontSize19{
-    font-size: 19px;
+font-size: 19px;
 }
 
 #fontSize20{
-    font-size: 20px;
+font-size: 20px;
 }
 
 #fontSize22{
-    font-size: 22px;
+font-size: 22px;
 }
 
 .button {
@@ -282,20 +282,20 @@ background: #0b7dda;
 }
 
 .botaoFiltro2{
-    width: 170px;
-    height: 40px;
-    background: dodgerblue;
-    color: white;
-    font-size: 17px;
-    border: none;
-    border-left: none; /* Prevent double borders */
-    cursor: pointer;
-    border-radius:5px;
-    }
-    
-    .botaoFiltro2:hover {
-    background: #0b7dda;
-    }
+width: 170px;
+height: 40px;
+background: dodgerblue;
+color: white;
+font-size: 17px;
+border: none;
+border-left: none; /* Prevent double borders */
+cursor: pointer;
+border-radius:5px;
+}
+
+.botaoFiltro2:hover {
+background: #0b7dda;
+}
 
 
 /* CAIXAS DE INPUT */
@@ -314,7 +314,7 @@ font-size: 18;
 }
 
 #padding12{
-    padding: 12px;}
+padding: 12px;}
 
 legend{
 text-align: center;
@@ -322,7 +322,6 @@ padding: 12px;
 border: 1px solid dodgerblue;
 color:white;
 border-radius: 8px;
-
 background-color: black;
 }
 
@@ -372,18 +371,18 @@ transition-duration: 0.25s;
 }
 
 .obsBox {
-    background: none;
-    border: none;
-    border: 1px solid white;
-    outline: none;
-    color: white;
-    font-size: 15px;
-    width:100%;
-    letter-spacing: 1px;
-    width: 100%;
-    height: 120px;
-    border-radius: 4px;
-    work-break: break-all;
+background: none;
+border: none;
+border: 1px solid white;
+outline: none;
+color: white;
+font-size: 15px;
+width:100%;
+letter-spacing: 1px;
+width: 100%;
+height: 120px;
+border-radius: 4px;
+word-break: break-all;
 
 }
 

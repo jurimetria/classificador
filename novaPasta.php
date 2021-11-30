@@ -1,59 +1,48 @@
-<?php
-    session_start();
+<?php 
+   
+    include('config2.php');
     
+    $pdo = conectar();
 
-        include('config2.php');
+    $stmt = $pdo->prepare('SELECT * FROM tb_folder ');
+    $stmt->execute();
+    $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    if(isset($_POST['submit']))
+    {
+        $id_pasta = $_POST['id_pasta'];
+                $avaliador = $_POST['avaliador'];
+        $area = $_POST['area'];
+        $mes_aval = $_POST['mes_aval'];
+        $ano_aval = $_POST['ano_aval'];
+        $reclamante = $_POST['reclamante'];
+        $reclamada = $_POST['reclamada'];
+        $ramo = $_POST['ramo'];
+        $binaria = $_POST['binaria'];
+        $cargo = $_POST['cargo'];
+        $periodo = $_POST['periodo'];
+        $comarca = $_POST['comarca'];
+        $salario = $_POST['salario'];
+        $tipo_acao = $_POST['tipo_acao'];
+        $obs = $_POST['obs'];
+
+        $statement = $pdo->prepare("INSERT INTO tb_folder (id_pasta,avaliador,area,ano_aval,mes_aval,reclamante,reclamada,ramo,binaria,cargo,periodo,comarca,salario,tipo_acao,obs)
+        VALUES ('".$id_pasta."','".$avaliador."', '".$area."', '".$ano_aval."', '".$mes_aval."', '".$reclamante."', '".$reclamada."', '".$ramo."', '".$binaria."', '".$cargo."', '".$periodo."', '".$comarca."', '".$salario."', '".$tipo_acao."', '".$obs."')");
+        $statement->execute(array($id_pasta, $avaliador, $area, $ano_aval, $mes_aval, $reclamante, $reclamada, $ramo, $binaria, $cargo, $periodo, $comarca, $salario, $tipo_acao, $obs));
+
+        header('Location: sistema.php?id_pasta='.$id_pasta);
+    }
+    
+    // Completa com o mês atual na caixa menu mês
+
+        $datam = date('m');
+        $dataa = date('Y');
+// print_r($dataa);
+
         include('style.css');
         include('script.js');
-        $pdo = conectar();
-        
-       
-        
-        $stmt = $pdo->prepare('SELECT * FROM tb_folder ');
-        $stmt->execute();
-        $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if(isset($_POST['submit']))
-        {
-    
-            $id_pasta = $_POST['id_pasta'];
-            $avaliador = $_POST['avaliador'];
-            $area = $_POST['area'];
-            $mes_aval = $_POST['mes_aval'];
-            $ano_aval = $_POST['ano_aval'];
-            $reclamante = $_POST['reclamante'];
-            $reclamada = $_POST['reclamada'];
-            $ramo = $_POST['ramo'];
-            $cargo = $_POST['cargo'];
-            $periodo = $_POST['periodo'];
-            $comarca = $_POST['comarca'];
-            $salario = $_POST['salario'];
-            $tipo_acao = $_POST['tipo_acao'];
-            $obs = $_POST['obs'];
-    
-            $sqlInsert = "INSERT INTO tb_folder(id_pasta,avaliador,area,ano_aval,mes_aval,reclamante,reclamada,ramo,cargo,periodo,comarca,salario,tipo_acao,obs
-            VALUES ('$id_pasta','$avaliador','$area','$ano_aval','$mes_aval','$reclamante','$reclamada','$ramo','$cargo','$periodo','$comarca','$salario','$tipo_acao','$obs')";
-
-            $insert = $pdo->prepare($sqlInsert);
-            $result= $insert->execute(array($id_pasta,$avaliador, $area,$mes_aval,$ano_aval,$reclamante,$reclamada,$ramo,$cargo,$periodo,$comarca,$salario,$tipo_acao,$obs));
-            {
-                header('Location: sistema.php?id_pasta='.$id_pasta);
-            }
-        }
-
-    
-        if( date('m') == 12){$data = "Dezembro";}
-        if( date('m') == 11){$data = "Novembro";}
-        if( date('m') == 10){$data = "Outubro";}
-        if( date('m') == 9){$data = "Setembro";}
-        if( date('m') == 8){$data = "Agosto";}
-        if( date('m') == 7){$data = "Julho";}
-        if( date('m') == 6){$data = "Junho";}
-        if( date('m') == 5){$data = "Maio";}
-        if( date('m') == 4){$data = "Abril";}
-        if( date('m') == 3){$data = "Março";}
-        if( date('m') == 2){$data = "Fevereiro";}
-        if( date('m') == 1){$data = "Janeiro";}
 
 ?>
 <!-- 
@@ -90,11 +79,12 @@
         </nav>
 </div>  
 
-
-<div class='alingLeft alingTop'>
-<a class='voltar' onclick="goBack()">Voltar</a>
+<!-- BOTÃO VOLTAR -->
+    <div class='alingLeft alingTop'>
+        <button class='voltar' onclick="goBack()">Voltar</button>
     </div>
 
+<!-- BOTÃO PROCURAR OUTRA PASTA -->
     <div class='alingLeft alingTop'>
         <?php
                 {echo "<a class='voltar' href='index.php' title='Procurar Outra Pasta'> Procurar Outra Pasta</a>";
@@ -147,8 +137,11 @@
                 <div class="inputBox" class="container">
                 <label for="ano_aval" >Ano da Avaliação: </label>
                     <select id="ano_aval" name="ano_aval">
-                        <option value="2021" >2021</option>
-                        
+                        <option value="2023" <?php if($dataa=="2023") echo 'selected="selected"'; ?>>2023</option>
+                        <option value="2022" <?php if($dataa=="2022") echo 'selected="selected"'; ?>>2022</option>
+                        <option value="2021" <?php if($dataa=="2021") echo 'selected="selected"'; ?>>2021</option>
+                        <option value="2020" <?php if($dataa=="2020") echo 'selected="selected"'; ?>>2020</option>
+                        <option value="2019" <?php if($dataa=="2019") echo 'selected="selected"'; ?>>2019</option>
                     </select>
                 </div>
                 <br>
@@ -157,18 +150,18 @@
                 <div class="inputBox" class="container">
                 <label for="mes_aval" >Mês da Avaliação: </label>
                     <select id="mes_aval" name="mes_aval" >
-                        <option value="Dezembro" <?php if($data=="Dezembro") echo 'selected="selected"'; ?>>Dezembro</option>
-                        <option value="Novembro" <?php if($data=="Novembro") echo 'selected="selected"'; ?>>Novembro</option>
-                        <option value="Outubro" <?php if($data=="Outubro") echo 'selected="selected"'; ?>>Outubro</option>
-                        <option value="Setembro" <?php if($data=="Setembro") echo 'selected="selected"'; ?>>Setembro</option>
-                        <option value="Agosto" <?php if($data=="Agosto") echo 'selected="selected"'; ?>>Agosto</option>
-                        <option value="Julho" <?php if($data=="Julho") echo 'selected="selected"'; ?>>Julho</option>
-                        <option value="Junho" <?php if($data=="Junho") echo 'selected="selected"'; ?>>Junho</option>
-                        <option value="Maio" <?php if($data=="Maio") echo 'selected="selected"'; ?>>Maio</option>
-                        <option value="Abril" <?php if($data=="Abril") echo 'selected="selected"'; ?>>Abril</option>
-                        <option value="Março" <?php if($data=="Março") echo 'selected="selected"'; ?>>Março</option>
-                        <option value="Fevereiro" <?php if($data=="Fevereiro") echo 'selected="selected"'; ?>>Fevereiro</option>
-                        <option value="Janeiro"<?php if($data=="Janeiro") echo 'selected="selected"'; ?>>Janeiro</option>
+                        <option value="Dezembro" <?php if($datam=="12") echo 'selected="selected"'; ?>>Dezembro</option>
+                        <option value="Novembro" <?php if($datam=="11") echo 'selected="selected"'; ?>>Novembro</option>
+                        <option value="Outubro" <?php if($datam=="10") echo 'selected="selected"'; ?>>Outubro</option>
+                        <option value="Setembro" <?php if($datam=="09") echo 'selected="selected"'; ?>>Setembro</option>
+                        <option value="Agosto" <?php if($datam=="08") echo 'selected="selected"'; ?>>Agosto</option>
+                        <option value="Julho" <?php if($datam=="07") echo 'selected="selected"'; ?>>Julho</option>
+                        <option value="Junho" <?php if($datam=="06") echo 'selected="selected"'; ?>>Junho</option>
+                        <option value="Maio" <?php if($datam=="05") echo 'selected="selected"'; ?>>Maio</option>
+                        <option value="Abril" <?php if($datam=="04") echo 'selected="selected"'; ?>>Abril</option>
+                        <option value="Março" <?php if($datam=="03") echo 'selected="selected"'; ?>>Março</option>
+                        <option value="Fevereiro" <?php if($datam=="02") echo 'selected="selected"'; ?>>Fevereiro</option>
+                        <option value="Janeiro"<?php if($datam=="01") echo 'selected="selected"'; ?>>Janeiro</option>
                     </select>
                 </div>
                 <br>
@@ -189,9 +182,18 @@
                 <div class="inputBox" class="container">
                 <label for="ramo" >Ramo: </label>
                     <select id="ramo" name="ramo">
-                    <option value="" >Escolha um ramo</option>
+
                     <option value="Bancário">Bancário</option>
                     <option value="Não Bancário" >Não Bancário</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class="inputBox" class="container">
+                <label for="binaria" >É Binária? </label>
+                    <select id="binaria" name="binaria">
+                    <option value="Sim">Sim</option>
+                    <option value="Não" >Não</option>
                     </select>
                 </div>
                 <br>
@@ -234,12 +236,12 @@
                 </div>
                 <br><br>
 
+
                 <div class="inputBox">
-                    <textarea name="obs" id="obs" class="obsBox" rows="4" cols="50" ></textarea>
-                    <label for="obs" class="labelInput">Observações</label>
+                <label for="obs" class="label">Observações</label>
+                    <textarea name="obs" id="obs" class="obsBox" rows="4" cols="50"></textarea>
                 </div>
                 <br>
-            
                 
                 <input type="submit" name="submit" id="submit">
             </fieldset>
@@ -248,3 +250,9 @@
 
 </body>
 </html>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>

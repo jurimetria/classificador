@@ -98,7 +98,7 @@
     <h1>Resumo das Classificações</h1>
 
     <!-- RESULTADOS DA FILTRAGEM -->
-    <p><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "Escolha um período";} ?></p>
+    <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "Escolha um período";} ?></p>
 
     <!-- BUSCAR PASTA SEARCH BOX -->
     <div  class="buscar alingLeft">
@@ -148,9 +148,9 @@
             <thead>
                 <tr>
                     <th scope="col">Pasta</th>
-                    <th scope="col">Tipo de Pedido</th>
+                    <th scope="col">Tipo de Ação</th>
                     <th scope="col">Ramo</th>
-                    <th scope="col">Classificação Relacionamento - Rating da Pasta</th>
+                    <th scope="col">Rating</th>
                     <th scope="col">Comissão</th>
                     <th scope="col">Classificação Global (Valor Médio)</th>
                     <th scope="col">Classificação Global (Probabilidade)</th>

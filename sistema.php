@@ -29,11 +29,10 @@
 
 
 
-
     $count = count($data_tb);
 
     // print_r('Linhas: '.$count);
- 
+
     if ($count === 0)
     {
         $sum_val_rel_total_return['valor']= "0";
@@ -49,42 +48,47 @@
         
         // CLASSIFICAÇÃO GLOBAL - VARIÁVEIS
         // VALOR TOTAL 
-        $sum_val_rel_total = $pdo->prepare('SELECT SUM(valor_pedido*prob_med) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p
+        $sum_val_total = $pdo->prepare('SELECT SUM(valor_pedido) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p
         ON v.probabilidade=p.probabilidade WHERE id_pasta=\''.$id_pasta.'\'');
-        $sum_val_rel_total->execute();
-        $sum_val_rel_total_return = $sum_val_rel_total->fetch(PDO::FETCH_ASSOC);
+        $sum_val_total->execute();
+        $sum_val_total_return = $sum_val_total->fetch(PDO::FETCH_ASSOC);
 
-        // CLASSIFICAÇÃO DA AÇÃO
-        $result_selection_rating_val_rel = $pdo->prepare('SELECT rating AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_rel_total_return['valor'].' AND val_min<='.$sum_val_rel_total_return['valor'].')');
-        $result_selection_rating_val_rel->execute();
-        $result_selection_rating_val_rel_return = $result_selection_rating_val_rel->fetch(PDO::FETCH_ASSOC);
-        // COMISSAO A SER PAGA
-        $result_selection_comiss_val_rel = $pdo->prepare('SELECT comissao AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_rel_total_return['valor'].' AND val_min<='.$sum_val_rel_total_return['valor'].')');
-        $result_selection_comiss_val_rel->execute();
-        $result_selection_comiss_val_rel_return = $result_selection_comiss_val_rel->fetch(PDO::FETCH_ASSOC);
-        
-        // PROBABILIDADE MEDIA DA PASTA
-        $sum_val_rel_con_med = $pdo->prepare('SELECT AVG(prob_med) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p ON v.probabilidade=p.probabilidade WHERE id_pasta=\''.$id_pasta.'\'');
-        $sum_val_rel_con_med->execute();
-        $sum_val_rel_con_med_return = $sum_val_rel_con_med->fetch(PDO::FETCH_ASSOC);
-        // print_r($sum_val_rel_con_med_return['valor']);
+        // VALOR TOTAL COM MÉDIA DE EXITO
+        $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_pedido*prob_med) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p
+        ON v.probabilidade=p.probabilidade WHERE id_pasta=\''.$id_pasta.'\'');
+        $sum_val_total_cme->execute();
+        $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
+
+        // MÉDIA DE EXITO GLOBAL
+        $med_exito = $sum_val_total_cme_return['valor']/ $sum_val_total_return['valor'];
+
+        // PRBABILIDADE % (ALTA,BX,etc)
+        $prob_perc = $pdo->prepare('SELECT probabilidade AS valor FROM tb_probabilidade WHERE (prob_max>='.$med_exito.' AND prob_min<='.$med_exito.')');
+        $prob_perc->execute();
+        $prob_perc_return = $prob_perc->fetch(PDO::FETCH_ASSOC);
 
         // PRBABILIDADE  TXT
-        $sum_val_rel_con_med_v2 = $pdo->prepare('SELECT prob_txt AS valor FROM tb_probabilidade WHERE (prob_max>='.$sum_val_rel_con_med_return['valor'].' AND prob_min<='.$sum_val_rel_con_med_return['valor'].')');
-        $sum_val_rel_con_med_v2->execute();
-        $sum_val_rel_con_med_v2_return = $sum_val_rel_con_med_v2->fetch(PDO::FETCH_ASSOC);
-        
-        // PRBABILIDADE MEDIA DA PASTA -  PROB
-        $sum_val_rel_con_med_v3 = $pdo->prepare('SELECT probabilidade AS valor FROM tb_probabilidade WHERE (prob_max>='.$sum_val_rel_con_med_return['valor'].' AND prob_min<='.$sum_val_rel_con_med_return['valor'].')');
-        $sum_val_rel_con_med_v3->execute();
-        $sum_val_rel_con_med_v3_return = $sum_val_rel_con_med_v3->fetch(PDO::FETCH_ASSOC);
-        
+        $prob_txt = $pdo->prepare('SELECT prob_txt AS valor FROM tb_probabilidade WHERE (prob_max>='.$med_exito.' AND prob_min<='.$med_exito.')');
+        $prob_txt->execute();
+        $prob_txt_return = $prob_txt->fetch(PDO::FETCH_ASSOC);
+
         // CRIA A VARIAVEL = CLASSIFICAÇÃO GLOBAL (Visão gerencial)
-        $cgvg = $sum_val_rel_con_med_v3_return['valor'].': '.$sum_val_rel_con_med_v2_return['valor'];
+        $cgvg = $prob_perc_return['valor'].': '.$prob_txt_return['valor'];
+
+        // Classificação Relacionamento - Rating da Pasta
+        $pasta_rating = $pdo->prepare('SELECT rating AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_total_cme_return['valor'].' AND val_min<='.$sum_val_total_cme_return['valor'].')');
+        $pasta_rating->execute();
+        $pasta_rating_return = $pasta_rating->fetch(PDO::FETCH_ASSOC);
+
+        // COMISSAO A SER PAGA
+        $comiss = $pdo->prepare('SELECT comissao AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_total_cme_return['valor'].' AND val_min<='.$sum_val_total_cme_return['valor'].')');
+        $comiss->execute();
+        $comiss_return = $comiss->fetch(PDO::FETCH_ASSOC);
+
     }
 
 
-    ?>
+?>
 
     
 <!DOCTYPE html>
@@ -152,7 +156,7 @@
     <div class="row">
         <!-- TABELA DETALHES -->
         <div class="column side" >
-            <h3>Dados da Pasta</h3>
+            <h3>Dados da Pasta</h3><br>
             <?php echo "<b>Avaliador: </b>", $db_f['avaliador'];?><br>
             <?php echo "<b>Área: </b>", $db_f['area'];?><br>
             <?php echo "<b>Mês Avaliado: </b>", $db_f['mes_aval'];?><br>
@@ -178,11 +182,11 @@
 
         <!--     TABELA CLASSIFICACAO RELATIVA        -->
         <div  class="column side" >
-            <h3>Classificação Global</h3>
-            <?php echo "<b>Valor Global: </b>R$ ", number_format( $sum_val_rel_total_return['valor'],2,",",".");?><br><br>
+            <h3>Classificação Global</h3><br>
+            <?php echo "<b>Valor Global: </b>R$ ", number_format( $sum_val_total_cme_return['valor'],2,",",".");?><br><br>
             <?php echo "<b>Classificação Global (Probabilidade): </b>", $cgvg;?><br><br>
-            <?php echo "<b>Classificação Relacionamento - Rating da Pasta: </b>", $result_selection_rating_val_rel_return['valor'];?><br><br>
-            <?php if ($db_f['binaria']==="Não") {echo "<b>Comissão a ser paga: </b>R$ ", number_format( $result_selection_comiss_val_rel_return['valor'],2,",",".");} else {echo "<b>Comissão a ser paga: </b>R$ 300,00";}?><br>
+            <?php echo "<b>Classificação Relacionamento - Rating da Pasta: </b>", $pasta_rating_return['valor'];?><br><br>
+            <?php if ($db_f['binaria']==="Não") {echo "<b>Comissão: </b>R$ ", number_format( $comiss_return['valor'],2,",",".");} else {echo "<b>Comissão a ser paga: </b>R$ 300,00";}?><br>
 
         </div>
 
