@@ -1,23 +1,24 @@
 <?php 
-   
+    session_start();
     include('config2.php');
     
     $pdo = conectar();
 
-    if(!empty($_GET['email']))
+    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
-   
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        header('Location: login.php');
+    }
         
     $stmt = $pdo->prepare('SELECT * FROM tb_folder ');
     $stmt->execute();
     $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
 
-} else{
 
-    header('Location: login.php');
-}
 
 include('style.css');
+
     if(isset($_POST['submit']))
     {
         $id_pasta = $_POST['id_pasta'];

@@ -1,28 +1,25 @@
 <?php
     session_start();
-    
-    include('script.js');
+
     include('config2.php');
 
-    $pdo = conectar();
-       
-
-    if(!empty($_GET['email']))
+    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
-   
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        header('Location: login.php');
+    }
 
-        $data_tb = $pdo->query('SELECT * FROM tb_probabilidade')->fetchAll();
+    $pdo = conectar();
+
+    $data_tb = $pdo->query('SELECT * FROM tb_probabilidade')->fetchAll();
 
 // Salva dados da última alteração
     $logado = $_SESSION['email'];
     date_default_timezone_set('America/Sao_Paulo');
     $horario = date('m/d/Y h:i:s a', time());
- 
-    } else{
 
-        header('Location: login.php');
-    }
-
+    include('script.js');
     include('style.css');
 
 

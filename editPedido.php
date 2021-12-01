@@ -2,33 +2,30 @@
 
 <?php
     session_start();
-   
-    include('script.js');
-    if(!empty($_GET['n_registro']))
+    include('config2.php');
+
+    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
-        include('config2.php');
-        $pdo = conectar();
-        $n_registro = $_GET['n_registro'];
-
-
-
-        if(!empty($_GET['id_pasta']))
-        {
-        $stmt = $pdo->prepare('SELECT * FROM tb_dados_valores WHERE n_registro=\''.$n_registro.'\'');
-        $stmt->execute();
-        $db_v = $stmt->fetch(PDO::FETCH_ASSOC);
-        $id_pasta = $db_v['id_pasta'];
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        header('Location: login.php');
     }
+
+    $pdo = conectar();
+    $n_registro = $_GET['n_registro'];
+
+    $stmt = $pdo->prepare('SELECT * FROM tb_dados_valores WHERE n_registro=\''.$n_registro.'\'');
+    $stmt->execute();
+    $db_v = $stmt->fetch(PDO::FETCH_ASSOC);
+    $id_pasta = $db_v['id_pasta'];
+
 
     // Salva dados da última alteração
     $logado = $_SESSION['email'];
     date_default_timezone_set('America/Sao_Paulo');
     $horario = date('m/d/Y h:i:s a', time());
-      } else{
 
-        header('Location: login.php');
-    }
-
+    include('script.js');
     include('style.css');
 ?>
 

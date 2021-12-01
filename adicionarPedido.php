@@ -1,10 +1,19 @@
 <?php
+    session_start();
+    include('config2.php');
+
+    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
+    {
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        header('Location: login.php');
+    }
+    
     if(!empty($_GET['id_pasta']))
     {
         include_once('config.php');
         
-        if(!empty($_GET['email']))
-        {
+     
        
 
         $id_pasta = $_GET['id_pasta'];
@@ -30,10 +39,6 @@
         }
     }
 
-} else{
-
-    header('Location: login.php');
-}
 
 
     include('style.css');

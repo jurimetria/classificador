@@ -2,11 +2,10 @@
     session_start();
     include_once('config.php');
 
-    if(!empty($_GET['email']))
+    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
-   
-    } else{
-
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
         header('Location: login.php');
     }
     

@@ -6,10 +6,13 @@
     include('script.js');
     $pdo = conectar();
    
-    if(!empty($id_pasta = $_GET['id_pasta']))
+    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
-        
-
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        header('Location: login.php');
+    }
+        $id_pasta = $_GET['id_pasta'];
 
         $stmt_vp = $pdo->prepare('SELECT * FROM tb_dados_valores v  
         INNER JOIN tb_probabilidade p
@@ -88,10 +91,8 @@
 
         }
 
-    }
- else {
-    header('Location: index.php');
- }
+    
+
  include('style.css');
 ?>
 

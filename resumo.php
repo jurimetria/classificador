@@ -1,15 +1,21 @@
 <?php
     session_start();
-
     include('config2.php');
+
+    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
+    {
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        header('Location: login.php');
+    }
+
+    
     $pdo = conectar();
 
     include('select.php');
-  
     include('script.js');
 
-    if(!empty($_GET['email']))
-    {
+
    
 // GROUP BY f.id_pasta 
 
@@ -55,10 +61,7 @@
     $state->execute();
     $data_tb = $state->fetchAll();
 
-} else{
 
-    header('Location: login.php');
-}
 
 include('style.css');
 

@@ -1,34 +1,32 @@
 <?php
     session_start();
-   
-    include('script.js');
     include('config2.php');
 
-    $pdo = conectar();
-    if(!empty($_GET['email']))
+    if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
-   
-
-    if(!empty($_GET['id_pasta']))
-    {
-
-        $stmt = $pdo->prepare('SELECT * FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
-        $stmt->execute();
-        $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        header('Location: login.php');
     }
+    
 
-// Salva dados da última alteração
+    $pdo = conectar();
+
+
+    $id_pasta = $_GET['id_pasta'];
+    $stmt = $pdo->prepare('SELECT * FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
+    $stmt->execute();
+    $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
+
+ 
+
+    // Salva dados da última alteração
     $logado = $_SESSION['email'];
     date_default_timezone_set('America/Sao_Paulo');
     $horario = date('m/d/Y h:i:s a', time());
- 
-} else{
 
-    header('Location: login.php');
-}
-
-include('style.css');
+    include('script.js');
+    include('style.css');
 
 ?>
 
