@@ -142,6 +142,10 @@
 </div>  
 
 <br>
+        <!-- NÚMERO DA PASTA -->
+        <?php
+            echo "<h1>Pasta: $id_pasta</h1>";
+        ?>
 
         <!-- LINK PÁGINA RESUMO -->
         <div class="alingLeft">
