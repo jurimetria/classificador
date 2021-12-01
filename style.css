@@ -81,6 +81,7 @@ background-color: #f1f1f1;
 }
 
 .button:hover {
+    font-weight: 300;
 background-color: dodgerblue;
 color: white;
 }
@@ -102,6 +103,7 @@ background-color: #f1f1f1;
 }
 
 .button2:hover {
+    font-weight: 300;
 background-color: dodgerblue;
 color: white;
 }
@@ -191,6 +193,7 @@ border-radius: 0px 5px 5px 0px;
 }
 
 form.searchF button:hover {
+    font-weight: 300;
 background: #0b7dda;
 }
 
@@ -403,10 +406,36 @@ text-decoration: none;
 }
 
 .voltar:hover{
+    font-weight: 300;
 background-color: dodgerblue;
 color: white;
 transition-duration: 0.25s;
 }
+
+
+
+.buttTop{
+    background-color: rgba(30, 143, 255, 0);
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    font-size: 17px;
+    border: 2px;
+    padding: 6px;
+    top:20px;
+    color: rgba(255, 255, 255, 0.568);
+    cursor: pointer;
+    border-radius: 10px;
+    text-decoration: none;
+    }
+    
+    .buttTop:hover{
+        font-weight: 300;
+    background-color: rgba(30, 143, 255, 0);
+    color: white;
+    transition-duration: 0.25s;
+    }
+
 
 .botoesAcoes{
 background-color: dodgerblue;

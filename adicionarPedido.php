@@ -3,6 +3,9 @@
     {
         include_once('config.php');
         
+        if(!empty($_GET['email']))
+        {
+       
 
         $id_pasta = $_GET['id_pasta'];
         $sqlSelect = "SELECT * FROM tb_dados_valores WHERE id_pasta=$id_pasta";
@@ -13,8 +16,6 @@
 
         if(isset($_POST["submit"]))
         {
-
-            
             $id_pasta = $_POST['id_pasta'];
             $tipo_pedido = $_POST['tipo_pedido'];
             $valor_pedido = $_POST['valor_pedido'];
@@ -23,12 +24,18 @@
             $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (id_pasta,tipo_pedido,valor_pedido,probabilidade) 
             VALUES ('$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade')");
 
-
             {
                 header('Location: sistema.php?id_pasta='.$id_pasta);
             }
         }
     }
+
+} else{
+
+    header('Location: login.php');
+}
+
+
     include('style.css');
 ?>
 
@@ -44,20 +51,25 @@
 </head>
 <body>
 <!-- BARRA DE NAVEGAÇÃO -->
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="d-flex">
-                <a href="login.php" class="btn btn-danger me-5">Sair</a>
-            </div>
-        </nav>
-    </div>  
+<div>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+
+    <!-- SAIR -->
+    <div class="d-flex">
+        <a href="login.php" class="btn btn-danger me-5">Sair</a>
+    </div>
+</nav>
+</div>  
+
+    <!-- VOLTAR -->
     <div class='alingLeft alingTop'>
         <?php
                 {echo "<a class='voltar' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
@@ -91,7 +103,7 @@
                         <option value="OUTROS">OUTROS</option>
                     </select>
                 </div>
-                
+
                 <br>
                 <div class="inputBox">
                     <input type = "text" name="valor_pedido" id="valor_pedido" class="inputUser"  required>

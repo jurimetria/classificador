@@ -1,7 +1,7 @@
 <?php
     session_start();
     include_once('config.php');
-    include('style.css');
+    
 
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
@@ -11,7 +11,7 @@
     }
 
     
-
+    include('style.css');
 
 ?>
 <!DOCTYPE html>
@@ -28,6 +28,7 @@
 <body>
 <!-- BARRA DE NAVEGAÇÃO -->
     <div>
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
@@ -35,11 +36,17 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
+
+ 
+
+            <!-- SAIR -->
             <div class="d-flex">
                 <a href="login.php" class="btn btn-danger me-5">Sair</a>
             </div>
         </nav>
     </div>  
+
+
     <br><br>
         <!-- LINK PÁGINA RESUMO -->
         <div class="alingLeft">

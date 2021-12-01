@@ -2,7 +2,7 @@
 
 <?php
     session_start();
-    include('style.css');
+   
     include('script.js');
     if(!empty($_GET['n_registro']))
     {
@@ -10,6 +10,10 @@
         $pdo = conectar();
         $n_registro = $_GET['n_registro'];
 
+
+
+        if(!empty($_GET['id_pasta']))
+        {
         $stmt = $pdo->prepare('SELECT * FROM tb_dados_valores WHERE n_registro=\''.$n_registro.'\'');
         $stmt->execute();
         $db_v = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -20,7 +24,12 @@
     $logado = $_SESSION['email'];
     date_default_timezone_set('America/Sao_Paulo');
     $horario = date('m/d/Y h:i:s a', time());
-  
+      } else{
+
+        header('Location: login.php');
+    }
+
+    include('style.css');
 ?>
 
 
@@ -38,20 +47,24 @@
 <body>
 <!-- BARRA DE NAVEGAÇÃO -->
 <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="d-flex">
-                <a href="login.php" class="btn btn-danger me-5">Sair</a>
-            </div>
-        </nav>
-    </div>  
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+
+    <!-- SAIR -->
+    <div class="d-flex">
+        <a href="login.php" class="btn btn-danger me-5">Sair</a>
+    </div>
+</nav>
+</div>  
     
-    
+    <!-- VOLTAR -->
     <div class='alingLeft alingTop'>
         <?php
                 {echo "<a class='voltar' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";

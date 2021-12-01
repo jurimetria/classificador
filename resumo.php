@@ -5,10 +5,12 @@
     $pdo = conectar();
 
     include('select.php');
-    include('style.css');
+  
     include('script.js');
 
-    
+    if(!empty($_GET['email']))
+    {
+   
 // GROUP BY f.id_pasta 
 
     $ver_ano_aval = '';
@@ -53,6 +55,13 @@
     $state->execute();
     $data_tb = $state->fetchAll();
 
+} else{
+
+    header('Location: login.php');
+}
+
+include('style.css');
+
     ?>
 
 
@@ -75,23 +84,34 @@
 <body>
     
 <!-- BARRA DE NAVEGAÇÃO -->
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="d-flex">
-                <a href="login.php" class="btn btn-danger me-5">Sair</a>
-            </div>
-        </nav>
-        <br>
+<div>
 
-
- 
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
+
+                <!-- RATINGS -->
+    <div class="container-fluid ">
+    <button type="button" class="buttTop" onclick="location.href='ratings.php'">Ratings</button>
+    </div><br>
+    
+                <!-- PROBABILIDADES -->
+                <div class="container-fluid ">
+    <button type="button" class="buttTop" onclick="location.href='prob.php'">Probabilidades</button>
+    </div><br>
+
+    <!-- SAIR -->
+    <div class="d-flex">
+        <a href="login.php" class="btn btn-danger me-5">Sair</a>
+    </div>
+</nav>
+</div>  
+
+
 <br>
     <!-- BOTÃO VOLTAR -->
     <div class='alingLeft alingTop'>
