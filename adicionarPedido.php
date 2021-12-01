@@ -111,7 +111,7 @@
 
                 <br>
                 <div class="inputBox">
-                    <input type = "text" name="valor_pedido" id="valor_pedido" class="inputUser"  required>
+                    <input type = "number" step="0.01" min="0" name="valor_pedido" id="valor_pedido" class="inputUser"  required>
                     <label for="valor_pedido" class="labelInput">Valor pedido</label>
                 </div>
                 <br>

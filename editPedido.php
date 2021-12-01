@@ -96,7 +96,7 @@
                 
                 <br>
                 <div class="inputBox">
-                    <input type = "text" name="valor_pedido" id="valor_pedido" class="inputUser" value="<?php echo $db_v['valor_pedido'] ?>" required>
+                    <input type = "number" step="0.01" min="0"  name="valor_pedido" id="valor_pedido" class="inputUser" value="<?php echo $db_v['valor_pedido'] ?>" required>
                     <label for="valor_pedido" class="labelInput">Valor pedido</label>
                 </div>
                 

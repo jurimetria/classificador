@@ -180,7 +180,7 @@
                 <br>
 
                 <div class="inputBox">
-                    <input type = "text" name="salario" id="salario" class="inputUser" value="<?php echo $db_f['salario'] ?>" >
+                    <input type = "number" step="0.01" min="0" name="salario" id="salario" class="inputUser" value="<?php echo $db_f['salario'] ?>" >
                     <label for="salario" class="labelInput">Última Remuneração</label>
                 </div>
                 <br>

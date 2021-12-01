@@ -231,7 +231,7 @@ include('style.css');
                 <br>
 
                 <div class="inputBox">
-                    <input type = "text" name="salario" id="salario" class="inputUser" required >
+                    <input type = "number" step="0.01" min="0"  name="salario" id="salario" class="inputUser" required >
                     <label for="salario" class="labelInput">Última Remuneração</label>
                 </div>
                 <br>
