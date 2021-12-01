@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('config2.php');
+   
 
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
@@ -8,12 +9,12 @@
         unset($_SESSION['senha']);
         header('Location: login.php');
     }
+  
 
     
     $pdo = conectar();
 
-    include('select.php');
-    include('script.js');
+
 
 
    
@@ -48,8 +49,9 @@
 
         $mes_aval = $_POST['search_mes'];
         $ano_aval = $_POST['search_ano'];
-        $state_prep .= 'WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\') GROUP BY f.id_pasta ';
+        $state_prep = 'SELECT * FROM 05_view_comiss_prob WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\') ';
         $teste = "1";
+        
 
     } 
     else{$state_prep .= 'WHERE * GROUP BY f.id_pasta ';
@@ -61,9 +63,22 @@
     $state->execute();
     $data_tb = $state->fetchAll();
 
+    // SOMA VALOR TOTAL DE Classificação Global (Valor Médio)
+    $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_global) AS valor  FROM 05_view_comiss_prob
+    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\')  ;');
+    $sum_val_total_cme->execute();
+    $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
 
+    // SOMA VALOR TOTAL DE Comissao
+    $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM 05_view_comiss_prob
+    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\')  ;');
+    $sum_comissao->execute();
+    $sum_comissao_return = $sum_comissao->fetch(PDO::FETCH_ASSOC);
 
-include('style.css');
+   
+
+    include('script.js');
+    include('style.css');
 
     ?>
 
@@ -148,6 +163,10 @@ include('style.css');
             <button class="botaoFiltro2" id="downloadExcel">Exportar Tabela </button>
 
     </div>
+    <!-- VALOR TOTAL -->
+    <p id="fontSize19"><?php echo "Valor Total: R$ ",number_format($sum_val_total_cme_return['valor'],2,",",".") ?></p>
+    <!-- COMISSAO TOTAL -->
+    <p id="fontSize19"><?php echo "Comissão Total: R$ ",number_format($sum_comissao_return['valor'],2,",",".") ?></p>
 
 
 
@@ -201,9 +220,9 @@ include('style.css');
         echo "<td>".$row['id_pasta']."</td>";
         echo "<td>".$row['tipo_acao']."</td>";
         echo "<td>".$row['ramo']."</td>";
-        echo "<td>".$row['global_rating']."</td>";
-        echo "<td>R$ ".number_format($row['global_comissao'],2,",",".")."</td>";
-        echo "<td>R$ ".number_format($row['cg_vm'],2,",",".")."</td>";
+        echo "<td>".$row['rating']."</td>";
+        echo "<td>R$ ".number_format($row['comissao'],2,",",".")."</td>";
+        echo "<td>R$ ".number_format($row['valor_global'],2,",",".")."</td>";
         echo "<td>".$row['global_mde']."</td>";
         echo "<td>
         <a class='btn btn-sm btn-primary ' href='sistema.php?id_pasta=$row[id_pasta]' name='id_pasta' title='Ver Pasta'>
