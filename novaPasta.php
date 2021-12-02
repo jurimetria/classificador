@@ -17,7 +17,7 @@
 
 
 
-include('style.css');
+
 
     if(isset($_POST['submit']))
     {
@@ -128,12 +128,11 @@ include('style.css');
                 <div class="inputBox" class="container" >
                 <label for="avaliador" >Avaliador: </label>
                     <select id="avaliador" name="avaliador" >
-                    <option value="NÃO SELECIONADO">Escolha um avaliador</option>
-                    <option value="Meinel">Meinel</option>
+                    <option value="">Escolha um avaliador</option>
                     <option value="Juliane">Juliane</option>
                     <option value="Carolina" >Carolina</option>
                     <option value="Filipe">Filipe</option>
-                    <option value="José">José</option>
+                  
                     </select>
                 </div>
                 <br>
