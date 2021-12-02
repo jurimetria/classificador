@@ -95,13 +95,13 @@ include('style.css');
 
 <!-- BOTÃO VOLTAR -->
     <div class='alingLeft alingTop'>
-        <button class='voltar' onclick="goBack()">Voltar</button>
+        <button class='button2' onclick="goBack()">Voltar</button>
     </div>
 
 <!-- BOTÃO PROCURAR OUTRA PASTA -->
     <div class='alingLeft alingTop'>
         <?php
-                {echo "<a class='voltar' href='index.php' title='Procurar Outra Pasta'> Procurar Outra Pasta</a>";
+                {echo "<a class='button2' href='index.php' title='Procurar Outra Pasta'> Procurar Outra Pasta</a>";
                 }
         ?>
     </div>

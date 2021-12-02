@@ -132,10 +132,10 @@
 </div>  
 
 
-<br>
+
     <!-- BOTÃO VOLTAR -->
     <div class='alingLeft alingTop'>
-        <button class='voltar' onclick="goBack()">Voltar</button>
+        <button class='button2' onclick="goBack()">Voltar</button>
     </div>
     <!-- TITULO DA PAGINA -->
     <h1>Resumo das Classificações</h1>
@@ -162,7 +162,10 @@
 
              <!-- EXPORTAR TABELA EXCEL -->
              <br>
-            <button class="botaoFiltro2" id="downloadExcel">Exportar Tabela </button>
+            <button class="botaoFiltro2" id="downloadExcel">Exportar Tabela  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+</svg><i class="bi bi-file-earmark-spreadsheet"></i></button>
+            
 
     </div>
     <!-- VALOR TOTAL -->
@@ -190,7 +193,9 @@
                 </select>
             </div>
             <div>
-                <button type="submit" name="enviar_busca" id="filter" class="botaoFiltro">Filtrar</button>
+                <button type="submit" name="enviar_busca" id="filter" class="botaoFiltro">Filtrar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+  <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
+</svg><i class="bi bi-funnel"></i></button>
             </div>
             </form>
         

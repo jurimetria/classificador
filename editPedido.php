@@ -64,7 +64,7 @@
     <!-- VOLTAR -->
     <div class='alingLeft alingTop'>
         <?php
-                {echo "<a class='voltar' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
+                {echo "<a class='button2' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
                 }
         ?>
     </div>
