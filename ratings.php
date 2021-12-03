@@ -37,8 +37,8 @@ include('style.css');
     
 </head>
 <body>
-<!-- BARRA DE NAVEGAÇÃO -->
-<div>
+    <!-- BARRA DE NAVEGAÇÃO -->
+    <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
@@ -52,15 +52,15 @@ include('style.css');
         </nav>
     </div>  
 
-<!-- BOTÃO VOLTAR -->
-<div class='alingLeft alingTop'>
+    <!-- BOTÃO VOLTAR -->
+    <div class='alingLeft alingTop'>
         <button class='voltar' onclick="goBack()">Voltar</button>
     </div>
 
 
 
     <div class="m-5">
-    <h3>Tabela de Ratings</h3><br>
+        <h3>Tabela de Ratings</h3><br>
         <table class="table text-white table-bg">
             <thead>
                 <tr>
@@ -95,7 +95,7 @@ include('style.css');
 </html>
 
 <script>
-function goBack() {
-  window.history.back();
-}
+    function goBack() {
+    window.history.back();
+    }
 </script>

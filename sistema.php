@@ -2,7 +2,6 @@
     session_start();
 
     include('config2.php');
-    
     include('script.js');
     $pdo = conectar();
    
@@ -12,7 +11,9 @@
         unset($_SESSION['senha']);
         header('Location: login.php');
     }
-        $id_pasta = $_GET['id_pasta'];
+  
+    if(!empty($id_pasta = $_GET['id_pasta']))
+    {
 
         $stmt_vp = $pdo->prepare('SELECT * FROM tb_dados_valores v  
         INNER JOIN tb_probabilidade p
@@ -39,11 +40,10 @@
 
         if ($count === 0)
         {
-            $sum_val_rel_total_return['valor']= "0";
-            $sum_val_rel_considerado_return['valor'] = "0";
+            $sum_val_total_cme_return['valor']= "0";
             $cgvg="Adicione Pedidos";
-            $result_selection_rating_val_rel_return['valor']="Adicione Pedidos";
-            $result_selection_comiss_val_rel_return['valor']="0";
+            $pasta_rating_return['valor']="Adicione Pedidos";
+            $comiss_return['valor']="0";
 
         }
         else
@@ -90,8 +90,12 @@
             $comiss_return = $comiss->fetch(PDO::FETCH_ASSOC);
 
         }
+    }
+        else
+    {
+        header('Location: index.php');
+    }
 
-    
 
  include('style.css');
 ?>

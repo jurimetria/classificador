@@ -2,7 +2,7 @@
 <?php
 
         include('style.css');
-       ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +17,8 @@
 <body>
     <div class="tela-login">
         <div class='img'>
-        <img src="https://lp-classificador.s3.amazonaws.com/img/LogoBranco+-+P1.png" alt="logo" width="80" height="80">
-        <br><br><br>
+            <img src="https://lp-classificador.s3.amazonaws.com/img/LogoBranco+-+P1.png" alt="logo" width="80" height="80">
+            <br><br><br>
         </div>
     
         <form action="testLogin.php" method="POST" class='inputBox'>

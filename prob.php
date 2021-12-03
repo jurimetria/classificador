@@ -14,7 +14,7 @@
 
     $data_tb = $pdo->query('SELECT * FROM tb_probabilidade')->fetchAll();
 
-// Salva dados da última alteração
+    // Salva dados da última alteração
     $logado = $_SESSION['email'];
     date_default_timezone_set('America/Sao_Paulo');
     $horario = date('m/d/Y h:i:s a', time());
@@ -30,16 +30,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>L&P | CLassificador</title>
     
 </head>
+
 <body>
-<!-- BARRA DE NAVEGAÇÃO -->
-<div>
+    <!-- BARRA DE NAVEGAÇÃO -->
+    <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
@@ -53,15 +54,15 @@
         </nav>
     </div>  
 
-<!-- BOTÃO VOLTAR -->
-<div class='alingLeft alingTop'>
+    <!-- BOTÃO VOLTAR -->
+    <div class='alingLeft alingTop'>
         <button class='voltar' onclick="goBack()">Voltar</button>
     </div>
 
 
 
     <div class="m-5">
-    <h3>Tabela de Probabilidades</h3><br>
+        <h3>Tabela de Probabilidades</h3><br>
         <table class="table text-white table-bg">
             <thead>
                 <tr>
@@ -100,7 +101,7 @@
 </html>
 
 <script>
-function goBack() {
-  window.history.back();
-}
+    function goBack() {
+    window.history.back();
+    }
 </script>

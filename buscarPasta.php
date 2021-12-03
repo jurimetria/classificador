@@ -15,55 +15,49 @@
 ?>
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>L&P | CLassificador</title>
-    
 </head>
+
 <body>
-<!-- BARRA DE NAVEGAÇÃO -->
-<div>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
-        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-
- 
-    <!-- SAIR -->
-    <div class="d-flex">
-        <a href="login.php" class="btn btn-danger me-5">Sair</a>
-    </div>
-</nav>
-</div>  
-
-
-<div class='alingLeft alingTop'>
-<br><br>
+    <!-- BARRA DE NAVEGAÇÃO -->
     <div>
-    
-    <a class="button2" href="index.php">Procurar Outra Pasta</a>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <!-- BOTAO SAIR -->
+            <div class="d-flex">
+                <a href="login.php" class="btn btn-danger me-5">Sair</a>
+            </div>
+        </nav>
+    </div>  
+
+
+    <div class='alingLeft alingTop'>
+        <br><br>
+        <div>
+            <a class="button2" href="index.php">Procurar Outra Pasta</a>
+        </div>
+
+        <div>
+            <br>
+            <a class="button2" href="novaPasta.php">Cadastrar Nova Pasta</a>
+        </div>
+
     </div>
 
-    <div>
+    <br><br>
+    <h1 class='alingLeft'>Resultados da busca</h1>  
     <br>
-    <a class="button2" href="novaPasta.php">Cadastrar Nova Pasta</a>
-    </div>
-
-</div>
-
-
-<br><br>
-<h1 class='alingLeft'>Resultados da busca</h1>  
-<br>
-
-
-  
 
     <?php
         if(isset($_GET['submit-search'])) 
@@ -95,4 +89,4 @@
 
     ?>
 
-    </body>
+</body>
