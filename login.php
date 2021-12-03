@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href='style.css' rel="stylesheet" type="text/css"/>
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="https://lp-classificador.s3.amazonaws.com/img/favicon.ico" type="image/x-icon" />
     
 </head>
 <body>
