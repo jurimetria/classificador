@@ -771,11 +771,11 @@ xdata_out_ipca_idx = xdata_out_ipca_idx.drop(columns=['valor'])
 
 #####>>> CRIA CSVs
 
-xdata_out_ipca_idx.to_csv('C:/xampp/htdocs/dashboard/from_py_aws/ipca_idx.csv', index=False)
+xdata_out_ipca_idx.to_csv('C:/xampp/htdocs/dashboard/datalake/ipca_idx.csv', index=False)
 
-xdata_out_tbl.to_csv('C:/xampp/htdocs/dashboard/from_py_aws/tb_calc_linear.csv', index=False)
+xdata_out_tbl.to_csv('C:/xampp/htdocs/dashboard/datalake/tb_calc_linear.csv', index=False)
 
-xdata_out_dl.to_csv('C:/xampp/htdocs/dashboard/from_py_aws/datalake.csv', index=False)
+xdata_out_dl.to_csv('C:/xampp/htdocs/dashboard/datalake/datalake.csv', index=False)
 
 
 
