@@ -2,24 +2,30 @@ import boto3 as aws
 import pandas as pd
 import warnings
 import numpy as np
+from datetime import date
+from datetime import timedelta
 warnings.filterwarnings("ignore")
 
 
 
 s3_resource = aws.client("s3")
 
-ultimo_csv = "query_aws.2021-12-02-20.30.csv.gz"
+# pega o last added no bucket:
+today = date.today()
+yesterday = today - timedelta(days = 1)
+yesterday = yesterday.strftime('%Y-%m-%d')
+ultimo_csv = "query_aws." + yesterday +"-20.30.csv.gz"
 
+print("Fazendo download do arquivo: ", ultimo_csv)
+
+
+# Faz download do arquivo do S3
 s3_resource.download_file(Bucket="lp-judice-csv",Key=ultimo_csv,Filename="ultima_query.gz")
 
+print("Donwload realizado com sucesso")
 
-
-
-
-
-
-# df = pd.read_csv("C:\\Users\\mel85\\iCloudDrive\\01.L&P\\Dhuio\\2021julho.csv", delimiter=",", encoding = "ISO-8859-1") 
-df = pd.read_csv("C:\\Users\\Administrator\\.spyder-py3\\ultima_query.gz", delimiter=",", encoding = "ISO-8859-1") 
+# Lê os dados 
+df = pd.read_csv("C:\\xampp\\htdocs\\dashboard\\datalake\\ultima_query.gz", delimiter=",", encoding = "ISO-8859-1") 
 
 
 # Cria o dataframe
@@ -28,7 +34,7 @@ df = pd.DataFrame(df)
 # Escolhe as colunas e coloca na base
 base = df.iloc[:,[1,2,3,4,5,6,8,9,10,11,12,13,14,15,16,23,24,45]]
 
-
+print("Dataframe montado")
 ######################
 # FORMATAÇÃO INICIAL #
 ######################
@@ -68,6 +74,7 @@ format_f1['nameclient'] = format_f1['nameclient'].str.title()
 
 base = format_f1
 
+print("Formatação inicial executada com sucesso")
 
 ##############
 # N_PROCESSO #
@@ -85,6 +92,7 @@ nproc['n_processo'] = nproc['n_processo'].astype(str)
 
 base = nproc
 
+print("Coluna n_processo criada com sucesso")
 
 #####################
 # DATA_ENCERRAMENTO #
@@ -103,6 +111,7 @@ dt_enc['data_encerramento'] = pd.to_datetime(dt_enc['data_encerramento'], format
 
 base = dt_enc
 
+print("Coluna data_encerramento criada com sucesso")
 
 #################
 # DATA_ABERTURA #
@@ -122,6 +131,7 @@ dt_abert['data_abertura'] = pd.to_datetime(dt_abert['data_abertura'], format='%Y
 
 base = dt_abert
 
+print("Coluna data_abertura criada com sucesso")
 
 ########################
 # INICIA COLUNA STATUS #
@@ -270,6 +280,8 @@ col_status_f7 = col_status_f6[col_status_f6['nameclient']!='Judice Office']
 
 base = col_status_f7
 
+print("Coluna status criada com sucesso")
+
 #########################
 # ADICIONA OS PROSPECTS # Seleciona os prospects que não cairam em nenhum filtro/selo
 ######################### For the sake of continuity
@@ -296,7 +308,7 @@ base = col_status_f8
 
 
 
-
+print("Prospects adicionados com sucesso")
 
 ###############
 # COLUNA RAMO #
@@ -318,6 +330,7 @@ ramo['ramo'] = ramo['ramo'].fillna('Outros Ramos')
 
 base = ramo
 
+print("Coluna ramo criada com sucesso")
 
 ####################
 # COLUNA DEMORA AJ #
@@ -382,6 +395,7 @@ demora_aj['demora_aj_meses'] = demora_aj['demora_aj_meses'].str.replace(".", ","
 # Forma a Base
 base = demora_aj
 
+print("Coluna demora_aj criada com sucesso")
 
 #####################
 # COLUNA DEMORA REQ #
@@ -446,6 +460,7 @@ demora_req['demora_req_meses'] = demora_req['demora_req_meses'].str.replace(".",
 # Refaz a base
 base = demora_req
 
+print("Coluna demora_req criada com sucesso")
 
 ####################
 # COLUNA DECORRIDO #
@@ -497,6 +512,7 @@ decorrido['decorrido_meses'] = decorrido['decorrido_meses'].str.replace(".", ","
 
 base = decorrido
 
+print("Coluna decorrido criada com sucesso")
 
 ##################
 # SAÍDA DATALAKE #
@@ -518,6 +534,7 @@ xdata_out.rename(columns={'namefolder':'pasta','namearea':'area', 'nameactiontyp
 xdata_out_dl = xdata_out[['n_processo','pasta','cliente','email','unidade','area','ramo','tipo_de_acao','fase','parte','motivo_encerramento','data_abertura','data_encerramento_processo','data_encerramento_pasta','data_reativacao','data_requerimento','data_ajuizamento','status','demora_aj_meses','demora_req_meses','decorrido_meses']]
 
 
+print("Arquivos preparados para a saída")
 
 ##################
 # TB CALC LINEAR #
@@ -536,6 +553,8 @@ base['data_encerramento_pasta'] = base['data_encerramento_pasta'].astype(str)
 #Abertura é +1, encerramento é -1 e null é 0
 base['data_abertura_n'] = np.where(base['data_abertura'] == "0", 0, 1)
 base['data_encerramento_pasta_n'] = np.where(base['data_encerramento_pasta'] == "0", 0, -1)
+
+
 
 
 ############
@@ -742,7 +761,7 @@ xdata_out_tbl = xdata_out_tbl.groupby('data')['conta_banc','conta_or','conta_ppo
 
 xdata_out_tbl = xdata_out_tbl[xdata_out_tbl['data'] >= "2019-01-01"]
 
-
+print("Tabela tb_calc_linear criada com sucesso")
 
 ###############
 # INDICE IPCA # >> BUSCA NA API DO BANCO CENTRAL
@@ -768,15 +787,18 @@ xdata_out_ipca_idx['data'] = pd.to_datetime(xdata_out_ipca_idx['data'], format='
 
 xdata_out_ipca_idx = xdata_out_ipca_idx.drop(columns=['valor'])
 
+print("Tabela ipca_idx criada com sucesso")
 
 #####>>> CRIA CSVs
 
 xdata_out_ipca_idx.to_csv('C:/xampp/htdocs/dashboard/datalake/ipca_idx.csv', index=False)
+print("Arquivo CSV ipca_idx criado com sucesso")
 
 xdata_out_tbl.to_csv('C:/xampp/htdocs/dashboard/datalake/tb_calc_linear.csv', index=False)
+print("Arquivo CSV tb_calc_linear criado com sucesso")
 
 xdata_out_dl.to_csv('C:/xampp/htdocs/dashboard/datalake/datalake.csv', index=False)
-
+print("Arquivo CSV datalake criado com sucesso")
 
 
 ##############
