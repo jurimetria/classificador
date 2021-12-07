@@ -244,6 +244,7 @@
                     <option value="PCS" >PCS</option>
                     <option value="PLR" >PLR</option>
                     <option value="VÍNCULO" >VÍNCULO</option>
+                    <option value="RESTABELECER GRAT. FUNÇÃO" >RESTABELECER GRAT. FUNÇÃO</option>
                     </select>
                 </div>
                 <br><br>

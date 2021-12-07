@@ -206,6 +206,7 @@
                     <option value="PCS" <?php if($db_f['tipo_acao']=="PCS") echo 'selected="selected"'; ?>>PCS</option>
                     <option value="PLR" <?php if($db_f['tipo_acao']=="PLR") echo 'selected="selected"'; ?>>PLR</option>
                     <option value="VÍNCULO" <?php if($db_f['tipo_acao']=="VÍNCULO") echo 'selected="selected"'; ?>>VÍNCULO</option>
+                    <option value="RESTABELECER GRAT. FUNÇÃO" <?php if($db_f['tipo_acao']=="RESTABELECER GRAT. FUNÇÃO") echo 'selected="selected"'; ?>>RESTABELECER GRAT. FUNÇÃO</option>
                     </select>
                 </div>
                 <br>
