@@ -43,12 +43,12 @@
 
         $mes_aval = $_POST['search_mes'];
         $ano_aval = $_POST['search_ano'];
-        $state_prep = 'SELECT * FROM view_comiss_prob WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\') ';
+        $state_prep = 'SELECT * FROM view_06_resumo WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\') ';
         $teste = "1";
         
 
     } 
-    else{$state_prep = 'SELECT * FROM view_comiss_prob WHERE * GROUP BY f.id_pasta ';
+    else{$state_prep = 'SELECT * FROM view_06_resumo WHERE * GROUP BY f.id_pasta ';
         $teste = "0";
         $mes_aval = "";
         $ano_aval = "";
@@ -60,13 +60,13 @@
     $data_tb = $state->fetchAll();
 
     // SOMA VALOR TOTAL DE Classificação Global (Valor Médio)
-    $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_global) AS valor  FROM view_comiss_prob
+    $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_global) AS valor  FROM view_06_resumo
     WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\')  ;');
     $sum_val_total_cme->execute();
     $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE Comissao
-    $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_comiss_prob
+    $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_06_resumo
     WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\')  ;');
     $sum_comissao->execute();
     $sum_comissao_return = $sum_comissao->fetch(PDO::FETCH_ASSOC);

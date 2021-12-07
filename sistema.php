@@ -32,7 +32,9 @@
             ON v.probabilidade=p.probabilidade 
         WHERE id_pasta=\''.$id_pasta.'\'')->fetchAll();
 
-
+        $data_res = $pdo->prepare('SELECT * FROM view_06_resumo  WHERE id_pasta=\''.$id_pasta.'\'');
+        $data_res->execute();
+        $data_resumo = $data_res->fetch(PDO::FETCH_ASSOC);
 
         $count = count($data_tb);
 
@@ -202,13 +204,13 @@
 
 
 
-        <!--     TABELA CLASSIFICACAO RELATIVA        -->
+        <!--     TABELA CLASSIFICACAO GLOBAL        -->
         <div  class="column side" >
             <h3>Classificação Global</h3><br>
-            <?php echo "<b>Valor Global: </b>R$ ", number_format( $sum_val_total_cme_return['valor'],2,",",".");?><br><br>
-            <?php echo "<b>Classificação Global (Probabilidade): </b>", $cgvg;?><br><br>
-            <?php echo "<b>Classificação Relacionamento - Rating da Pasta: </b>", $pasta_rating_return['valor'];?><br><br>
-            <?php if ($db_f['binaria']==="Não") {echo "<b>Comissão: </b>R$ ", number_format( $comiss_return['valor'],2,",",".");} else {echo "<b>Comissão a ser paga: </b>R$ 300,00";}?><br>
+            <?php echo "<b>Valor Global: </b>R$ ", number_format( $data_resumo['valor_global'],2,",",".");?><br><br>
+            <?php echo "<b>Classificação Global (Probabilidade): </b>", $data_resumo['global_mde'];?><br><br>
+            <?php echo "<b>Classificação Relacionamento - Rating da Pasta: </b>", $data_resumo['rating'];?><br><br>
+            <?php if ($db_f['binaria']==="Não") {echo "<b>Comissão: </b>R$ ", number_format( $data_resumo['comissao'],2,",",".");} else {echo "<b>Comissão a ser paga: </b>R$ 300,00";}?><br>
 
         </div>
 
