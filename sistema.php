@@ -191,6 +191,7 @@
             <?php echo "<b>É binária: </b>", $db_f['binaria'];?><br>
             <?php echo "<b>Cargo: </b>", $db_f['cargo'];?><br>
             <?php echo "<b>Período Discutido: </b>", $db_f['periodo'];?><br>
+            <?php echo "<b>Porcentagem Honorários: </b>", $db_f['honorarios_perc'],"%";?><br>
             <?php echo "<b>Comarca: </b>", $db_f['comarca'];?><br>
             <?php echo "<b>Última Remuneração: </b>R$ ", number_format( $db_f['salario'],2,",",".");?><br>
             <?php echo "<b>Tipo de Ação: </b>", $db_f['tipo_acao'];?><br>

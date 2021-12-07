@@ -32,14 +32,15 @@
         $binaria = $_POST['binaria'];
         $cargo = $_POST['cargo'];
         $periodo = $_POST['periodo'];
+        $honorarios_perc = $_POST['honorarios_perc'];
         $comarca = $_POST['comarca'];
         $salario = $_POST['salario'];
         $tipo_acao = $_POST['tipo_acao'];
         $obs = $_POST['obs'];
 
-        $statement = $pdo->prepare("INSERT INTO tb_folder (id_pasta,avaliador,area,ano_aval,mes_aval,reclamante,reclamada,ramo,binaria,cargo,periodo,comarca,salario,tipo_acao,obs)
-        VALUES ('".$id_pasta."','".$avaliador."', '".$area."', '".$ano_aval."', '".$mes_aval."', '".$reclamante."', '".$reclamada."', '".$ramo."', '".$binaria."', '".$cargo."', '".$periodo."', '".$comarca."', '".$salario."', '".$tipo_acao."', '".$obs."')");
-        $statement->execute(array($id_pasta, $avaliador, $area, $ano_aval, $mes_aval, $reclamante, $reclamada, $ramo, $binaria, $cargo, $periodo, $comarca, $salario, $tipo_acao, $obs));
+        $statement = $pdo->prepare("INSERT INTO tb_folder (id_pasta,avaliador,area,ano_aval,mes_aval,reclamante,reclamada,ramo,binaria,cargo,periodo,honorarios_perc,comarca,salario,tipo_acao,obs)
+        VALUES ('".$id_pasta."','".$avaliador."', '".$area."', '".$ano_aval."', '".$mes_aval."', '".$reclamante."', '".$reclamada."', '".$ramo."', '".$binaria."', '".$cargo."', '".$periodo."','".$honorarios_perc."', '".$comarca."', '".$salario."', '".$tipo_acao."', '".$obs."')");
+        $statement->execute(array($id_pasta, $avaliador, $area, $ano_aval, $mes_aval, $reclamante, $reclamada, $ramo, $binaria, $cargo, $periodo, $honorarios_perc, $comarca, $salario, $tipo_acao, $obs));
 
         header('Location: sistema.php?id_pasta='.$id_pasta);
     }
@@ -209,6 +210,18 @@
                 </div>
                 <br>
 
+
+                <div class="input-group" >
+                    <label for="honorarios_perc" > Porcentagem Honorários &nbsp;&nbsp;  </label>
+                    <input type="number" min="0" max="100" placeholder="100" name="honorarios_perc" id="honorarios_perc"  class="form-control " aria-label="" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <br>
+          
+
+
                 <div class="inputBox">
                     <input type = "text" name="comarca" id="comarca" class="inputUser" required>
                     <label for="comarca" class="labelInput">Comarca</label>
@@ -255,3 +268,4 @@
     window.history.back();
     }
 </script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>

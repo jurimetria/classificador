@@ -14,7 +14,7 @@
 
     $ver_ano_aval = '';
     $query = "SELECT DISTINCT ano_aval FROM
-        tb_folder  ORDER BY idtb_folder DESC";
+        view_06_resumo  ORDER BY ano_aval DESC";
     $statement = $pdo->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
@@ -25,7 +25,7 @@
     }
 
     $ver_mes_aval = '';
-    $query = "SELECT DISTINCT mes_aval FROM tb_folder 
+    $query = "SELECT DISTINCT mes_aval FROM view_06_resumo 
     ORDER BY mes_aval_n ASC";
     $statement = $pdo->prepare($query);
     $statement->execute();

@@ -176,6 +176,15 @@
                 </div>
                 <br>
 
+                <div class="input-group" >
+                    <label for="honorarios_perc" > Porcentagem Honorários &nbsp;&nbsp;  </label>
+                    <input type="number" min="0" max="100" placeholder="100" name="honorarios_perc" id="honorarios_perc"  class="form-control " aria-label="" value="<?php echo $db_f['honorarios_perc'] ?>">
+                    <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                    </div>
+                </div>
+                <br>
+
                 <div class="inputBox">
                     <input type = "text" name="comarca" id="comarca" class="inputUser" value="<?php echo $db_f['comarca'] ?>" >
                     <label for="comarca" class="labelInput">Comarca</label>
