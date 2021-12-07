@@ -49,6 +49,7 @@
 
     } 
     else{$state_prep = 'SELECT * FROM view_06_resumo WHERE * GROUP BY f.id_pasta ';
+        
         $teste = "0";
         $mes_aval = "";
         $ano_aval = "";
