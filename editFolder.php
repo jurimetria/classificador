@@ -83,11 +83,11 @@
                 <div class="inputBox" class="container" >
                 <label for="avaliador" >Avaliador: </label>
                     <select id="avaliador" name="avaliador" >
-                    <option value="Meinel" <?php if($db_f['avaliador']=="Meinel") echo 'selected="selected"'; ?>>Meinel</option>
+                 
                     <option value="Juliane" <?php if($db_f['avaliador']=="Juliane") echo 'selected="selected"'; ?>>Juliane</option>
                     <option value="Carolina" <?php if($db_f['avaliador']=="Carolina") echo 'selected="selected"'; ?>>Carolina</option>
                     <option value="Filipe" <?php if($db_f['avaliador']=="Filipe") echo 'selected="selected"'; ?>>Filipe</option>
-                    <option value="José" <?php if($db_f['avaliador']=="José") echo 'selected="selected"'; ?>>José</option>
+                 
                     </select>
                 </div>
                 <br>
