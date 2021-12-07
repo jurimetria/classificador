@@ -123,11 +123,11 @@
                     <label for="probabilidade" >Probabilidade de Êxito: </label>
                     <select id="probabilidade" name="probabilidade">
                         <option value="">Escolha</option>
-                        <option value="Alta">Alta: 90% a 100%</option>
-                        <option value="Provável">Provável: 70% a 90%</option>
-                        <option value="Possível">Possível: 50% a 70%</option>
-                        <option value="Baixa">Baixa: 20% a 50%</option>
-                        <option value="Remota">Remota: abaixo de 20%</option>
+                        <option value="ALTA">Alta: 90% a 100%</option>
+                        <option value="PROVÁVEL">Provável: 70% a 90%</option>
+                        <option value="POSSÍVEL">Possível: 50% a 70%</option>
+                        <option value="BAIXA">Baixa: 20% a 50%</option>
+                        <option value="REMOTA">Remota: abaixo de 20%</option>
                     </select>
                 </div>
                 <br><br>
