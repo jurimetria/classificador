@@ -65,6 +65,12 @@
     $sum_val_total_cme->execute();
     $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
 
+    // SOMA VALOR TOTAL DE HONORÁRIOS ESPERADOS
+    $sum_honorarios = $pdo->prepare('SELECT SUM(honorarios_esp) AS valor FROM view_06_resumo
+    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\')  ;');
+    $sum_honorarios->execute();
+    $sum_honorarios_return = $sum_honorarios->fetch(PDO::FETCH_ASSOC);
+
     // SOMA VALOR TOTAL DE Comissao
     $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_06_resumo
     WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\')  ;');
@@ -166,10 +172,13 @@
     <!-- VALOR TOTAL -->
     <p id="fontSize19"><?php echo "Valor Total: R$ ",number_format($sum_val_total_cme_return['valor'],2,",",".") ?></p>
 
+    <!-- HONORARIOS ESPERADOS TOTAL -->
+   <p id="fontSize19"><?php echo "Honorários Esperados Total: R$ ",number_format($sum_honorarios_return['valor'],2,",",".") ?></p>
+   
     <!-- COMISSAO TOTAL -->
     <p id="fontSize19"><?php echo "Comissão Total: R$ ",number_format($sum_comissao_return['valor'],2,",",".") ?></p>
 
-
+   
 
  <!-- FILTRO MES E ANO --- CONSERTAR IDENTACAO -->
  <div class='row'>
@@ -211,6 +220,7 @@
                     <th scope="col">Rating</th>
                     <th scope="col">Comissão</th>
                     <th scope="col">Classificação Global (Valor Médio)</th>
+                    <th scope="col">Honorários Esperados</th>
                     <th scope="col">Classificação Global (Probabilidade)</th>
                     <th scope="col">Ir</th>
                 </tr>
@@ -225,6 +235,7 @@
                         echo "<td>".$row['rating']."</td>";
                         echo "<td>R$ ".number_format($row['comissao'],2,",",".")."</td>";
                         echo "<td>R$ ".number_format($row['valor_global'],2,",",".")."</td>";
+                        echo "<td>R$ ".number_format($row['honorarios_esp'],2,",",".")."</td>";
                         echo "<td>".$row['global_mde']."</td>";
                         echo "<td>
                         <a class='btn btn-sm btn-primary ' href='sistema.php?id_pasta=$row[id_pasta]' name='id_pasta' title='Ver Pasta'>

@@ -211,6 +211,7 @@
             <?php echo "<b>Valor Global: </b>R$ ", number_format( $data_resumo['valor_global'],2,",",".");?><br><br>
             <?php echo "<b>Classificação Global (Probabilidade): </b>", $data_resumo['global_mde'];?><br><br>
             <?php echo "<b>Classificação Relacionamento - Rating da Pasta: </b>", $data_resumo['rating'];?><br><br>
+            <?php echo "<b>Honorários Esperados: </b>R$ ", number_format( $data_resumo['honorarios_esp'],2,",",".");?><br><br>
             <?php if ($db_f['binaria']==="Não") {echo "<b>Comissão: </b>R$ ", number_format( $data_resumo['comissao'],2,",",".");} else {echo "<b>Comissão a ser paga: </b>R$ 300,00";}?><br>
 
         </div>
