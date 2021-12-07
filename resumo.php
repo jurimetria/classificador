@@ -143,7 +143,7 @@
     <h1>Resumo das Classificações</h1>
 
     <!-- RESULTADOS DA FILTRAGEM -->
-    <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "Escolha um período";} ?></p>
+    <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "&nbsp;";} ?></p>
 
     <!-- CADASTRAR NOVA PASTA -->
     <div class='alingLeft '>
@@ -170,13 +170,13 @@
     </div>
 
     <!-- VALOR TOTAL -->
-    <p id="fontSize19"><?php echo "Valor Total: R$ ",number_format($sum_val_total_cme_return['valor'],2,",",".") ?></p>
+    <p id="fontSize19"><?php if ($teste==="1"){echo "Valor Total: R$ ",number_format($sum_val_total_cme_return['valor'],2,",",".");} else {echo "&nbsp;";} ?></p>
 
     <!-- HONORARIOS ESPERADOS TOTAL -->
-   <p id="fontSize19"><?php echo "Honorários Esperados Total: R$ ",number_format($sum_honorarios_return['valor'],2,",",".") ?></p>
-   
+   <p id="fontSize19"><?php if ($teste==="1"){ echo "Honorários Esperados Total: R$ ",number_format($sum_honorarios_return['valor'],2,",",".");} else {echo "&nbsp;";}  ?></p>
+
     <!-- COMISSAO TOTAL -->
-    <p id="fontSize19"><?php echo "Comissão Total: R$ ",number_format($sum_comissao_return['valor'],2,",",".") ?></p>
+    <p id="fontSize19"><?php if ($teste==="1"){echo "Comissão Total: R$ ",number_format($sum_comissao_return['valor'],2,",",".");} else {echo "Selecione um período:";} ?></p>
 
    
 

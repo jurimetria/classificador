@@ -257,7 +257,7 @@
 
                 <div class="inputBox">
                 <label for="obs" class="label">Observações</label>
-                    <textarea name="obs" id="obs" class="obsBox" rows="4" cols="50"></textarea>
+                    <textarea name="obs" id="obs" class="obsBox" rows="4" cols="50" placeholder="Observações..."></textarea>
                 </div>
                 <br>
                 
