@@ -49,7 +49,7 @@
 
     } 
     else{$state_prep = 'SELECT * FROM view_06_resumo WHERE * GROUP BY f.id_pasta ';
-        
+
         $teste = "0";
         $mes_aval = "";
         $ano_aval = "";
@@ -177,7 +177,7 @@
    <p id="fontSize19"><?php if ($teste==="1"){ echo "Honorários Esperados Total: R$ ",number_format($sum_honorarios_return['valor'],2,",",".");} else {echo "&nbsp;";}  ?></p>
 
     <!-- COMISSAO TOTAL -->
-    <p id="fontSize19"><?php if ($teste==="1"){echo "Comissão Total: R$ ",number_format($sum_comissao_return['valor'],2,",",".");} else {echo "Selecione um período:";} ?></p>
+    <p id="fontSize19"><?php if ($teste==="1"){echo "Comissão Relacionamento: R$ ",number_format($sum_comissao_return['valor'],2,",",".");} else {echo "Selecione um período:";} ?></p>
 
    
 
