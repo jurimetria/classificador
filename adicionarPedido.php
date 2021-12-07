@@ -106,6 +106,8 @@
                         <option value="GRADE ABN REAL">GRADE ABN REAL</option>
                         <option value="PCS">PCS</option>
                         <option value="DANO MORAL">DANO MORAL</option>
+                        <option value="ACÚMULO DE FUNÇÃO">ACÚMULO DE FUNÇÃO</option>
+                        <option value="RESTABELECER GRAT. FUNÇÃO">RESTABELECER GRAT. FUNÇÃO</option>
                         <option value="OUTROS">OUTROS</option>
                     </select>
                 </div>

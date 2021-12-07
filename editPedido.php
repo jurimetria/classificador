@@ -94,6 +94,8 @@
                         <option value="GRADE ABN REAL" <?php if($db_v['tipo_pedido']=="GRADE ABN REAL") echo 'selected="selected"'; ?>>GRADE ABN REAL</option>
                         <option value="PCS" <?php if($db_v['tipo_pedido']=="PCS") echo 'selected="selected"'; ?>>PCS</option>
                         <option value="DANO MORAL" <?php if($db_v['tipo_pedido']=="DANO MORAL") echo 'selected="selected"'; ?>>DANO MORAL</option>
+                        <option value="ACÚMULO DE FUNÇÃO" <?php if($db_v['tipo_pedido']=="ACÚMULO DE FUNÇÃO") echo 'selected="selected"'; ?>>ACÚMULO DE FUNÇÃO</option>
+                        <option value="RESTABELECER GRAT. FUNÇÃO" <?php if($db_v['tipo_pedido']=="RESTABELECER GRAT. FUNÇÃO") echo 'selected="selected"'; ?>>RESTABELECER GRAT. FUNÇÃO</option>
                         <option value="OUTROS" <?php if($db_v['tipo_pedido']=="OUTROS") echo 'selected="selected"'; ?>>OUTROS</option>
                     </select>
                 </div>
