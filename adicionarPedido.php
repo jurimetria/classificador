@@ -8,11 +8,11 @@
         unset($_SESSION['senha']);
         header('Location: login.php');
     }
-    
+    $id_pasta = $_GET['id_pasta'];
     if(!empty($_GET['id_pasta']))
     {
         include_once('config.php');
-        
+        $id_pasta = $_GET['id_pasta'];
 
         $sqlSelect = "SELECT * FROM tb_dados_valores WHERE id_pasta=$id_pasta";
 
