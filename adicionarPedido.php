@@ -19,16 +19,22 @@
 
         $result = $conexao->query($sqlSelect);
 
+        // Salva dados da última alteração
+        $logado = $_SESSION['email'];
+        date_default_timezone_set('America/Sao_Paulo');
+        $horario = date('m/d/Y h:i:s a', time());
 
         if(isset($_POST["submit"]))
         {
+            $logado = $_POST['logado'];
+            $horario = $_POST['horario'];
             $id_pasta = $_POST['id_pasta'];
             $tipo_pedido = $_POST['tipo_pedido'];
             $valor_pedido = $_POST['valor_pedido'];
             $probabilidade = $_POST['probabilidade'];
 
-            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (id_pasta,tipo_pedido,valor_pedido,probabilidade) 
-            VALUES ('$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade')");
+            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (logado, horario, id_pasta,tipo_pedido,valor_pedido,probabilidade) 
+            VALUES ('$logado','$horario','$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade')");
 
             {
                 header('Location: sistema.php?id_pasta='.$id_pasta);

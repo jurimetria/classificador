@@ -16,11 +16,16 @@
     $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-
+    // Salva dados da última alteração
+    $logado = $_SESSION['email'];
+    date_default_timezone_set('America/Sao_Paulo');
+    $horario = date('m/d/Y h:i:s a', time());
 
 
     if(isset($_POST['submit']))
     {
+        $logado = $_POST['logado'];
+        $horario = $_POST['horario'];
         $id_pasta = $_POST['id_pasta'];
         $avaliador = $_POST['avaliador'];
         $area = $_POST['area'];
@@ -38,9 +43,9 @@
         $tipo_acao = $_POST['tipo_acao'];
         $obs = $_POST['obs'];
 
-        $statement = $pdo->prepare("INSERT INTO tb_folder (id_pasta,avaliador,area,ano_aval,mes_aval,reclamante,reclamada,ramo,binaria,cargo,periodo,honorarios_perc,comarca,salario,tipo_acao,obs)
-        VALUES ('".$id_pasta."','".$avaliador."', '".$area."', '".$ano_aval."', '".$mes_aval."', '".$reclamante."', '".$reclamada."', '".$ramo."', '".$binaria."', '".$cargo."', '".$periodo."','".$honorarios_perc."', '".$comarca."', '".$salario."', '".$tipo_acao."', '".$obs."')");
-        $statement->execute(array($id_pasta, $avaliador, $area, $ano_aval, $mes_aval, $reclamante, $reclamada, $ramo, $binaria, $cargo, $periodo, $honorarios_perc, $comarca, $salario, $tipo_acao, $obs));
+        $statement = $pdo->prepare("INSERT INTO tb_folder (logado,horario, id_pasta,avaliador,area,ano_aval,mes_aval,reclamante,reclamada,ramo,binaria,cargo,periodo,honorarios_perc,comarca,salario,tipo_acao,obs)
+        VALUES ('".$logado."','".$horario."','".$id_pasta."','".$avaliador."', '".$area."', '".$ano_aval."', '".$mes_aval."', '".$reclamante."', '".$reclamada."', '".$ramo."', '".$binaria."', '".$cargo."', '".$periodo."','".$honorarios_perc."', '".$comarca."', '".$salario."', '".$tipo_acao."', '".$obs."')");
+        $statement->execute(array($logado, $horario, $id_pasta, $avaliador, $area, $ano_aval, $mes_aval, $reclamante, $reclamada, $ramo, $binaria, $cargo, $periodo, $honorarios_perc, $comarca, $salario, $tipo_acao, $obs));
 
         header('Location: sistema.php?id_pasta='.$id_pasta);
     }
