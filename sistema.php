@@ -15,83 +15,35 @@
     if(!empty($id_pasta = $_GET['id_pasta']))
     {
 
-        $stmt_vp = $pdo->prepare('SELECT * FROM tb_dados_valores v  
-        INNER JOIN tb_probabilidade p
-            ON v.probabilidade=p.probabilidade 
+        $stmt_folder = $pdo->prepare('SELECT * FROM tb_folder  
         WHERE id_pasta=\''.$id_pasta.'\'');
-        $stmt_vp->execute(array('id_pasta' => $id_pasta));
-        $db_vp =$stmt_vp->fetch(PDO::FETCH_ASSOC);
-
-        $stmt_f = $pdo->prepare('SELECT * FROM tb_folder f  
-        WHERE id_pasta=\''.$id_pasta.'\'');
-        $stmt_f->execute(array('id_pasta' => $id_pasta));
-        $db_f = $stmt_f->fetch(PDO::FETCH_ASSOC);
-
-        $data_tb = $pdo->query('SELECT *, valor_pedido*prob_med as ValorEstimadocomMDE FROM tb_dados_valores v  
-        INNER JOIN tb_probabilidade p
-            ON v.probabilidade=p.probabilidade 
-        WHERE id_pasta=\''.$id_pasta.'\'')->fetchAll();
+        $stmt_folder->execute(array('id_pasta' => $id_pasta));
+        $db_folder = $stmt_folder->fetch(PDO::FETCH_ASSOC);
 
         $data_res = $pdo->prepare('SELECT * FROM view_06_resumo  WHERE id_pasta=\''.$id_pasta.'\'');
         $data_res->execute();
         $data_resumo = $data_res->fetch(PDO::FETCH_ASSOC);
+       
+        $data_pedidos = $pdo->query('SELECT *, valor_pedido*prob_med as ValorEstimadocomMDE FROM tb_dados_valores v  
+        INNER JOIN tb_probabilidade p
+            ON v.probabilidade=p.probabilidade 
+        WHERE id_pasta=\''.$id_pasta.'\'')->fetchAll();
 
-        $count = count($data_tb);
+        $count_pedidos = count($data_pedidos);
 
-        // print_r('Linhas: '.$count);
+       
 
-        if ($count === 0)
+        if ($count_pedidos === 0)
         {
-            $sum_val_total_cme_return['valor']= "0";
-            $cgvg="Adicione Pedidos";
-            $pasta_rating_return['valor']="Adicione Pedidos";
-            $comiss_return['valor']="0";
-
-        }
-        else
-        {
-
+            $data_resumo['valor_global']=0;
+            $data_resumo['global_mde']="Adicione Pedidos";
+            $data_resumo['rating']="Adicione Pedidos";
+            $data_resumo['honorarios_esp']=0;
+            $data_resumo['comissao']=0;
             
-            // CLASSIFICAÇÃO GLOBAL - VARIÁVEIS
-            // VALOR TOTAL 
-            $sum_val_total = $pdo->prepare('SELECT SUM(valor_pedido) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p
-            ON v.probabilidade=p.probabilidade WHERE id_pasta=\''.$id_pasta.'\'');
-            $sum_val_total->execute();
-            $sum_val_total_return = $sum_val_total->fetch(PDO::FETCH_ASSOC);
-
-            // VALOR TOTAL COM MÉDIA DE EXITO
-            $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_pedido*prob_med) AS valor FROM tb_dados_valores v INNER JOIN tb_probabilidade p
-            ON v.probabilidade=p.probabilidade WHERE id_pasta=\''.$id_pasta.'\'');
-            $sum_val_total_cme->execute();
-            $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
-
-            // MÉDIA DE EXITO GLOBAL
-            $med_exito = $sum_val_total_cme_return['valor']/ $sum_val_total_return['valor'];
-
-            // PRBABILIDADE % (ALTA,BX,etc)
-            $prob_perc = $pdo->prepare('SELECT probabilidade AS valor FROM tb_probabilidade WHERE (prob_max>='.$med_exito.' AND prob_min<='.$med_exito.')');
-            $prob_perc->execute();
-            $prob_perc_return = $prob_perc->fetch(PDO::FETCH_ASSOC);
-
-            // PRBABILIDADE  TXT
-            $prob_txt = $pdo->prepare('SELECT prob_txt AS valor FROM tb_probabilidade WHERE (prob_max>='.$med_exito.' AND prob_min<='.$med_exito.')');
-            $prob_txt->execute();
-            $prob_txt_return = $prob_txt->fetch(PDO::FETCH_ASSOC);
-
-            // CRIA A VARIAVEL = CLASSIFICAÇÃO GLOBAL (Visão gerencial)
-            $cgvg = $prob_perc_return['valor'].': '.$prob_txt_return['valor'];
-
-            // Classificação Relacionamento - Rating da Pasta
-            $pasta_rating = $pdo->prepare('SELECT rating AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_total_cme_return['valor'].' AND val_min<='.$sum_val_total_cme_return['valor'].')');
-            $pasta_rating->execute();
-            $pasta_rating_return = $pasta_rating->fetch(PDO::FETCH_ASSOC);
-
-            // COMISSAO A SER PAGA
-            $comiss = $pdo->prepare('SELECT comissao AS valor FROM tb_ratings WHERE (val_max>='.$sum_val_total_cme_return['valor'].' AND val_min<='.$sum_val_total_cme_return['valor'].')');
-            $comiss->execute();
-            $comiss_return = $comiss->fetch(PDO::FETCH_ASSOC);
 
         }
+     
     }
         else
     {
@@ -181,22 +133,22 @@
         <!-- TABELA DETALHES -->
         <div class="column side" >
             <h3>Dados da Pasta</h3><br>
-            <?php echo "<b>Avaliador: </b>", $db_f['avaliador'];?><br>
-            <?php echo "<b>Área: </b>", $db_f['area'];?><br>
-            <?php echo "<b>Mês Avaliado: </b>", $db_f['mes_aval'];?><br>
-            <?php echo "<b>Ano Avaliado: </b>", $db_f['ano_aval'];?><br>
-            <?php echo "<b>Reclamante: </b>", $db_f['reclamante'];?><br>
-            <?php echo "<b>Reclamada: </b>", $db_f['reclamada'];?><br>
-            <?php echo "<b>Ramo: </b>", $db_f['ramo'];?><br>
-            <?php echo "<b>É binária: </b>", $db_f['binaria'];?><br>
-            <?php echo "<b>Cargo: </b>", $db_f['cargo'];?><br>
-            <?php echo "<b>Período Discutido: </b>", $db_f['periodo'];?><br>
-            <?php echo "<b>Porcentagem Honorários: </b>", $db_f['honorarios_perc'],"%";?><br>
-            <?php echo "<b>Comarca: </b>", $db_f['comarca'];?><br>
-            <?php echo "<b>Última Remuneração: </b>R$ ", number_format( $db_f['salario'],2,",",".");?><br>
-            <?php echo "<b>Tipo de Ação: </b>", $db_f['tipo_acao'];?><br>
-            <?php echo "<b>Obs: </b>", $db_f['obs'];?><br><br>
-            <?php echo "<a class='btn btn-sm btn-primary' href='editFolder.php?id_pasta=$db_f[id_pasta]' title='Editar Pasta'>
+            <?php echo "<b>Avaliador: </b>", $db_folder['avaliador'];?><br>
+            <?php echo "<b>Área: </b>", $db_folder['area'];?><br>
+            <?php echo "<b>Mês Avaliado: </b>", $db_folder['mes_aval'];?><br>
+            <?php echo "<b>Ano Avaliado: </b>", $db_folder['ano_aval'];?><br>
+            <?php echo "<b>Reclamante: </b>", $db_folder['reclamante'];?><br>
+            <?php echo "<b>Reclamada: </b>", $db_folder['reclamada'];?><br>
+            <?php echo "<b>Ramo: </b>", $db_folder['ramo'];?><br>
+            <?php echo "<b>É binária: </b>", $db_folder['binaria'];?><br>
+            <?php echo "<b>Cargo: </b>", $db_folder['cargo'];?><br>
+            <?php echo "<b>Período Discutido: </b>", $db_folder['periodo'];?><br>
+            <?php echo "<b>Porcentagem Honorários: </b>", $db_folder['honorarios_perc'],"%";?><br>
+            <?php echo "<b>Comarca: </b>", $db_folder['comarca'];?><br>
+            <?php echo "<b>Última Remuneração: </b>R$ ", number_format( $db_folder['salario'],2,",",".");?><br>
+            <?php echo "<b>Tipo de Ação: </b>", $db_folder['tipo_acao'];?><br>
+            <?php echo "<b>Obs: </b>", $db_folder['obs'];?><br><br>
+            <?php echo "<a class='btn btn-sm btn-primary' href='editFolder.php?id_pasta=$db_folder[id_pasta]' title='Editar Pasta'>
                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
                         <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
                     </svg>   Editar dados da Pasta
@@ -212,7 +164,7 @@
             <?php echo "<b>Classificação Global (Probabilidade): </b>", $data_resumo['global_mde'];?><br><br>
             <?php echo "<b>Classificação Relacionamento - Rating da Pasta: </b>", $data_resumo['rating'];?><br><br>
             <?php echo "<b>Honorários Esperados: </b>R$ ", number_format( $data_resumo['honorarios_esp'],2,",",".");?><br><br>
-            <?php if ($db_f['binaria']==="Não") {echo "<b>Comissão: </b>R$ ", number_format( $data_resumo['comissao'],2,",",".");} else {echo "<b>Comissão a ser paga: </b>R$ 300,00";}?><br>
+            <?php if ($db_folder['binaria']==="Não") {echo "<b>Comissão: </b>R$ ", number_format( $data_resumo['comissao'],2,",",".");} else {echo "<b>Comissão: </b>R$ 300,00";}?><br>
 
         </div>
 
@@ -235,7 +187,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($data_tb as $row) {
+                <?php foreach($data_pedidos as $row) {
                         echo "<tr>";
                         echo "<td>".$row['n_registro']."</td>";
                         echo "<td>".$row['tipo_pedido']."</td>";
@@ -267,7 +219,7 @@
         <?php
                 
                 echo "
-                <a class='btn btn-sm btn-primary' href='adicionarPedido.php?id_pasta=$db_f[id_pasta]' title='Adicionar Pedido'>
+                <a class='btn btn-sm btn-primary' href='adicionarPedido.php?id_pasta=$db_folder[id_pasta]' title='Adicionar Pedido'>
                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
                         <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
                     </svg> Adicionar Pedido
