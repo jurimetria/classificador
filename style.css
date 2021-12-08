@@ -145,14 +145,23 @@ color:white;
 font-size: 20px;
 }
 
+
+
 /* Left and right column */
 .column.side {
 width: 50%;
 }
 
+/* Left and right column */
+.column.side2 {
+    width: 40%;
+    }
+
 .row{
 padding-left: 50px;
 }
+
+
 
 /* Clear floats after the columns */
 .row:after {

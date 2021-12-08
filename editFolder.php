@@ -101,6 +101,15 @@
                     </select>
                 </div>
                 <br>
+                <div class="inputBox" class="container">
+                <label for="unidade" >Unidade: </label>
+                    <select id="unidade" name="unidade">
+                        <option value="RS" <?php if($db_f['unidade']=="RS") echo 'selected="selected"'; ?>>RS</option>
+                        <option value="SP" <?php if($db_f['unidade']=="SP") echo 'selected="selected"'; ?>>SP</option>
+                    </select>
+                </div>
+                <br>
+                
 
                 <div class="inputBox" class="container">
                 <label for="ano_aval" >Ano da Avaliação: </label>

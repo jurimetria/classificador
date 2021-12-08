@@ -29,6 +29,7 @@
         $id_pasta = $_POST['id_pasta'];
         $avaliador = $_POST['avaliador'];
         $area = $_POST['area'];
+        $unidade = $_POST['unidade'];
         $mes_aval = $_POST['mes_aval'];
         $ano_aval = $_POST['ano_aval'];
         $reclamante = $_POST['reclamante'];
@@ -43,9 +44,9 @@
         $tipo_acao = $_POST['tipo_acao'];
         $obs = $_POST['obs'];
 
-        $statement = $pdo->prepare("INSERT INTO tb_folder (logado,horario, id_pasta,avaliador,area,ano_aval,mes_aval,reclamante,reclamada,ramo,binaria,cargo,periodo,honorarios_perc,comarca,salario,tipo_acao,obs)
-        VALUES ('".$logado."','".$horario."','".$id_pasta."','".$avaliador."', '".$area."', '".$ano_aval."', '".$mes_aval."', '".$reclamante."', '".$reclamada."', '".$ramo."', '".$binaria."', '".$cargo."', '".$periodo."','".$honorarios_perc."', '".$comarca."', '".$salario."', '".$tipo_acao."', '".$obs."')");
-        $statement->execute(array($logado, $horario, $id_pasta, $avaliador, $area, $ano_aval, $mes_aval, $reclamante, $reclamada, $ramo, $binaria, $cargo, $periodo, $honorarios_perc, $comarca, $salario, $tipo_acao, $obs));
+        $statement = $pdo->prepare("INSERT INTO tb_folder (logado,horario, id_pasta,avaliador,area,unidade,ano_aval,mes_aval,reclamante,reclamada,ramo,binaria,cargo,periodo,honorarios_perc,comarca,salario,tipo_acao,obs)
+        VALUES ('".$logado."','".$horario."','".$id_pasta."','".$avaliador."', '".$area."', '".$unidade."', '".$ano_aval."', '".$mes_aval."', '".$reclamante."', '".$reclamada."', '".$ramo."', '".$binaria."', '".$cargo."', '".$periodo."','".$honorarios_perc."', '".$comarca."', '".$salario."', '".$tipo_acao."', '".$obs."')");
+        $statement->execute(array($logado, $horario, $id_pasta, $avaliador, $area,$unidade, $ano_aval, $mes_aval, $reclamante, $reclamada, $ramo, $binaria, $cargo, $periodo, $honorarios_perc, $comarca, $salario, $tipo_acao, $obs));
 
         header('Location: sistema.php?id_pasta='.$id_pasta);
     }
@@ -135,6 +136,15 @@
                     <option value="" >Escolha uma área</option>
                         <option value="Trabalhista" <?php if($db_f['area']=="Trabalhista") echo 'selected="selected"'; ?>>Trabalhista</option>
                         <option value="Previdenciário" <?php if($db_f['area']=="Previdenciário") echo 'selected="selected"'; ?>>Previdenciário</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class="inputBox" class="container">
+                <label for="unidade" >Unidade: </label>
+                    <select id="unidade" name="unidade">
+                        <option value="RS" <?php if($db_f['unidade']=="RS") echo 'selected="selected"'; ?>>RS</option>
+                        <option value="SP" <?php if($db_f['unidade']=="SP") echo 'selected="selected"'; ?>>SP</option>
                     </select>
                 </div>
                 <br>

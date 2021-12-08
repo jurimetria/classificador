@@ -135,6 +135,8 @@
             <h3>Dados da Pasta</h3><br>
             <?php echo "<b>Avaliador: </b>", $db_folder['avaliador'];?><br>
             <?php echo "<b>Área: </b>", $db_folder['area'];?><br>
+            <?php echo "<b>Unidade: </b>", $db_folder['unidade'];?><br>
+            <?php echo "<b>Comarca: </b>", $db_folder['comarca'];?><br>
             <?php echo "<b>Mês Avaliado: </b>", $db_folder['mes_aval'];?><br>
             <?php echo "<b>Ano Avaliado: </b>", $db_folder['ano_aval'];?><br>
             <?php echo "<b>Reclamante: </b>", $db_folder['reclamante'];?><br>
@@ -144,7 +146,7 @@
             <?php echo "<b>Cargo: </b>", $db_folder['cargo'];?><br>
             <?php echo "<b>Período Discutido: </b>", $db_folder['periodo'];?><br>
             <?php echo "<b>Porcentagem Honorários: </b>", $db_folder['honorarios_perc'],"%";?><br>
-            <?php echo "<b>Comarca: </b>", $db_folder['comarca'];?><br>
+            
             <?php echo "<b>Última Remuneração: </b>R$ ", number_format( $db_folder['salario'],2,",",".");?><br>
             <?php echo "<b>Tipo de Ação: </b>", $db_folder['tipo_acao'];?><br>
             <?php echo "<b>Obs: </b>", $db_folder['obs'];?><br><br>

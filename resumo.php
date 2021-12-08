@@ -22,13 +22,13 @@
 
         foreach($result as $row)
         {
-        $ver_ano_aval .= '<option value="'.$row['ano_aval'].'">'.$row['ano_aval'].'</option>';
+            $ver_ano_aval .= '<option value="'.$row['ano_aval'].'">'.$row['ano_aval'].'</option>';
         }
 
 
         $ver_mes_aval = '';
         $query = "SELECT DISTINCT mes_aval FROM view_06_resumo 
-        ORDER BY mes_aval_n ASC";
+        ORDER BY mes_aval_n DESC";
         $statement = $pdo->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll();
@@ -50,30 +50,51 @@
             $ver_avaliador .= '<option value="'.$row2['avaliador'].'">'.$row2['avaliador'].'</option>';
         }
 
+        $ver_unidade = "";
+        $query = "SELECT DISTINCT unidade FROM view_06_resumo ORDER BY unidade ASC";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result3 = $statement->fetchAll();
+
+        foreach($result3 as $row3)
+        {
+            $ver_unidade .= '<option value="'.$row3['unidade'].'">'.$row3['unidade'].'</option>';
+        }
+
 
     $avaliador = "";
-    $aval_sentence = "";
+    $aval_sentence="";
+    $unidade = "";
+    $unid_sentence="";
     # AO ENVIAR A BUSCA
     if (isset($_POST['enviar_busca']))
     {
         $mes_aval = $_POST['search_mes'];
         $ano_aval = $_POST['search_ano'];
+
         if($_POST['search_avaliador']!="NULL"){
             $avaliador = $_POST['search_avaliador'];
-            $aval_sentence="AND avaliador=\''.$avaliador.'\')";} 
+            $aval_sentence="AND avaliador='$avaliador'";} 
         else{$aval_sentence="";}
-        $state_prep = 'SELECT * FROM view_06_resumo WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' \''.$aval_sentence.'\') ';
-        $teste = "1";
+
+        if($_POST['search_unidade']!="NULL"){
+            $unidade = $_POST['search_unidade'];
+            $unid_sentence="AND unidade='$unidade'";} 
+        else{$unid_sentence="";}
         
 
+        $state_prep = 'SELECT * FROM view_06_resumo WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.') ';
+        
+        $teste = "1";
+        
     } 
     #ENQUANTO NÃO ENVIAR A BUSCA
-    else{$state_prep = 'SELECT * FROM view_06_resumo WHERE * GROUP BY f.id_pasta ';
+    else{$state_prep = '';
 
         $teste = "0";
         $mes_aval = "";
         $ano_aval = "";
-        $avaliador = "";
+
 
     }
     $state= $pdo->prepare($state_prep);
@@ -84,19 +105,19 @@
 
     // SOMA VALOR TOTAL DE Classificação Global (Valor Médio)
     $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_global) AS valor  FROM view_06_resumo
-    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' \''.$aval_sentence.'\')  ;');
+    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_val_total_cme->execute();
     $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE HONORÁRIOS ESPERADOS
     $sum_honorarios = $pdo->prepare('SELECT SUM(honorarios_esp) AS valor FROM view_06_resumo
-    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' \''.$aval_sentence.'\')  ;');
+    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_honorarios->execute();
     $sum_honorarios_return = $sum_honorarios->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE Comissao
     $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_06_resumo
-    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' \''.$aval_sentence.'\')  ;');
+    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_comissao->execute();
     $sum_comissao_return = $sum_comissao->fetch(PDO::FETCH_ASSOC);
 
@@ -144,57 +165,69 @@
             </div>
         </nav>
     </div>  
-
-
-
-    <!-- BOTÃO VOLTAR -->
-    <div class='alingLeft alingTop'>
-        <button class='button2' onclick="goBack()">Voltar</button>
-    </div>
+    <br>
 
     <!-- TITULO DA PAGINA -->
     <h1>Resumo das Classificações</h1>
+    
 
-    <!-- RESULTADOS DA FILTRAGEM -->
-    <!-- PERIODO -->
-    <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "&nbsp;";} ?></p>
-    <!-- AVALIADOR -->
-    <p id="fontSize19"><?php if ($avaliador!=""){echo "Filtrado por avaliador: "; echo $avaliador;}  ?></p>
+    <!-- COLUNAS CENTRAIS -->
+    <div class="row">
+        <!-- COLUNA DA ESQUERDA -->
+        <div class="column side2">
+            <!-- BOTÃO VOLTAR -->
+            <div class=' alingTop'>
+                <button class='button2' onclick="goBack()">Voltar</button>
+            </div>
+            <br><br>
 
-    <!-- CADASTRAR NOVA PASTA -->
-    <div class='alingLeft '>
-        <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
-    </div>
-    <br>
-
-    <!-- BUSCAR PASTA SEARCH BOX -->
-    <div  class="buscar alingLeft">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <form class="searchF" action="buscarPasta.php" method="GET">
-                <input type="text" name="search" placeholder="buscar pasta...">
-                <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
-            </form>
-
-             <!-- EXPORTAR TABELA EXCEL -->
+            <!-- CADASTRAR NOVA PASTA -->
+            <div class=' '>
+                <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
+            </div>
             <br>
-            <button class="botaoFiltro2" id="downloadExcel">Exportar Tabela  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
-                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
-                </svg><i class="bi bi-file-earmark-spreadsheet"></i>
-            </button>
-            
 
+            <!-- BUSCAR PASTA SEARCH BOX -->
+            <div  class="buscar ">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                    <form class="searchF" action="buscarPasta.php" method="GET">
+                        <input type="text" name="search" placeholder="buscar pasta...">
+                        <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
+                    </form>
+
+                    <!-- EXPORTAR TABELA EXCEL -->
+                    <br>
+                    <button class="botaoFiltro2" id="downloadExcel">Exportar Tabela  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                        </svg><i class="bi bi-file-earmark-spreadsheet"></i>
+                    </button>
+                    
+
+            </div>
+        </div>
+
+        <!-- COLUNA DA DIREITA -->
+        <!-- RESULTADOS DA FILTRAGEM -->
+        <div class="column side2">
+        <br><br>
+            <!-- PERIODO -->
+            <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "&nbsp;";} ?></p>
+            <!-- AVALIADOR -->
+            <p id="fontSize19"><?php if ($avaliador!=""){echo "Filtrado por avaliador: "; echo $avaliador;} else{echo "&nbsp;";}  ?></p>
+            <!-- UNIDADE -->
+            <p id="fontSize19"><?php if ($unidade!=""){echo "Filtrado por unidade: "; echo $unidade;} else{echo "&nbsp;";} ?></p>
+
+
+            <!-- VALOR TOTAL -->
+            <p id="fontSize19"><?php if ($teste==="1"){echo "Valor Total: R$ ",number_format($sum_val_total_cme_return['valor'],2,",",".");} else {echo "&nbsp;";} ?></p>
+
+            <!-- HONORARIOS ESPERADOS TOTAL -->
+            <p id="fontSize19"><?php if ($teste==="1"){ echo "Honorários Esperados Total: R$ ",number_format($sum_honorarios_return['valor'],2,",",".");} else {echo "&nbsp;";}  ?></p>
+
+            <!-- COMISSAO TOTAL -->
+            <p id="fontSize19"><?php if ($teste==="1"){echo "Comissão Relacionamento: R$ ",number_format($sum_comissao_return['valor'],2,",",".");} else {echo "Selecione um período:";} ?></p>
+        </div>
     </div>
-
-    <!-- VALOR TOTAL -->
-    <p id="fontSize19"><?php if ($teste==="1"){echo "Valor Total: R$ ",number_format($sum_val_total_cme_return['valor'],2,",",".");} else {echo "&nbsp;";} ?></p>
-
-    <!-- HONORARIOS ESPERADOS TOTAL -->
-   <p id="fontSize19"><?php if ($teste==="1"){ echo "Honorários Esperados Total: R$ ",number_format($sum_honorarios_return['valor'],2,",",".");} else {echo "&nbsp;";}  ?></p>
-
-    <!-- COMISSAO TOTAL -->
-    <p id="fontSize19"><?php if ($teste==="1"){echo "Comissão Relacionamento: R$ ",number_format($sum_comissao_return['valor'],2,",",".");} else {echo "Selecione um período:";} ?></p>
-
-   
 
  <!-- FILTRO MES E ANO --- CONSERTAR IDENTACAO -->
  <div class='row'>
@@ -216,6 +249,12 @@
                         <select name="search_avaliador" id="search_avaliador">
                             <option value="NULL">Avaliador</option>
                             <?php echo $ver_avaliador; ?>
+                        </select>
+                    </div>
+                    <div>
+                        <select name="search_unidade" id="search_unidade">
+                            <option value="NULL">Unidade</option>
+                            <?php echo $ver_unidade; ?>
                         </select>
                     </div>
                     <div>
@@ -241,11 +280,12 @@
                     <th scope="col">Ramo</th>
                     <th scope="col">Rating</th>
                     <th scope="col">Comissão</th>
-                    <th scope="col">Classificação Global (Valor Médio)</th>
+                    <th scope="col">Valor Médio</th>
                     <th scope="col">Honorários Esperados</th>
                     <th scope="col">Honorários %</th>
-                    <th scope="col">Classificação Global (Probabilidade)</th>
+                    <th scope="col">Probabilidade</th>
                     <th scope="col">Avaliador</th>
+                    <th scope="col">UN</th>
                     <th scope="col">Ir</th>
                 </tr>
             </thead>
@@ -263,6 +303,7 @@
                         echo "<td>".$row['honorarios_perc']."%</td>";
                         echo "<td>".$row['global_mde']."</td>";
                         echo "<td>".$row['avaliador']."</td>";
+                        echo "<td>".$row['unidade']."</td>";
                         echo "<td>
                         <a class='btn btn-sm btn-primary ' href='sistema.php?id_pasta=$row[id_pasta]' name='id_pasta' title='Ver Pasta'>
                         <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-arrow-up-right-square' viewBox='0 0 16 16'>
