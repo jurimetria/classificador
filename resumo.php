@@ -2,6 +2,7 @@
     session_start();
     include('config2.php');
    
+    
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
         unset($_SESSION['email']);
@@ -11,70 +12,91 @@
   
     $pdo = conectar();
 
+    # VER OPÇÕES DE SELEÇÃO
+        $ver_ano_aval = '';
+        $query = "SELECT DISTINCT ano_aval FROM
+            view_06_resumo  ORDER BY ano_aval DESC";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
 
-    $ver_ano_aval = '';
-    $query = "SELECT DISTINCT ano_aval FROM
-        view_06_resumo  ORDER BY ano_aval DESC";
-    $statement = $pdo->prepare($query);
-    $statement->execute();
-    $result = $statement->fetchAll();
-
-    foreach($result as $row)
-    {
-      $ver_ano_aval .= '<option value="'.$row['ano_aval'].'">'.$row['ano_aval'].'</option>';
-    }
-
-    $ver_mes_aval = '';
-    $query = "SELECT DISTINCT mes_aval FROM view_06_resumo 
-    ORDER BY mes_aval_n ASC";
-    $statement = $pdo->prepare($query);
-    $statement->execute();
-    $result = $statement->fetchAll();
-
-    foreach($result as $row)
-    {
-        $ver_mes_aval .= '<option value="'.$row['mes_aval'].'">'.$row['mes_aval'].'</option>';
-    }
+        foreach($result as $row)
+        {
+        $ver_ano_aval .= '<option value="'.$row['ano_aval'].'">'.$row['ano_aval'].'</option>';
+        }
 
 
+        $ver_mes_aval = '';
+        $query = "SELECT DISTINCT mes_aval FROM view_06_resumo 
+        ORDER BY mes_aval_n ASC";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
 
+        foreach($result as $row)
+        {
+            $ver_mes_aval .= '<option value="'.$row['mes_aval'].'">'.$row['mes_aval'].'</option>';
+        }
+        
+        
+        $ver_avaliador = "";
+        $query = "SELECT DISTINCT avaliador FROM view_06_resumo ORDER BY avaliador ASC";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result2 = $statement->fetchAll();
+
+        foreach($result2 as $row2)
+        {
+            $ver_avaliador .= '<option value="'.$row2['avaliador'].'">'.$row2['avaliador'].'</option>';
+        }
+
+
+    $avaliador = "";
+    $aval_sentence = "";
+    # AO ENVIAR A BUSCA
     if (isset($_POST['enviar_busca']))
     {
-
         $mes_aval = $_POST['search_mes'];
         $ano_aval = $_POST['search_ano'];
-        $state_prep = 'SELECT * FROM view_06_resumo WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\') ';
+        if($_POST['search_avaliador']!="NULL"){
+            $avaliador = $_POST['search_avaliador'];
+            $aval_sentence="AND avaliador=\''.$avaliador.'\')";} 
+        else{$aval_sentence="";}
+        $state_prep = 'SELECT * FROM view_06_resumo WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' \''.$aval_sentence.'\') ';
         $teste = "1";
         
 
     } 
+    #ENQUANTO NÃO ENVIAR A BUSCA
     else{$state_prep = 'SELECT * FROM view_06_resumo WHERE * GROUP BY f.id_pasta ';
 
         $teste = "0";
         $mes_aval = "";
         $ano_aval = "";
+        $avaliador = "";
 
     }
-
     $state= $pdo->prepare($state_prep);
     $state->execute();
     $data_tb = $state->fetchAll();
 
+
+
     // SOMA VALOR TOTAL DE Classificação Global (Valor Médio)
     $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_global) AS valor  FROM view_06_resumo
-    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\')  ;');
+    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' \''.$aval_sentence.'\')  ;');
     $sum_val_total_cme->execute();
     $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE HONORÁRIOS ESPERADOS
     $sum_honorarios = $pdo->prepare('SELECT SUM(honorarios_esp) AS valor FROM view_06_resumo
-    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\')  ;');
+    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' \''.$aval_sentence.'\')  ;');
     $sum_honorarios->execute();
     $sum_honorarios_return = $sum_honorarios->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE Comissao
     $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_06_resumo
-    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\')  ;');
+    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' \''.$aval_sentence.'\')  ;');
     $sum_comissao->execute();
     $sum_comissao_return = $sum_comissao->fetch(PDO::FETCH_ASSOC);
 
@@ -116,16 +138,6 @@
                 </button>
             </div>
 
-            <!-- RATINGS -->
-            <div class="container-fluid ">
-                <button type="button" class="buttTop" onclick="location.href='ratings.php'">Ratings</button>
-            </div><br>
-    
-            <!-- PROBABILIDADES -->
-            <div class="container-fluid ">
-                <button type="button" class="buttTop" onclick="location.href='prob.php'">Probabilidades</button>
-            </div><br>
-
             <!-- SAIR -->
             <div class="d-flex">
                 <a href="login.php" class="btn btn-danger me-5">Sair</a>
@@ -144,7 +156,10 @@
     <h1>Resumo das Classificações</h1>
 
     <!-- RESULTADOS DA FILTRAGEM -->
+    <!-- PERIODO -->
     <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "&nbsp;";} ?></p>
+    <!-- AVALIADOR -->
+    <p id="fontSize19"><?php if ($avaliador!=""){echo "Filtrado por avaliador: "; echo $avaliador;}  ?></p>
 
     <!-- CADASTRAR NOVA PASTA -->
     <div class='alingLeft '>
@@ -198,6 +213,12 @@
                         </select>
                     </div>
                     <div>
+                        <select name="search_avaliador" id="search_avaliador">
+                            <option value="NULL">Avaliador</option>
+                            <?php echo $ver_avaliador; ?>
+                        </select>
+                    </div>
+                    <div>
                         <button type="submit" name="enviar_busca" id="filter" class="botaoFiltro">Filtrar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
                             <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
                         </svg><i class="bi bi-funnel"></i></button>
@@ -222,7 +243,9 @@
                     <th scope="col">Comissão</th>
                     <th scope="col">Classificação Global (Valor Médio)</th>
                     <th scope="col">Honorários Esperados</th>
+                    <th scope="col">Honorários %</th>
                     <th scope="col">Classificação Global (Probabilidade)</th>
+                    <th scope="col">Avaliador</th>
                     <th scope="col">Ir</th>
                 </tr>
             </thead>
@@ -237,7 +260,9 @@
                         echo "<td>R$ ".number_format($row['comissao'],2,",",".")."</td>";
                         echo "<td>R$ ".number_format($row['valor_global'],2,",",".")."</td>";
                         echo "<td>R$ ".number_format($row['honorarios_esp'],2,",",".")."</td>";
+                        echo "<td>".$row['honorarios_perc']."%</td>";
                         echo "<td>".$row['global_mde']."</td>";
+                        echo "<td>".$row['avaliador']."</td>";
                         echo "<td>
                         <a class='btn btn-sm btn-primary ' href='sistema.php?id_pasta=$row[id_pasta]' name='id_pasta' title='Ver Pasta'>
                         <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-arrow-up-right-square' viewBox='0 0 16 16'>
