@@ -131,7 +131,7 @@
     <!-- TABELAS CENTRAIS -->
     <div class="row">
         <!-- TABELA DETALHES -->
-        <div class="column side" >
+        <div class="column side alingLeft" >
             <h3>Dados da Pasta</h3><br>
             <?php echo "<b>Avaliador: </b>", $db_folder['avaliador'];?><br>
             <?php echo "<b>Área: </b>", $db_folder['area'];?><br>
@@ -160,7 +160,7 @@
 
 
         <!--     TABELA CLASSIFICACAO GLOBAL        -->
-        <div  class="column side" >
+        <div  class="column side alingLeft" >
             <h3>Classificação Global</h3><br>
             <?php echo "<b>Valor Global: </b>R$ ", number_format( $data_resumo['valor_global'],2,",",".");?><br><br>
             <?php echo "<b>Classificação Global (Probabilidade): </b>", $data_resumo['global_mde'];?><br><br>
@@ -184,7 +184,7 @@
                     <th scope="col">Valor Estimado do Pedido</th>
                     <th scope="col">Probabilidade de Êxito</th>
                     <th scope="col">Faixa de Êxito</th>
-                      <th scope="col">Valor com Média Êxito</th>
+                    <th scope="col">Valor com Média Êxito</th>
                     <th scope="col">...</th>
                 </tr>
             </thead>

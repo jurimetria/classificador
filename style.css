@@ -140,7 +140,7 @@ font-size: 18px;
 
 /* Sistema.php = colunas nos dados detalhes */
 .column {
-text-align: left;
+
 color:white;
 font-size: 20px;
 }
@@ -154,7 +154,7 @@ width: 50%;
 
 /* Left and right column */
 .column.side2 {
-    width: 40%;
+    width: 33%;
     }
 
 .row{
