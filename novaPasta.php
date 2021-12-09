@@ -1,6 +1,9 @@
 <?php 
     session_start();
     include('config2.php');
+    include('salvaDados.php');
+ 
+
     
     $pdo = conectar();
 
@@ -16,10 +19,7 @@
     $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
-    // Salva dados da última alteração
-    $logado = $_SESSION['email'];
-    date_default_timezone_set('America/Sao_Paulo');
-    $horario = date('m/d/Y h:i:s a', time());
+ 
 
 
     if(isset($_POST['submit']))
@@ -272,6 +272,8 @@
                 <br>
                 
                 <input type="submit" name="submit" id="submit">
+                <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
+                <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
             </fieldset>
         </form>
     </div>

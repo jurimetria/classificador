@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('config2.php');
+    include('salvaDados.php');
 
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
@@ -17,10 +18,7 @@
         $stmt->execute();
         $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Salva dados da última alteração
-        $logado = $_SESSION['email'];
-        date_default_timezone_set('America/Sao_Paulo');
-        $horario = date('m/d/Y h:i:s a', time());
+
     }
     else
     {

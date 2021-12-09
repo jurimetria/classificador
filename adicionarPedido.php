@@ -1,6 +1,8 @@
 <?php
     session_start();
     include('config2.php');
+    include('salvaDados.php');
+    
 
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
@@ -8,10 +10,14 @@
         unset($_SESSION['senha']);
         header('Location: login.php');
     }
+
+    include('salvaDados.php');
     $id_pasta = $_GET['id_pasta'];
+    
     if(!empty($_GET['id_pasta']))
     {
         include_once('config.php');
+        
         $id_pasta = $_GET['id_pasta'];
 
         $sqlSelect = "SELECT * FROM tb_dados_valores WHERE id_pasta=$id_pasta";
@@ -19,13 +25,11 @@
 
         $result = $conexao->query($sqlSelect);
 
-        // Salva dados da última alteração
-        $logado = $_SESSION['email'];
-        date_default_timezone_set('America/Sao_Paulo');
-        $horario = date('m/d/Y h:i:s a', time());
-
+        
+        
         if(isset($_POST["submit"]))
         {
+            
             $logado = $_POST['logado'];
             $horario = $_POST['horario'];
             $id_pasta = $_POST['id_pasta'];
@@ -46,6 +50,8 @@
         header('Location: index.php');
     }
 
+ 
+   
 
     include('style.css');
 ?>
@@ -140,6 +146,8 @@
 
                 <input type="hidden" name="id_pasta" id="id_pasta" value="<?php echo $id_pasta;?>">
                 <input type="submit" name="submit" id="submit">
+                <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
+                <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
             </fieldset>
         </form>
     </div>

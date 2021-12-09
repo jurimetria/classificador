@@ -84,7 +84,7 @@
             
             else 
                 {
-                    echo "<br><br> Sem resultados na busca! <br><br>";
+                    echo "<br><br><h2> Sem resultados na busca! <br>Certifique-se que a pasta foi cadastrada no Judice até a meia noite de ontem <br> Ou tente buscar por um termo mais abrangente </h2><br><br>";
                 }
 
         }
