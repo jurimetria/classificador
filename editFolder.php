@@ -1,7 +1,10 @@
 <?php
     session_start();
     include('config2.php');
+    include('config.php');
     include('salvaDados.php');
+
+
 
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
@@ -17,7 +20,13 @@
         $stmt = $pdo->prepare('SELECT * FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
         $stmt->execute();
         $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
+        $db_f_aval = $db_f['avaliador'];
+        
+       
 
+
+
+        
 
     }
     else
@@ -77,48 +86,117 @@
         <form action="saveEditFolder.php" method="POST">
             <fieldset>
                 <legend id='padding12'><a><b>Editar Pasta: <?php echo $id_pasta ?></b></a></legend>
+                <br>
+
+                <!-- DROPDOWN AVALIADOR -->
+                <div class="inputBox" class="container">
+                    <label for="avaliador" >Avaliador: </label>
+                    <?php
+
+                        $statement = $pdo->prepare('SELECT avaliador FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
+                        $statement->execute();
+                        $selected_avaliador = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        $statement = $pdo->prepare("SELECT avaliador FROM tb_campos WHERE avaliador IS NOT NULL ");
+                        $statement->execute();
+                        $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+                       
+                        
+                        echo "<select id='avaliador' name='avaliador'>";
+                        foreach($options as $option){
+                            if($selected_avaliador['avaliador'] == $option) {
+                                echo "<option selected='selected' value='$option'>$option</option>";
+                            }
+                            else {
+                                echo "<option value='$option'>$option</option>";
+                            }
+                        }
+                        echo "</select>";
+                    ?>
+                </div><br>
+
+                <!-- DROPDOWN AREA -->
+                <div class="inputBox" class="container">
+                    <label for="area" >Área: </label>
+                    <?php
+
+                        $statement = $pdo->prepare('SELECT area FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
+                        $statement->execute();
+                        $selected_area = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        $statement = $pdo->prepare("SELECT area FROM tb_campos WHERE area IS NOT NULL ORDER BY area DESC");
+                        $statement->execute();
+                        $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+                       
+                        
+                        echo "<select id='area' name='area'>";
+                        foreach($options as $option){
+                            if($selected_area['area'] == $option) {
+                                echo "<option selected='selected' value='$option'>$option</option>";
+                            }
+                            else {
+                                echo "<option value='$option'>$option</option>";
+                            }
+                        }
+                        echo "</select>";
+                    ?>
+                </div><br>
+
+
+                <!-- DROPDOWN UNIDADE -->
+                <div class="inputBox" class="container">
+                    <label for="unidade" >Unidade: </label>
+                    <?php
+
+                        $statement = $pdo->prepare('SELECT unidade FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
+                        $statement->execute();
+                        $selected_unidade = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        $statement = $pdo->prepare("SELECT unidade FROM tb_campos WHERE unidade IS NOT NULL ORDER BY unidade DESC");
+                        $statement->execute();
+                        $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+                       
+                        
+                        echo "<select id='unidade' name='unidade'>";
+                        foreach($options as $option){
+                            if($selected_unidade['unidade'] == $option) {
+                                echo "<option selected='selected' value='$option'>$option</option>";
+                            }
+                            else {
+                                echo "<option value='$option'>$option</option>";
+                            }
+                        }
+                        echo "</select>";
+                    ?>
+                </div><br>
+
+                <!-- DROPDOWN ANO AVALIAÇAO -->
+                <div class="inputBox" class="container">
+                    <label for="ano_aval" >Ano da Avaliação: </label>
+                    <?php
+
+                        $statement = $pdo->prepare('SELECT ano_aval FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
+                        $statement->execute();
+                        $selected_ano_aval = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        $statement = $pdo->prepare("SELECT ano FROM tb_campos WHERE ano <= $ano_atual ORDER BY ano DESC");
+                        $statement->execute();
+                        $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+                       
+                        
+                        echo "<select id='ano_aval' name='ano_aval'>";
+                        foreach($options as $option){
+                            if($selected_ano_aval['ano_aval'] == $option) {
+                                echo "<option selected='selected' value='$option'>$option</option>";
+                            }
+                            else {
+                                echo "<option value='$option'>$option</option>";
+                            }
+                        }
+                        echo "</select>";
+                    ?>
+                </div><br>
                 
-                <div class="inputBox" class="container" >
-                <label for="avaliador" >Avaliador: </label>
-                    <select id="avaliador" name="avaliador" >
-                 
-                    <option value="Juliane" <?php if($db_f['avaliador']=="Juliane") echo 'selected="selected"'; ?>>Juliane</option>
-                    <option value="Carolina" <?php if($db_f['avaliador']=="Carolina") echo 'selected="selected"'; ?>>Carolina</option>
-                    <option value="Filipe" <?php if($db_f['avaliador']=="Filipe") echo 'selected="selected"'; ?>>Filipe</option>
-                 
-                    </select>
-                </div>
-                <br>
-
-                <div class="inputBox" class="container">
-                <label for="area" >Área: </label>
-                    <select id="area" name="area">
-                    <option value="" >Escolha uma área</option>
-                        <option value="Trabalhista" <?php if($db_f['area']=="Trabalhista") echo 'selected="selected"'; ?>>Trabalhista</option>
-                        <option value="Previdenciário" <?php if($db_f['area']=="Previdenciário") echo 'selected="selected"'; ?>>Previdenciário</option>
-                    </select>
-                </div>
-                <br>
-                <div class="inputBox" class="container">
-                <label for="unidade" >Unidade: </label>
-                    <select id="unidade" name="unidade">
-                        <option value="RS" <?php if($db_f['unidade']=="RS") echo 'selected="selected"'; ?>>RS</option>
-                        <option value="SP" <?php if($db_f['unidade']=="SP") echo 'selected="selected"'; ?>>SP</option>
-                    </select>
-                </div>
-                <br>
-                
-
-                <div class="inputBox" class="container">
-                <label for="ano_aval" >Ano da Avaliação: </label>
-                    <select id="ano_aval" name="ano_aval">
-
-                        <option value="2022" <?php if($db_f['ano_aval']=="2022") echo 'selected="selected"'; ?>>2022</option>
-                        <option value="2021" <?php if($db_f['ano_aval']=="2021") echo 'selected="selected"'; ?>>2021</option>
-                        <option value="2020" <?php if($db_f['ano_aval']=="2020") echo 'selected="selected"'; ?>>2020</option>
-                    </select>
-                </div>
-                <br>
 
                 
                 <div class="inputBox" class="container">
@@ -204,19 +282,32 @@
                 </div>
                 <br>
 
+                <!-- DROPDOWN TIPO AÇÃO -->
                 <div class="inputBox" class="container">
-                <label for="tipo_acao" >Tipo de Ação </label>
-                    <select id="tipo_acao" name="tipo_acao">
-                    <option value="RT TÍPICA" <?php if($db_f['tipo_acao']=="RT TÍPICA") echo 'selected="selected"'; ?>>RT TÍPICA</option>
-                    <option value="GRATIFICAÇÃO ESPECIAL" <?php if($db_f['tipo_acao']=="GRATIFICAÇÃO ESPECIAL") echo 'selected="selected"'; ?>>GRATIFICAÇÃO ESPECIAL</option>
-                    <option value="GRADE" <?php if($db_f['tipo_acao']=="GRADE") echo 'selected="selected"'; ?>>GRADE</option>
-                    <option value="PCS" <?php if($db_f['tipo_acao']=="PCS") echo 'selected="selected"'; ?>>PCS</option>
-                    <option value="PLR" <?php if($db_f['tipo_acao']=="PLR") echo 'selected="selected"'; ?>>PLR</option>
-                    <option value="VÍNCULO" <?php if($db_f['tipo_acao']=="VÍNCULO") echo 'selected="selected"'; ?>>VÍNCULO</option>
-                    <option value="RESTABELECER GRAT. FUNÇÃO" <?php if($db_f['tipo_acao']=="RESTABELECER GRAT. FUNÇÃO") echo 'selected="selected"'; ?>>RESTABELECER GRAT. FUNÇÃO</option>
-                    </select>
-                </div>
-                <br>
+                    <label for="tipo_acao" >Tipo de Ação: </label>
+                    <?php
+
+                        $statement = $pdo->prepare('SELECT tipo_acao FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
+                        $statement->execute();
+                        $selected_tipo_acao = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        $statement = $pdo->prepare("SELECT tipo_acao FROM tb_campos WHERE tipo_acao IS NOT NULL ");
+                        $statement->execute();
+                        $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+                       
+                        
+                        echo "<select id='tipo_acao' name='tipo_acao'>";
+                        foreach($options as $option){
+                            if($selected_tipo_acao['tipo_acao'] == $option) {
+                                echo "<option selected='selected' value='$option'>$option</option>";
+                            }
+                            else {
+                                echo "<option value='$option'>$option</option>";
+                            }
+                        }
+                        echo "</select>";
+                    ?>
+                </div><br>
 
 
                 <div class="inputBox">

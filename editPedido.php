@@ -3,7 +3,7 @@
 <?php
     session_start();
     include('config2.php');
-    
+    include('salvaDados.php');
 
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
@@ -22,7 +22,7 @@
         $db_v = $stmt->fetch(PDO::FETCH_ASSOC);
         $id_pasta = $db_v['id_pasta'];
 
-        include('salvaDados.php');
+        
     }
     else
     {
@@ -78,26 +78,35 @@
             <fieldset>
                 <legend id='padding12'><a><b>Editar pedido # <?php echo $n_registro ?> - Pasta # <?php echo $id_pasta ?> </b></a></legend>
                 <br><br>
+
+                <!-- DROPDOWN TIPO PEDIDO -->
                 <div class="inputBox" class="container">
-                    <label for="tipo_pedido" >Pedido</label>
-                    <select id="tipo_pedido" name="tipo_pedido">
-                        <option value="7ª E 8ª HORAS" <?php if($db_v['tipo_pedido']=="7ª E 8ª HORAS") echo 'selected="selected"'; ?>>7ª E 8ª HORAS</option>
-                        <option value="HORAS EXTRAS ALÉM DA 8ª" <?php if($db_v['tipo_pedido']=="HORAS EXTRAS ALÉM DA 8ª") echo 'selected="selected"'; ?>>HORAS EXTRAS ALÉM DA 8ª</option>
-                        <option value="HORAS EXTRAS ALÉM DA 6ª" <?php if($db_v['tipo_pedido']=="HORAS EXTRAS ALÉM DA 6ª") echo 'selected="selected"'; ?>>HORAS EXTRAS ALÉM DA 6ª </option>
-                        <option value="HORAS EXTRAS DE INTERVALO" <?php if($db_v['tipo_pedido']=="HORAS EXTRAS DE INTERVALO") echo 'selected="selected"'; ?>>HORAS EXTRAS DE INTERVALO</option>
-                        <option value="EQUIPARAÇÃO SALARIAL" <?php if($db_v['tipo_pedido']=="EQUIPARAÇÃO SALARIAL") echo 'selected="selected"'; ?>>EQUIPARAÇÃO SALARIAL</option>
-                        <option value="PERICULOSIDADE/INSALUBRIDADE" <?php if($db_v['tipo_pedido']=="PERICULOSIDADE/INSALUBRIDADE") echo 'selected="selected"'; ?>>PERICULOSIDADE/INSALUBRIDADE</option>
-                        <option value="KM RODADO" <?php if($db_v['tipo_pedido']=="KM RODADO") echo 'selected="selected"'; ?>>KM RODADO</option>
-                        <option value="GRATIFICAÇÃO ESPECIAL" <?php if($db_v['tipo_pedido']=="GRATIFICAÇÃO ESPECIAL") echo 'selected="selected"'; ?>>GRATIFICAÇÃO ESPECIAL</option>
-                        <option value="GRADE ABN REAL" <?php if($db_v['tipo_pedido']=="GRADE ABN REAL") echo 'selected="selected"'; ?>>GRADE ABN REAL</option>
-                        <option value="PCS" <?php if($db_v['tipo_pedido']=="PCS") echo 'selected="selected"'; ?>>PCS</option>
-                        <option value="DANO MORAL" <?php if($db_v['tipo_pedido']=="DANO MORAL") echo 'selected="selected"'; ?>>DANO MORAL</option>
-                        <option value="ACÚMULO DE FUNÇÃO" <?php if($db_v['tipo_pedido']=="ACÚMULO DE FUNÇÃO") echo 'selected="selected"'; ?>>ACÚMULO DE FUNÇÃO</option>
-                        <option value="RESTABELECER GRAT. FUNÇÃO" <?php if($db_v['tipo_pedido']=="RESTABELECER GRAT. FUNÇÃO") echo 'selected="selected"'; ?>>RESTABELECER GRAT. FUNÇÃO</option>
-                        <option value="OUTROS" <?php if($db_v['tipo_pedido']=="OUTROS") echo 'selected="selected"'; ?>>OUTROS</option>
-                    </select>
-                </div>
-                
+                    <label for="tipo_pedido" >Pedido: </label>
+                    <?php
+
+                        $statement = $pdo->prepare('SELECT tipo_pedido FROM tb_dados_valores WHERE n_registro=\''.$n_registro.'\'');
+                        $statement->execute();
+                        $selected_tipo_pedido = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        $statement = $pdo->prepare("SELECT tipo_pedido FROM tb_campos WHERE tipo_pedido IS NOT NULL ");
+                        $statement->execute();
+                        $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+                       
+                        
+                        echo "<select id='tipo_pedido' name='tipo_pedido'>";
+                        foreach($options as $option){
+                            if($selected_tipo_pedido['tipo_pedido'] == $option) {
+                                echo "<option selected='selected' value='$option'>$option</option>";
+                            }
+                            else {
+                                echo "<option value='$option'>$option</option>";
+                            }
+                        }
+                        echo "</select>";
+                    ?>
+                </div><br>
+
+
                 <br>
                 <div class="inputBox">
                     <input type = "number" step="0.01" min="0"  name="valor_pedido" id="valor_pedido" class="inputUser" value="<?php echo $db_v['valor_pedido'] ?>" required>
