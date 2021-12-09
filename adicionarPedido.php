@@ -2,6 +2,7 @@
     session_start();
     include('config2.php');
     include('salvaDados.php');
+    $pdo = conectar();
     
 
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
@@ -13,6 +14,20 @@
 
     include('salvaDados.php');
     $id_pasta = $_GET['id_pasta'];
+
+        # VER OPÇÕES DE SELEÇÃO
+    # VER TIPO DE PEDIDO
+    $ver_tipo_pedido = '';
+    $query = "SELECT DISTINCT tipo_pedido FROM
+        tb_campos WHERE tipo_pedido IS NOT NULL ";
+    $statement = $pdo->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+
+    foreach($result as $row)
+    {
+        $ver_tipo_pedido .= '<option value="'.$row['tipo_pedido'].'">'.$row['tipo_pedido'].'</option>';
+    }
     
     if(!empty($_GET['id_pasta']))
     {
@@ -101,28 +116,17 @@
         <form action="" method="POST">
             <fieldset>
                 <legend id='padding12'><a><b>Novo pedido - Pasta: <?php echo $id_pasta ?> </b></a></legend>
-                <br>
+                <br><br>
 
-                <div class="inputBox">
-                <label for="tipo_pedido" >Pedido</label>
-                    <select id="tipo_pedido" name="tipo_pedido">
-                        <option value="">Escolha</option>
-                        <option value="7ª E 8ª HORAS">7ª E 8ª HORAS</option>
-                        <option value="HORAS EXTRAS ALÉM DA 8ª">HORAS EXTRAS ALÉM DA 8ª</option>
-                        <option value="HORAS EXTRAS ALÉM DA 6ª ">HORAS EXTRAS ALÉM DA 6ª </option>
-                        <option value="HORAS EXTRAS DE INTERVALO">HORAS EXTRAS DE INTERVALO</option>
-                        <option value="EQUIPARAÇÃO SALARIAL">EQUIPARAÇÃO SALARIAL</option>
-                        <option value="PERICULOSIDADE/INSALUBRIDADE">PERICULOSIDADE/INSALUBRIDADE</option>
-                        <option value="KM RODADO">KM RODADO</option>
-                        <option value="GRATIFICAÇÃO ESPECIAL">GRATIFICAÇÃO ESPECIAL</option>
-                        <option value="GRADE ABN REAL">GRADE ABN REAL</option>
-                        <option value="PCS">PCS</option>
-                        <option value="DANO MORAL">DANO MORAL</option>
-                        <option value="ACÚMULO DE FUNÇÃO">ACÚMULO DE FUNÇÃO</option>
-                        <option value="RESTABELECER GRAT. FUNÇÃO">RESTABELECER GRAT. FUNÇÃO</option>
-                        <option value="OUTROS">OUTROS</option>
-                    </select>
-                </div>
+                <div class="inputBox" class="container">
+                <label for="tipo_pedido">Pedido:</label>
+                        <select name="tipo_pedido" id="tipo_pedido"  required>
+                        <option value="" >Escolha...</option>
+                            <?php echo $ver_tipo_pedido; ?>
+                        </select>
+                    </div>
+                
+
 
                 <br>
                 <div class="inputBox">
@@ -134,7 +138,7 @@
                 <div class="inputBox" class="container">
                     <label for="probabilidade" >Probabilidade de Êxito: </label>
                     <select id="probabilidade" name="probabilidade">
-                        <option value="">Escolha</option>
+                        <option value="">Escolha...</option>
                         <option value="ALTA">Alta: 90% a 100%</option>
                         <option value="PROVÁVEL">Provável: 70% a 90%</option>
                         <option value="POSSÍVEL">Possível: 50% a 70%</option>

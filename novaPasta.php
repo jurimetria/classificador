@@ -7,6 +7,76 @@
     
     $pdo = conectar();
 
+        # VER OPÇÕES DE SELEÇÃO
+        # VER AVALIADOR
+        $ver_avaliador = '';
+        $query = "SELECT DISTINCT avaliador FROM
+            tb_campos WHERE avaliador IS NOT NULL ORDER BY avaliador ASC ";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        foreach($result as $row)
+        {
+            $ver_avaliador .= '<option value="'.$row['avaliador'].'">'.$row['avaliador'].'</option>';
+        }
+
+        # VER AREA
+        $ver_area = '';
+        $query = "SELECT DISTINCT area FROM
+            tb_campos WHERE area IS NOT NULL ORDER BY area DESC ";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        foreach($result as $row)
+        {
+            $ver_area .= '<option value="'.$row['area'].'">'.$row['area'].'</option>';
+        }
+
+        # VER UNIDADE
+        $ver_unidade = '';
+        $query = "SELECT DISTINCT unidade FROM
+            tb_campos WHERE unidade IS NOT NULL ORDER BY unidade ASC ";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        foreach($result as $row)
+        {
+            $ver_unidade .= '<option value="'.$row['unidade'].'">'.$row['unidade'].'</option>';
+        }
+
+
+        # VER ANO
+        $ver_ano = '';
+        $query = "SELECT DISTINCT ano FROM
+            tb_campos WHERE ano <= $ano_atual ORDER BY ano DESC ";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        # IS NOT NULL ORDER BY ano DESC
+        foreach($result as $row)
+        {
+            $ver_ano .= '<option value="'.$row['ano'].'">'.$row['ano'].'</option>';
+        }
+
+        # VER TIPO DE ACAO
+        $ver_tipo_acao = '';
+        $query = "SELECT DISTINCT tipo_acao FROM
+            tb_campos WHERE tipo_acao IS NOT NULL ";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        foreach($result as $row)
+        {
+            $ver_tipo_acao .= '<option value="'.$row['tipo_acao'].'">'.$row['tipo_acao'].'</option>';
+        }
+
+
+
+
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))
     {
         unset($_SESSION['email']);
@@ -118,47 +188,44 @@
                 <br>
 
 
-                <div class="inputBox" class="container" >
-                <label for="avaliador" >Avaliador: </label>
-                    <select id="avaliador" name="avaliador" >
-                    <option value="">Escolha um avaliador</option>
-                    <option value="Juliane">Juliane</option>
-                    <option value="Carolina" >Carolina</option>
-                    <option value="Filipe">Filipe</option>
-                  
-                    </select>
-                </div>
-                <br>
 
                 <div class="inputBox" class="container">
-                <label for="area" >Área: </label>
-                    <select id="area" name="area">
-                    <option value="" >Escolha uma área</option>
-                        <option value="Trabalhista" <?php if($db_f['area']=="Trabalhista") echo 'selected="selected"'; ?>>Trabalhista</option>
-                        <option value="Previdenciário" <?php if($db_f['area']=="Previdenciário") echo 'selected="selected"'; ?>>Previdenciário</option>
-                    </select>
-                </div>
+                <label for="avaliador">Avaliador:</label>
+                        <select name="avaliador" id="avaliador"  required>
+                        <option value="" >Escolha um avaliador</option>
+                            <?php echo $ver_avaliador; ?>
+                        </select>
+                    </div>
                 <br>
 
-                <div class="inputBox" class="container">
-                <label for="unidade" >Unidade: </label>
-                    <select id="unidade" name="unidade">
-                        <option value="RS" <?php if($db_f['unidade']=="RS") echo 'selected="selected"'; ?>>RS</option>
-                        <option value="SP" <?php if($db_f['unidade']=="SP") echo 'selected="selected"'; ?>>SP</option>
-                    </select>
-                </div>
-                <br>
 
                 <div class="inputBox" class="container">
-                <label for="ano_aval" >Ano da Avaliação: </label>
-                    <select id="ano_aval" name="ano_aval">
-                        <option value="2023" <?php if($dataa=="2023") echo 'selected="selected"'; ?>>2023</option>
-                        <option value="2022" <?php if($dataa=="2022") echo 'selected="selected"'; ?>>2022</option>
-                        <option value="2021" <?php if($dataa=="2021") echo 'selected="selected"'; ?>>2021</option>
-                        <option value="2020" <?php if($dataa=="2020") echo 'selected="selected"'; ?>>2020</option>
-                        <option value="2019" <?php if($dataa=="2019") echo 'selected="selected"'; ?>>2019</option>
-                    </select>
-                </div>
+                <label for="area">Área:</label>
+                        <select name="area" id="area"  required>
+                            <?php echo $ver_area; ?>
+                        </select>
+                    </div>
+                <br>
+
+
+                <div class="inputBox" class="container">
+                <label for="unidade">Unidade:</label>
+                        <select name="unidade" id="unidade"  required>
+                            <?php echo $ver_unidade; ?>
+                            
+                        </select>
+                    </div>
+                <br>
+
+
+
+                <div class="inputBox" class="container">
+                <label for="ano_aval">Ano da avaliação:</label>
+                        <select name="ano_aval" id="ano_aval"  required>
+                            <?php echo $ver_ano; ?>
+                            
+                        </select>
+                    </div>
                 <br>
 
                 
@@ -250,18 +317,13 @@
                 <br>
 
                 <div class="inputBox" class="container">
-                <label for="tipo_acao" >Tipo de Ação </label>
-                    <select id="tipo_acao" name="tipo_acao">
-                    <option value="" >Escolha um Tipo de Ação</option>
-                    <option value="RT TÍPICA" >RT TÍPICA</option>
-                    <option value="GRATIFICAÇÃO ESPECIAL" >GRATIFICAÇÃO ESPECIAL</option>
-                    <option value="GRADE" >GRADE</option>
-                    <option value="PCS" >PCS</option>
-                    <option value="PLR" >PLR</option>
-                    <option value="VÍNCULO" >VÍNCULO</option>
-                    <option value="RESTABELECER GRAT. FUNÇÃO" >RESTABELECER GRAT. FUNÇÃO</option>
-                    </select>
-                </div>
+                <label for="tipo_acao">Tipo de Ação:</label>
+                        <select name="tipo_acao" id="tipo_acao"  required>
+                            <option value="">Escolha um tipo de Ação</option>
+                            <?php echo $ver_tipo_acao; ?>
+                            
+                        </select>
+                    </div>
                 <br><br>
 
 
