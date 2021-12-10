@@ -138,6 +138,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    
     <title>L&P | CLassificador</title>
     <!-- FAVICON -->
     <link rel="shortcut icon" href="https://lp-classificador.s3.amazonaws.com/img/favicon.ico" type="image/x-icon" />
@@ -161,183 +163,200 @@
         </nav>
     </div>
 
-    <!-- BOTÃO VOLTAR -->
-    <div class='alingLeft alingTop'>
-        <button class='button2' onclick="goBack()">Voltar</button>
-    </div>
+    <div class="row">
+        <div class="column side2 alingLeft">
+            <!-- BOTÃO VOLTAR -->
+            <div class=' alingTop'>
+                <button class='button2' onclick="goBack()">Voltar</button>
+            </div>
 
-    <!-- BOTÃO PROCURAR OUTRA PASTA -->
-    <div class='alingLeft alingTop'>
-        <?php
-                {echo "<a class='button2' href='index.php' title='Procurar Outra Pasta'> Procurar Outra Pasta</a>";
-                }
-        ?>
-    </div>
-    <div class="box">
-        <form action="" method="POST">
+            <!-- BOTÃO PROCURAR OUTRA PASTA -->
+            <div class=' alingTop'>
+                <?php
+                        {echo "<a class='button2' href='index.php' title='Procurar Outra Pasta'> Procurar Outra Pasta</a>";
+                        }
+                ?>
+            </div>
 
+            <div class=' alingTop text-warning'>
+                <span ><b>Importante!</b></span><br><br>
+                <span >No Número da Pasta copie e cole o número da Pasta </span><br>
+                <span >como está no Judice</span><br>
+                <span >É importante que sejam idênticos (e com underlines _ )</span><br><br>
+                <span >Correto: POA_TRAB_11549</span><br>
+                <span >Errado: TRAB 11549</span><br>
 
-            <fieldset>
-                <legend id='padding12'><a><b>Cadastrar Nova Pasta </b></a></legend>
-                <br><br>
+            </div><br>
+        </div>
 
-                <div class="inputBox">
-                    <input type = "text" name="id_pasta" id="id_pasta" class="inputUser" required>
-                    <label for="id_pasta" class="labelInput">Número da Pasta</label>
-                </div>
-                <br>
+        <div class="column side2 alingCenter">
+            <div class="box">
+                <form action="" method="POST">
+                    <fieldset>
+                        <legend id='padding12'><a><b>Cadastrar Nova Pasta </b></a></legend>
+                        <br><br>
+                        
 
-
-
-                <div class="inputBox" class="container">
-                <label for="avaliador">Avaliador:</label>
-                        <select name="avaliador" id="avaliador"  required>
-                        <option value="" >Escolha um avaliador</option>
-                            <?php echo $ver_avaliador; ?>
-                        </select>
-                    </div>
-                <br>
-
-
-                <div class="inputBox" class="container">
-                <label for="area">Área:</label>
-                        <select name="area" id="area"  required>
-                            <?php echo $ver_area; ?>
-                        </select>
-                    </div>
-                <br>
+                        <div class="inputBox ">
+                            <input type = "text" name="id_pasta" id="id_pasta" class="inputUser " required>
+                        
+                            <label for="id_pasta" class="labelInput">Número da Pasta</label>
+                        </div>
+                        <br>
 
 
-                <div class="inputBox" class="container">
-                <label for="unidade">Unidade:</label>
-                        <select name="unidade" id="unidade"  required>
-                            <?php echo $ver_unidade; ?>
+
+                        <div class="inputBox" class="container">
+                        <label for="avaliador">Avaliador:</label>
+                                <select name="avaliador" id="avaliador"  required>
+                                <option value="" >Escolha um avaliador</option>
+                                    <?php echo $ver_avaliador; ?>
+                                </select>
+                            </div>
+                        <br>
+
+
+                        <div class="inputBox" class="container">
+                        <label for="area">Área:</label>
+                                <select name="area" id="area"  required>
+                                    <?php echo $ver_area; ?>
+                                </select>
+                            </div>
+                        <br>
+
+
+                        <div class="inputBox" class="container">
+                        <label for="unidade">Unidade:</label>
+                                <select name="unidade" id="unidade"  required>
+                                    <?php echo $ver_unidade; ?>
+                                    
+                                </select>
+                            </div>
+                        <br>
+
+
+
+                        <div class="inputBox" class="container">
+                        <label for="ano_aval">Ano da avaliação:</label>
+                                <select name="ano_aval" id="ano_aval"  required>
+                                    <?php echo $ver_ano; ?>
+                                    
+                                </select>
+                            </div>
+                        <br>
+
+                        
+                        <div class="inputBox" class="container">
+                        <label for="mes_aval" >Mês da Avaliação: </label>
+                            <select id="mes_aval" name="mes_aval" >
+                                <option value="Dezembro" <?php if($datam=="12") echo 'selected="selected"'; ?>>Dezembro</option>
+                                <option value="Novembro" <?php if($datam=="11") echo 'selected="selected"'; ?>>Novembro</option>
+                                <option value="Outubro" <?php if($datam=="10") echo 'selected="selected"'; ?>>Outubro</option>
+                                <option value="Setembro" <?php if($datam=="09") echo 'selected="selected"'; ?>>Setembro</option>
+                                <option value="Agosto" <?php if($datam=="08") echo 'selected="selected"'; ?>>Agosto</option>
+                                <option value="Julho" <?php if($datam=="07") echo 'selected="selected"'; ?>>Julho</option>
+                                <option value="Junho" <?php if($datam=="06") echo 'selected="selected"'; ?>>Junho</option>
+                                <option value="Maio" <?php if($datam=="05") echo 'selected="selected"'; ?>>Maio</option>
+                                <option value="Abril" <?php if($datam=="04") echo 'selected="selected"'; ?>>Abril</option>
+                                <option value="Março" <?php if($datam=="03") echo 'selected="selected"'; ?>>Março</option>
+                                <option value="Fevereiro" <?php if($datam=="02") echo 'selected="selected"'; ?>>Fevereiro</option>
+                                <option value="Janeiro"<?php if($datam=="01") echo 'selected="selected"'; ?>>Janeiro</option>
+                            </select>
+                        </div>
+                        <br><br>
+
+                        <div class="inputBox">
+                            <input type = "text" name="reclamante" id="reclamante" class="inputUser"  required>
+                            <label for="reclamante" class="labelInput">Reclamante</label>
+                        </div>
+                        <br>
+
+                        <div class="inputBox">
+                            <input type = "text" name="reclamada" id="reclamada" class="inputUser"  >
+                            <label for="reclamada" class="labelInput">Reclamada</label>
+                        </div>
+                        <br>
+
+                        <div class="inputBox" class="container">
+                        <label for="ramo" >Ramo: </label>
+                            <select id="ramo" name="ramo">
+
+                            <option value="Bancário">Bancário</option>
+                            <option value="Não Bancário" >Não Bancário</option>
+                            </select>
+                        </div>
+                        <br>
+
+                        <div class="inputBox" class="container">
+                        <label for="binaria" >É Binária? </label>
+                            <select id="binaria" name="binaria">
+                            <option value="Não">Não</option>
+                            <option value="Sim">Sim</option>
                             
-                        </select>
-                    </div>
-                <br>
+                            </select>
+                        </div>
+                        <br><br>
+
+                        <div class="inputBox">
+                            <input type = "text" name="cargo" id="cargo" class="inputUser" >
+                            <label for="cargo" class="labelInput">Cargo</label>
+                        </div>
+                        <br>
+
+                        <div class="inputBox">
+                            <input type = "text" name="periodo" id="periodo" class="inputUser"  >
+                            <label for="periodo" class="labelInput">Período Discutido</label>
+                        </div>
+                        <br>
 
 
-
-                <div class="inputBox" class="container">
-                <label for="ano_aval">Ano da avaliação:</label>
-                        <select name="ano_aval" id="ano_aval"  required>
-                            <?php echo $ver_ano; ?>
-                            
-                        </select>
-                    </div>
-                <br>
-
+                        <div class="input-group" >
+                            <label for="honorarios_perc" > Porcentagem Honorários &nbsp;&nbsp;  </label>
+                            <input type="number" min="0" max="100" placeholder="100" name="honorarios_perc" id="honorarios_perc"  class="form-control " aria-label="" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        <br>
                 
-                <div class="inputBox" class="container">
-                <label for="mes_aval" >Mês da Avaliação: </label>
-                    <select id="mes_aval" name="mes_aval" >
-                        <option value="Dezembro" <?php if($datam=="12") echo 'selected="selected"'; ?>>Dezembro</option>
-                        <option value="Novembro" <?php if($datam=="11") echo 'selected="selected"'; ?>>Novembro</option>
-                        <option value="Outubro" <?php if($datam=="10") echo 'selected="selected"'; ?>>Outubro</option>
-                        <option value="Setembro" <?php if($datam=="09") echo 'selected="selected"'; ?>>Setembro</option>
-                        <option value="Agosto" <?php if($datam=="08") echo 'selected="selected"'; ?>>Agosto</option>
-                        <option value="Julho" <?php if($datam=="07") echo 'selected="selected"'; ?>>Julho</option>
-                        <option value="Junho" <?php if($datam=="06") echo 'selected="selected"'; ?>>Junho</option>
-                        <option value="Maio" <?php if($datam=="05") echo 'selected="selected"'; ?>>Maio</option>
-                        <option value="Abril" <?php if($datam=="04") echo 'selected="selected"'; ?>>Abril</option>
-                        <option value="Março" <?php if($datam=="03") echo 'selected="selected"'; ?>>Março</option>
-                        <option value="Fevereiro" <?php if($datam=="02") echo 'selected="selected"'; ?>>Fevereiro</option>
-                        <option value="Janeiro"<?php if($datam=="01") echo 'selected="selected"'; ?>>Janeiro</option>
-                    </select>
-                </div>
-                <br><br>
-
-                <div class="inputBox">
-                    <input type = "text" name="reclamante" id="reclamante" class="inputUser"  required>
-                    <label for="reclamante" class="labelInput">Reclamante</label>
-                </div>
-                <br>
-
-                <div class="inputBox">
-                    <input type = "text" name="reclamada" id="reclamada" class="inputUser"  >
-                    <label for="reclamada" class="labelInput">Reclamada</label>
-                </div>
-                <br>
-
-                <div class="inputBox" class="container">
-                <label for="ramo" >Ramo: </label>
-                    <select id="ramo" name="ramo">
-
-                    <option value="Bancário">Bancário</option>
-                    <option value="Não Bancário" >Não Bancário</option>
-                    </select>
-                </div>
-                <br>
-
-                <div class="inputBox" class="container">
-                <label for="binaria" >É Binária? </label>
-                    <select id="binaria" name="binaria">
-                    <option value="Não">Não</option>
-                    <option value="Sim">Sim</option>
-                    
-                    </select>
-                </div>
-                <br><br>
-
-                <div class="inputBox">
-                    <input type = "text" name="cargo" id="cargo" class="inputUser" >
-                    <label for="cargo" class="labelInput">Cargo</label>
-                </div>
-                <br>
-
-                <div class="inputBox">
-                    <input type = "text" name="periodo" id="periodo" class="inputUser"  >
-                    <label for="periodo" class="labelInput">Período Discutido</label>
-                </div>
-                <br>
 
 
-                <div class="input-group" >
-                    <label for="honorarios_perc" > Porcentagem Honorários &nbsp;&nbsp;  </label>
-                    <input type="number" min="0" max="100" placeholder="100" name="honorarios_perc" id="honorarios_perc"  class="form-control " aria-label="" required>
-                    <div class="input-group-append">
-                        <span class="input-group-text">%</span>
-                    </div>
-                </div>
-                <br>
-          
+                        <div class="inputBox">
+                            <input type = "text" name="comarca" id="comarca" class="inputUser" >
+                            <label for="comarca" class="labelInput">Comarca</label>
+                        </div>
+                        <br>
+
+                        <div class="inputBox">
+                            <input type = "number" step="0.01" min="0"  name="salario" id="salario" class="inputUser"  >
+                            <label for="salario" class="labelInput">Última Remuneração</label>
+                        </div>
+                        <br>
+
+                        <div class="inputBox" class="container">
+                        <label for="tipo_acao">Tipo de Ação:</label>
+                                <select name="tipo_acao" id="tipo_acao"  required>
+                                    <option value="">Escolha um tipo de Ação</option>
+                                    <?php echo $ver_tipo_acao; ?>
+                                    
+                                </select>
+                            </div>
+                        <br><br>
 
 
-                <div class="inputBox">
-                    <input type = "text" name="comarca" id="comarca" class="inputUser" >
-                    <label for="comarca" class="labelInput">Comarca</label>
-                </div>
-                <br>
-
-                <div class="inputBox">
-                    <input type = "number" step="0.01" min="0"  name="salario" id="salario" class="inputUser"  >
-                    <label for="salario" class="labelInput">Última Remuneração</label>
-                </div>
-                <br>
-
-                <div class="inputBox" class="container">
-                <label for="tipo_acao">Tipo de Ação:</label>
-                        <select name="tipo_acao" id="tipo_acao"  required>
-                            <option value="">Escolha um tipo de Ação</option>
-                            <?php echo $ver_tipo_acao; ?>
-                            
-                        </select>
-                    </div>
-                <br><br>
-
-
-                <div class="inputBox">
-                <label for="obs" class="label">Observações</label>
-                    <textarea name="obs" id="obs" class="obsBox" rows="4" cols="50" placeholder="Observações..."></textarea>
-                </div>
-                <br>
-                
-                <input type="submit" name="submit" id="submit">
-                <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
-                <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
-            </fieldset>
-        </form>
+                        <div class="inputBox">
+                        <label for="obs" class="label">Observações</label>
+                            <textarea name="obs" id="obs" class="obsBox" rows="4" cols="50" placeholder="Observações..."></textarea>
+                        </div>
+                        <br>
+                        
+                        <input type="submit" name="submit" id="submit">
+                        <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
+                        <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </div>
 
 </body>
