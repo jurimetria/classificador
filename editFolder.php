@@ -226,7 +226,7 @@
                 <br><br>
 
                 <div class="inputBox">
-                    <input type = "text" name="reclamada" id="reclamada" class="inputUser" value="<?php echo $db_f['reclamada'] ?>" required>
+                    <input type = "text" name="reclamada" id="reclamada" class="inputUser" value="<?php echo $db_f['reclamada'] ?>" >
                     <label for="reclamada" class="labelInput">Reclamada</label>
                 </div>
                 <br>
@@ -250,7 +250,7 @@
                 <br><br>
 
                 <div class="inputBox">
-                    <input type = "text" name="cargo" id="cargo" class="inputUser" value="<?php echo $db_f['cargo'] ?>" required>
+                    <input type = "text" name="cargo" id="cargo" class="inputUser" value="<?php echo $db_f['cargo'] ?>" >
                     <label for="cargo" class="labelInput">Cargo</label>
                 </div>
                 <br><br>

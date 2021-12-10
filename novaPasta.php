@@ -255,7 +255,7 @@
                 <br>
 
                 <div class="inputBox">
-                    <input type = "text" name="reclamada" id="reclamada" class="inputUser"  required>
+                    <input type = "text" name="reclamada" id="reclamada" class="inputUser"  >
                     <label for="reclamada" class="labelInput">Reclamada</label>
                 </div>
                 <br>
@@ -281,13 +281,13 @@
                 <br>
 
                 <div class="inputBox">
-                    <input type = "text" name="cargo" id="cargo" class="inputUser" required>
+                    <input type = "text" name="cargo" id="cargo" class="inputUser" >
                     <label for="cargo" class="labelInput">Cargo</label>
                 </div>
                 <br>
 
                 <div class="inputBox">
-                    <input type = "text" name="periodo" id="periodo" class="inputUser" required >
+                    <input type = "text" name="periodo" id="periodo" class="inputUser"  >
                     <label for="periodo" class="labelInput">Período Discutido</label>
                 </div>
                 <br>
@@ -305,13 +305,13 @@
 
 
                 <div class="inputBox">
-                    <input type = "text" name="comarca" id="comarca" class="inputUser" required>
+                    <input type = "text" name="comarca" id="comarca" class="inputUser" >
                     <label for="comarca" class="labelInput">Comarca</label>
                 </div>
                 <br>
 
                 <div class="inputBox">
-                    <input type = "number" step="0.01" min="0"  name="salario" id="salario" class="inputUser" required >
+                    <input type = "number" step="0.01" min="0"  name="salario" id="salario" class="inputUser"  >
                     <label for="salario" class="labelInput">Última Remuneração</label>
                 </div>
                 <br>
