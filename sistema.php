@@ -30,6 +30,7 @@
         WHERE id_pasta=\''.$id_pasta.'\'')->fetchAll();
 
         $count_pedidos = count($data_pedidos);
+  
 
        
 
@@ -40,6 +41,8 @@
             $data_resumo['rating']="Adicione Pedidos";
             $data_resumo['honorarios_esp']=0;
             $data_resumo['comissao']=0;
+            $data_resumo['valor_cme']=0;
+            $data_resumo['honorarios_perc']=0;
             
 
         }
@@ -145,7 +148,7 @@
             <?php echo "<b>É binária: </b>", $db_folder['binaria'];?><br>
             <?php echo "<b>Cargo: </b>", $db_folder['cargo'];?><br>
             <?php echo "<b>Período Discutido: </b>", $db_folder['periodo'];?><br>
-            <?php echo "<b>Porcentagem Honorários: </b>", $db_folder['honorarios_perc'],"%";?><br>
+          
             
             <?php echo "<b>Última Remuneração: </b>R$ ", number_format( $db_folder['salario'],2,",",".");?><br>
             <?php echo "<b>Tipo de Ação: </b>", $db_folder['tipo_acao'];?><br>
@@ -161,15 +164,17 @@
 
         <!--     TABELA CLASSIFICACAO GLOBAL        -->
         <div  class="column side alingLeft" >
-            <h3>Classificação Global</h3><br>
-            <?php echo "<b>Valor Global: </b>R$ ", number_format( $data_resumo['valor_global'],2,",",".");?><br><br>
-            <?php echo "<b>Classificação Global (Probabilidade): </b>", $data_resumo['global_mde'];?><br><br>
-            <?php echo "<b>Classificação Relacionamento - Rating da Pasta: </b>", $data_resumo['rating'];?><br><br>
-            <?php echo "<b>Honorários Esperados: </b>R$ ", number_format( $data_resumo['honorarios_esp'],2,",",".");?><br><br>
+            <h3>Classificação Relacionamento</h3><br>
+            <?php echo "<b>Valor: </b>R$ ", number_format( $data_resumo['valor_global'],2,",",".");?><br>
+            <?php echo "<b>Classificação da Ação: </b>", $data_resumo['rating'];?><br>
             <?php if ($db_folder['binaria']==="Não") {echo "<b>Comissão: </b>R$ ", number_format( $data_resumo['comissao'],2,",",".");} else {echo "<b>Comissão: </b>R$ 300,00";}?><br>
+            <br><br><h3>Classificação Gerencial</h3><br>
+            <?php echo "<b>Valor: </b>R$ ", number_format( $data_resumo['valor_cme'],2,",",".");?><br>
+            <?php echo "<b>Probabilidade: </b>", $data_resumo['global_mde'];?><br>
+            <?php echo "<b>Honorários %: </b>", $data_resumo['honorarios_perc'],"%";?><br>
+            <?php echo "<b>Honorários Esperados: </b>R$ ", number_format( $data_resumo['honorarios_esp'],2,",",".");?><br>
 
         </div>
-
     </div>
    
        

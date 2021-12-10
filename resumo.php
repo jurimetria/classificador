@@ -83,7 +83,7 @@
         else{$unid_sentence="";}
         
 
-        $state_prep = 'SELECT * FROM view_06_resumo WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.') ';
+        $state_prep = 'SELECT * FROM view_06_resumo WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.') ORDER BY id_pasta ASC';
         
         $teste = "1";
         
@@ -104,7 +104,7 @@
 
 
     // SOMA VALOR TOTAL DE Classificação Global (Valor Médio)
-    $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_global) AS valor  FROM view_06_resumo
+    $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_cme) AS valor  FROM view_06_resumo
     WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_val_total_cme->execute();
     $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
@@ -298,7 +298,7 @@
                         echo "<td>".$row['ramo']."</td>";
                         echo "<td>".$row['rating']."</td>";
                         echo "<td>R$ ".number_format($row['comissao'],2,",",".")."</td>";
-                        echo "<td>R$ ".number_format($row['valor_global'],2,",",".")."</td>";
+                        echo "<td>R$ ".number_format($row['valor_cme'],2,",",".")."</td>";
                         echo "<td>R$ ".number_format($row['honorarios_esp'],2,",",".")."</td>";
                         echo "<td>".$row['honorarios_perc']."%</td>";
                         echo "<td>".$row['global_mde']."</td>";

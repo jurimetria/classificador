@@ -246,7 +246,7 @@
                         <option value="Janeiro"<?php if($datam=="01") echo 'selected="selected"'; ?>>Janeiro</option>
                     </select>
                 </div>
-                <br>
+                <br><br>
 
                 <div class="inputBox">
                     <input type = "text" name="reclamante" id="reclamante" class="inputUser"  required>
@@ -278,7 +278,7 @@
                     
                     </select>
                 </div>
-                <br>
+                <br><br>
 
                 <div class="inputBox">
                     <input type = "text" name="cargo" id="cargo" class="inputUser" >
