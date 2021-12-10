@@ -46,8 +46,13 @@
 
     <div class='alingLeft alingTop'>
         <br><br>
+            <!-- BUSCAR PASTA SEARCH BOX -->
         <div>
-            <a class="button2" href="index.php">Procurar Outra Pasta</a>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                <form class="searchF" action="buscarPasta.php" method="GET">
+                    <input type="text" name="search" placeholder="buscar pasta...">
+                    <button type="submit" name="submit-search"><i class="fa fa-search "></i></button>
+                </form>
         </div>
 
         <div>
