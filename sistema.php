@@ -98,15 +98,7 @@
         </button>
     </div>
 
-                <!-- RATINGS -->
-    <div class="container-fluid ">
-    <button type="button" class="buttTop" onclick="location.href='ratings.php'">Ratings</button>
-    </div><br>
-    
-                <!-- PROBABILIDADES -->
-                <div class="container-fluid ">
-    <button type="button" class="buttTop" onclick="location.href='prob.php'">Probabilidades</button>
-    </div><br>
+
 
     <!-- SAIR -->
     <div class="d-flex">
