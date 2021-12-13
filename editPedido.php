@@ -29,6 +29,8 @@
         header('Location: index.php');
     }
 
+
+    
     include('script.js');
     include('style.css');
 ?>

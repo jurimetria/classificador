@@ -54,7 +54,19 @@
     }
 
 
+    $emExclusao="";
+    $emExclusao2="";
+    $emExclusao3="";
+    if($db_folder['folderDel']==='SIM'){
+        $emExclusao = "PASTA EM PROCESSO DE EXCLUSÃO";
+        $emExclusao2 = "Todo o seu conteúdo e pedidos serão apagados";
+        $emExclusao3 = "Para reverter este procedimento entre em contato com o Administrador";
+    } 
+
+
+
  include('style.css');
+
 ?>
 
     
@@ -108,6 +120,14 @@
         <?php
             echo "<h1>Pasta: $id_pasta</h1>";
         ?>
+
+        <!-- PASTA EM EXCLUSÃO -->
+        <?php
+            echo "<h1 class='text-danger'>$emExclusao</h1>";
+            echo "<h3 class='text-danger'>$emExclusao2</h3>";
+            echo "<h3 class='text-danger'>$emExclusao3</h3>";
+        ?>
+
 
         <!-- LINK PÁGINA RESUMO -->
         <div class="alingLeft">

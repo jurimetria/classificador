@@ -21,12 +21,6 @@
         $stmt->execute();
         $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
         $db_f_aval = $db_f['avaliador'];
-        
-       
-
-
-
-        
 
     }
     else
@@ -34,6 +28,14 @@
         header('Location: index.php');
     }
 
+    $emExclusao="";
+    $emExclusao2="";
+    $emExclusao3="";
+    if($db_f['folderDel']==='SIM'){
+        $emExclusao = "PASTA EM PROCESSO DE EXCLUSÃO";
+        $emExclusao2 = "Todo o seu conteúdo e pedidos serão apagados";
+        $emExclusao3 = "Para reverter este procedimento entre em contato com o Administrador";
+    } 
 
     include('script.js');
     include('style.css');
@@ -81,6 +83,14 @@
                     }
             ?>
         </div>
+
+                <!-- PASTA EM EXCLUSÃO -->
+                <?php
+            echo "<h1 class='text-danger'>$emExclusao</h1>";
+            echo "<h3 class='text-danger'>$emExclusao2</h3>";
+            echo "<h3 class='text-danger'>$emExclusao3</h3>";
+        ?>
+
 
     <div class="box">
         <form action="saveEditFolder.php" method="POST">
@@ -319,7 +329,14 @@
                 <input type="hidden" name="id_pasta" id="id_pasta" value="<?php echo $id_pasta;?>">
                 <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
                 <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
-                <input type="submit" name="update" id="submit">
+                <input type="submit" name="update" id="submit"><br><br>
+               
+                <div class='alingCenter '>
+            <?php
+                    {echo "<a class='button3' href='apagarPasta.php?id_pasta=$id_pasta' title='Apagar pasta'> Apagar esta pasta</a>";
+                    }
+            ?>
+        </div>
             </fieldset>
         </form>
     </div>
