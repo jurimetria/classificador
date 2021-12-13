@@ -130,7 +130,7 @@
                 <input type="hidden" name="n_registro" id="n_registro" value="<?php echo $n_registro;?>">
                 <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
                 <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
-                <input type="submit" name="update" id="submit">
+                <input type="submit" name="update" id="submit" value='Enviar'>
             </fieldset>
         </form>
     </div>

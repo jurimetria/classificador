@@ -350,7 +350,7 @@
                         </div>
                         <br>
                         
-                        <input type="submit" name="submit" id="submit">
+                        <input type="submit" name="submit" id="submit" value='Enviar'>
                         <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
                         <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
                     </fieldset>

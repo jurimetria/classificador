@@ -99,7 +99,7 @@
         <!-- BOTAO VOLTAR -->
         <div class='alingLeft alingTop'>
             <?php
-                    {echo "<a class='button2' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
+                    {echo "<a class='button2' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Cancelar e voltar</a>";
                     }
             ?>
         </div>
@@ -122,7 +122,7 @@
                 <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
                 <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
                 <input type="hidden" name="folderDel" id="folderDel" value="SIM">
-                <input type="submit" name="update" id="submitRed">
+                <input type="submit" name="update" id="submitRed" value='Apagar'>
                
             </fieldset>
         </form>

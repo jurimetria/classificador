@@ -329,11 +329,13 @@
                 <input type="hidden" name="id_pasta" id="id_pasta" value="<?php echo $id_pasta;?>">
                 <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
                 <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
-                <input type="submit" name="update" id="submit"><br><br>
+                <input type="submit" name="update" id="submit" value='Enviar'></input><br><br><br>
+
                
-                <div class='alingCenter '>
+               
+                <div class='alingCenter'  >
             <?php
-                    {echo "<a class='button3' href='apagarPasta.php?id_pasta=$id_pasta' title='Apagar pasta'> Apagar esta pasta</a>";
+                    {echo "<a id='submitRed' href='apagarPasta.php?id_pasta=$id_pasta' title='Apagar pasta'> Apagar esta pasta</a>";
                     }
             ?>
         </div>

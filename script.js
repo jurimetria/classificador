@@ -15,4 +15,7 @@ document.getElementById("voltar").onclick = function () {
 window.location.href="sistema.php?id_pasta="+'<?php echo $db_f['id_pasta'];?>';}
 
 
+
+
+
 </script>
