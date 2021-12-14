@@ -271,24 +271,29 @@
 
 
     <!-- TABELA PEDIDOS -->
-    <div class="m-5">
-        <table id="tabelaResumo" class="table text-white table-bg">
+    <?php $tabela="
+    <div class='m-5'>
+        <table id='tabelaResumo' class='table text-white table-bg'>
             <thead>
                 <tr>
-                    <th scope="col">Pasta</th>
-                    <th scope="col">Tipo de Ação</th>
-                    <th scope="col">Ramo</th>
-                    <th scope="col">Rating</th>
-                    <th scope="col">Comissão</th>
-                    <th scope="col">Valor Médio</th>
-                    <th scope="col">Honorários Esperados</th>
-                    <th scope="col">Honorários %</th>
-                    <th scope="col">Probabilidade</th>
-                    <th scope="col">Avaliador</th>
-                    <th scope="col">UN</th>
-                    <th scope="col">Ir</th>
+                    <th scope='col'>Pasta</th>
+                    <th scope='col'>Tipo de Ação</th>
+                    <th scope='col'>Ramo</th>
+                    <th scope='col'>Rating</th>
+                    <th scope='col'>Comissão</th>
+                    <th scope='col'>Valor Médio</th>
+                    <th scope='col'>Honorários Esperados</th>
+                    <th scope='col'>Honorários %</th>
+                    <th scope='col'>Probabilidade</th>
+                    <th scope='col'>Avaliador</th>
+                    <th scope='col'>UN</th>
+                    <th scope='col'>Ir</th>
                 </tr>
             </thead>
+            ";
+            
+            ?>
+            <?php if ($teste==="1") {echo $tabela;} ?>
             <tbody >
                 <?php foreach($data_tb as $row)
           
