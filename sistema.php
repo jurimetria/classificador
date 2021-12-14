@@ -140,19 +140,19 @@
 
 
         <!-- LINK PÁGINA RESUMO -->
-        <div class="alingLeft">
+        <div class="alignLeft">
         <button type="button2" class="button" onclick="location.href='resumo.php'">Ir para Resumo</button>
         </div><br>
 
 
         <!-- CADASTRAR NOVA PASTA -->
-        <div class='alingLeft '>
+        <div class='alignLeft '>
         <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
         </div>
         <br>
 
         <!-- BUSCAR PASTA SEARCH BOX -->
-        <div  class="buscar alingLeft">
+        <div  class="buscar alignLeft">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <form class="searchF" action="buscarPasta.php" method="GET">
         <input type="text" name="search" placeholder="buscar pasta...">
@@ -164,7 +164,7 @@
     <!-- TABELAS CENTRAIS -->
     <div class="row">
         <!-- TABELA DETALHES -->
-        <div class="column side alingLeft" >
+        <div class="column side alignLeft" >
             <h3>Dados da Pasta</h3><br>
             <?php echo "<b>Avaliador: </b>", $db_folder['avaliador'];?><br>
             <?php echo "<b>Área: </b>", $db_folder['area'];?><br>
@@ -193,7 +193,7 @@
 
 
         <!--     TABELA CLASSIFICACAO GLOBAL        -->
-        <div  class="column side alingLeft" >
+        <div  class="column side alignLeft" >
             <h3>Classificação Relacionamento</h3><br>
             <?php echo "<b>Valor: </b>R$ ", number_format( $data_resumo['valor_global'],2,",",".");?><br>
             <?php echo "<b>Classificação da Ação: </b>", $data_resumo['rating'];?><br>

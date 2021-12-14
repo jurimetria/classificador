@@ -44,7 +44,7 @@
     </div>  
 
 
-    <div class='alingLeft alingTop'>
+    <div class='alignLeft alignTop'>
         <br><br>
             <!-- BUSCAR PASTA SEARCH BOX -->
         <div>
@@ -63,7 +63,7 @@
     </div>
 
     <br><br>
-    <h1 class='alingLeft'>Resultados da busca</h1>  
+    <h1 class='alignLeft'>Resultados da busca</h1>  
     <br>
 
     <?php
@@ -74,14 +74,14 @@
             $result = mysqli_query($conexao,$sql6);
             $queryResults = mysqli_num_rows($result);
 
-            echo "<h2 class='alingLeft'>Foram encontrados ".$queryResults." resultados:</h2><br>";
+            echo "<h2 class='alignLeft'>Foram encontrados ".$queryResults." resultados:</h2><br>";
 
             if($queryResults > 0) 
             {
                 while ($rowx = mysqli_fetch_assoc($result)) 
                 {
-                    echo "<div class='alingLeft'><a class='resultBusca' href='sistema.php?id_pasta=".$rowx['id_pasta'].
-                    "'<div class='alingLeft '>".$rowx['id_pasta']."<br><br></div></div>" 
+                    echo "<div class='alignLeft'><a class='resultBusca' href='sistema.php?id_pasta=".$rowx['id_pasta'].
+                    "'<div class='alignLeft '>".$rowx['id_pasta']."<br><br></div></div>" 
                     ;
                 }
 

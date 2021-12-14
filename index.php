@@ -50,13 +50,13 @@
 
     <br><br>
         <!-- LINK PÁGINA RESUMO -->
-        <div class="alingLeft">
+        <div class="alignLeft">
         <button type="button" class="button" onclick="location.href='resumo.php'">Ir para Resumo</button>
         </div><br>
 
 
         <!-- CADASTRAR NOVA PASTA -->
-        <div class='alingLeft '>
+        <div class='alignLeft '>
         <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
         </div>
         <br>
@@ -65,11 +65,11 @@
     
 
 <br><br>
-<h2 class=" alingLeft">Procure uma pasta:</h2><br>
+<h2 class=" alignLeft">Procure uma pasta:</h2><br>
 
 
     <!-- BUSCAR PASTA SEARCH BOX -->
-    <div  class=" alingLeft">
+    <div  class=" alignLeft">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <form class="searchF" action="buscarPasta.php" method="GET">
                 <input type="text" name="search" placeholder="buscar pasta...">

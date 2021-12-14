@@ -77,7 +77,7 @@
 
     <div>
         <!-- BOTAO VOLTAR -->
-        <div class='alingLeft alingTop'>
+        <div class='alignLeft alignTop'>
             <?php
                     {echo "<a class='button2' href='sistema.php?id_pasta=$id_pasta' title='Voltar'> Voltar</a>";
                     }
@@ -333,7 +333,7 @@
 
                
                
-                <div class='alingCenter'  >
+                <div class='alignCenter'  >
             <?php
                     {echo "<a id='submitRed' href='apagarPasta.php?id_pasta=$id_pasta' title='Apagar pasta'> Apagar esta pasta</a>";
                     }

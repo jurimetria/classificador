@@ -59,7 +59,7 @@
     </div>  
 
     <!-- BOTÃO VOLTAR -->
-    <div class='alingLeft alingTop'>
+    <div class='alignLeft alignTop'>
         <button class='voltar' onclick="goBack()">Voltar</button>
     </div>
 

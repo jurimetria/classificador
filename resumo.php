@@ -178,9 +178,9 @@
     <!-- COLUNAS CENTRAIS -->
     <div class="row">
         <!-- COLUNA DA ESQUERDA -->
-        <div class="column side2 alingLeft">
+        <div class="column side2 alignLeft">
             <!-- BOTÃO VOLTAR -->
-            <div class=' alingTop'>
+            <div class=' alignTop'>
                 <button class='button2' onclick="goBack()">Voltar</button>
             </div>
             <br><br>
@@ -212,7 +212,7 @@
 
         <!-- COLUNA DA DIREITA -->
         <!-- RESULTADOS DA FILTRAGEM -->
-        <div class="column side2 alingCenter">
+        <div class="column side2 alignCenter">
         <br><br>
             <!-- PERIODO -->
             <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "&nbsp;";} ?></p>

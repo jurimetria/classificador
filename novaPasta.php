@@ -164,21 +164,21 @@
     </div>
 
     <div class="row">
-        <div class="column side2 alingLeft">
+        <div class="column side2 alignLeft">
             <!-- BOTÃO VOLTAR -->
-            <div class=' alingTop'>
+            <div class=' alignTop'>
                 <button class='button2' onclick="goBack()">Voltar</button>
             </div>
 
             <!-- BOTÃO PROCURAR OUTRA PASTA -->
-            <div class=' alingTop'>
+            <div class=' alignTop'>
                 <?php
                         {echo "<a class='button2' href='index.php' title='Procurar Outra Pasta'> Procurar Outra Pasta</a>";
                         }
                 ?>
             </div>
 
-            <div class=' alingTop text-warning'>
+            <div class=' alignTop text-warning'>
                 <span ><b>Importante!</b></span><br><br>
                 <span >No Número da Pasta copie e cole o número da Pasta </span><br>
                 <span >como está no Judice</span><br>
@@ -189,7 +189,7 @@
             </div><br>
         </div>
 
-        <div class="column side2 alingCenter">
+        <div class="column side2 alignCenter">
             <div class="box">
                 <form action="" method="POST">
                     <fieldset>
