@@ -87,6 +87,7 @@
         
         $teste = "1";
         
+        
     } 
     #ENQUANTO NÃO ENVIAR A BUSCA
     else{$state_prep = '';
@@ -94,6 +95,7 @@
         $teste = "0";
         $mes_aval = "";
         $ano_aval = "";
+        $contaLinhas = "";
 
 
     }
@@ -101,6 +103,8 @@
     $state->execute();
     $data_tb = $state->fetchAll();
 
+    
+    
 
 
     // SOMA VALOR TOTAL DE Classificação Global (Valor Médio)
@@ -226,7 +230,13 @@
 
             <!-- COMISSAO TOTAL -->
             <p id="fontSize19"><?php if ($teste==="1"){echo "Comissão Relacionamento: R$ ",number_format($sum_comissao_return['valor'],2,",",".");} else {echo "Selecione um período:";} ?></p>
-        </div>
+        
+            <!--  TOTAL DE PASTAS -->
+            <p id="fontSize19"><?php if ($teste==="1"){echo "Quantidade de pastas: ",$contaLinhas = count($data_tb);}  ?></p>
+
+        
+        
+        </div> 
     </div>
 
  <!-- FILTRO MES E ANO --- CONSERTAR IDENTACAO -->

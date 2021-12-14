@@ -158,9 +158,9 @@
         <input type="text" name="search" placeholder="buscar pasta...">
         <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
         </form>
-        </div>
+        </div><br>
 
-<br>
+    
     <!-- TABELAS CENTRAIS -->
     <div class="row">
         <!-- TABELA DETALHES -->
@@ -211,7 +211,7 @@
     <!-- TABELA PEDIDOS: INICIAL -->
         <?php $tabela_aval_inicial="
         <div class='m-5'>
-        <h3>Tabela de Pedidos em: Avaliação Inicial</h3><br>
+        <h3>Pedidos em: Avaliação Inicial</h3><br>
             <table class='table text-white table-bg'>
                 <thead>
                     <tr>
@@ -253,12 +253,12 @@
                 ?>
             </tbody>
         </table>
-      </div><br>
+    </div><br>
 
     <!-- TABELA PEDIDOS: DECISAO PRIMEIRO GRAU -->
         <?php $tabela_aval_primeiro="
             <div class='m-5'>
-            <h3>Tabela de Pedidos em: Decisão de Primeiro Grau</h3><br>
+            <h3>Pedidos em: Decisão de Primeiro Grau</h3><br>
                 <table class='table text-white table-bg'>
                     <thead>
                         <tr>
@@ -306,7 +306,7 @@
     <!-- TABELA PEDIDOS: DECISAO SEGUNDO GRAU -->
         <?php $tabela_aval_segundo="
             <div class='m-5'>
-            <h3>Tabela de Pedidos em: Decisão de Segundo Grau</h3><br>
+            <h3>Pedidos em: Decisão de Segundo Grau</h3><br>
                 <table class='table text-white table-bg'>
                     <thead>
                         <tr>
@@ -353,7 +353,7 @@
     <!-- TABELA PEDIDOS: LIQUIDACAO FINAL -->
         <?php $tabela_aval_liquidacao="
             <div class='m-5'>
-            <h3>Tabela de Pedidos em: Liquidação Final</h3><br>
+            <h3>Pedidos em: Liquidação Final</h3><br>
                 <table class='table text-white table-bg'>
                     <thead>
                         <tr>
