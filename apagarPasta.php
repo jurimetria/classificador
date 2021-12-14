@@ -122,7 +122,7 @@
                 <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
                 <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">
                 <input type="hidden" name="folderDel" id="folderDel" value="SIM">
-                <input type="submit" name="update" id="submitRed" value='Apagar'>
+                <input type="submit" name="update" id="submitRed" value='Clique para apagar'>
                
             </fieldset>
         </form>

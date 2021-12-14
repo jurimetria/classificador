@@ -51,9 +51,10 @@
             $tipo_pedido = $_POST['tipo_pedido'];
             $valor_pedido = $_POST['valor_pedido'];
             $probabilidade = $_POST['probabilidade'];
+            $tipo_avaliacao = $_POST['tipo_avaliacao'];
 
-            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (logado, horario, id_pasta,tipo_pedido,valor_pedido,probabilidade) 
-            VALUES ('$logado','$horario','$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade')");
+            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (logado, horario, id_pasta,tipo_pedido,valor_pedido,probabilidade,tipo_avaliacao) 
+            VALUES ('$logado','$horario','$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade','$tipo_avaliacao')");
 
             {
                 header('Location: sistema.php?id_pasta='.$id_pasta);
@@ -138,12 +139,25 @@
                 <div class="inputBox" class="container">
                     <label for="probabilidade" >Probabilidade de Êxito: </label>
                     <select id="probabilidade" name="probabilidade">
-                        <option value="">Escolha...</option>
+                    
                         <option value="ALTA">Alta: 90% a 100%</option>
                         <option value="PROVÁVEL">Provável: 70% a 90%</option>
                         <option value="POSSÍVEL">Possível: 50% a 70%</option>
                         <option value="BAIXA">Baixa: 20% a 50%</option>
                         <option value="REMOTA">Remota: abaixo de 20%</option>
+                    </select>
+                </div>
+                <br>
+
+                <div class="inputBox" class="container">
+                    <label for="tipo_avaliacao" >Tipo de Avaliação: </label>
+                    <select id="tipo_avaliacao" name="tipo_avaliacao">
+                     
+                        <option value="INICIAL">Inicial</option>
+                        <option value="DECISAO PRIMEIRO GRAU">Decisão de Primeiro Grau</option>
+                        <option value="DECISAO SEGUNDO GRAU">Decisão de Segundo Grau</option>
+                        <option value="LIQUIDACAO FINAL">Liquidação final</option>
+ 
                     </select>
                 </div>
                 <br><br>

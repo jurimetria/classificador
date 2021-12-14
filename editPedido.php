@@ -127,6 +127,20 @@
                     </select>
                 </div>
                 <br>
+
+                <div class="inputBox" class="container">
+                    <label for="tipo_avaliacao" >Tipo de Avaliação: </label>
+                    <select id="tipo_avaliacao" name="tipo_avaliacao">
+                     
+                        <option value="INICIAL" <?php if($db_v['tipo_avaliacao']=="INICIAL") echo 'selected="selected"'; ?>>Inicial</option>
+                        <option value="DECISAO PRIMEIRO GRAU" <?php if($db_v['tipo_avaliacao']=="DECISAO PRIMEIRO GRAU") echo 'selected="selected"'; ?>>Decisão de Primeiro Grau</option>
+                        <option value="DECISAO SEGUNDO GRAU" <?php if($db_v['tipo_avaliacao']=="DECISAO SEGUNDO GRAU") echo 'selected="selected"'; ?>>Decisão de Segundo Grau</option>
+                        <option value="LIQUIDACAO FINAL" <?php if($db_v['tipo_avaliacao']=="LIQUIDACAO FINAL") echo 'selected="selected"'; ?>>Liquidação final</option>
+ 
+                    </select>
+                </div>
+                <br><br>
+
                 <input type="hidden" name="n_registro" id="n_registro" value="<?php echo $n_registro;?>">
                 <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
                 <input type="hidden" name="horario" id="horario" value="<?php echo $horario;?>">

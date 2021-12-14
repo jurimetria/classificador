@@ -10,8 +10,9 @@
         $tipo_pedido = $_POST['tipo_pedido'];
         $valor_pedido = $_POST['valor_pedido'];
         $probabilidade = $_POST['probabilidade'];
+        $tipo_avaliacao = $_POST['tipo_avaliacao'];
 
-        $sqlUpdate = "UPDATE tb_dados_valores SET logado='$logado',horario='$horario',tipo_pedido='$tipo_pedido', valor_pedido='$valor_pedido', probabilidade='$probabilidade'
+        $sqlUpdate = "UPDATE tb_dados_valores SET logado='$logado',horario='$horario',tipo_pedido='$tipo_pedido', valor_pedido='$valor_pedido', probabilidade='$probabilidade', tipo_avaliacao='$tipo_avaliacao'
         WHERE n_registro='$n_registro'";
 
         $result = $conexao->query($sqlUpdate);
