@@ -15,7 +15,7 @@
     include('salvaDados.php');
     $id_pasta = $_GET['id_pasta'];
 
-        # VER OPÇÕES DE SELEÇÃO
+    # VER OPÇÕES DE SELEÇÃO
     # VER TIPO DE PEDIDO
     $ver_tipo_pedido = '';
     $query = "SELECT DISTINCT tipo_pedido FROM
@@ -52,9 +52,11 @@
             $valor_pedido = $_POST['valor_pedido'];
             $probabilidade = $_POST['probabilidade'];
             $tipo_avaliacao = $_POST['tipo_avaliacao'];
+            $mes_avaliacao = $_POST['mes_avaliacao'];
+            $ano_avaliacao = $_POST['ano_avaliacao'];
 
-            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (logado, horario, id_pasta,tipo_pedido,valor_pedido,probabilidade,tipo_avaliacao) 
-            VALUES ('$logado','$horario','$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade','$tipo_avaliacao')");
+            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (logado, horario, id_pasta,tipo_pedido,valor_pedido,probabilidade,tipo_avaliacao,mes_avaliacao,ano_avaliacao) 
+            VALUES ('$logado','$horario','$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade','$tipo_avaliacao','$mes_avaliacao','$ano_avaliacao')");
 
             {
                 header('Location: sistema.php?id_pasta='.$id_pasta);
@@ -66,10 +68,28 @@
         header('Location: index.php');
     }
 
+    # VER ANO
+        $ver_ano = '';
+        $query = "SELECT DISTINCT ano FROM
+            tb_campos WHERE ano <= $ano_atual ORDER BY ano DESC ";
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        # IS NOT NULL ORDER BY ano DESC
+        foreach($result as $row)
+        {
+            $ver_ano .= '<option value="'.$row['ano'].'">'.$row['ano'].'</option>';
+        }
  
-   
+    
+    // Completa com o mês atual na caixa menu mês
+       $datam = date('m');
+       $dataa = date('Y');
+
+
 
     include('style.css');
+    
 ?>
 
 <!DOCTYPE html>
@@ -116,26 +136,22 @@
     <div class="box">
         <form action="" method="POST">
             <fieldset>
-                <legend id='padding12'><a><b>Novo pedido - Pasta: <?php echo $id_pasta ?> </b></a></legend>
+                <legend id='padding12'><a><b>Novo pedido Inicial - Pasta: <?php echo $id_pasta ?> </b></a></legend>
                 <br><br>
 
                 <div class="inputBox" class="container">
-                <label for="tipo_pedido">Pedido:</label>
+                    <label for="tipo_pedido">Pedido:</label>
                         <select name="tipo_pedido" id="tipo_pedido"  required>
                         <option value="" >Escolha...</option>
                             <?php echo $ver_tipo_pedido; ?>
                         </select>
-                    </div>
+                </div><br>
                 
-
-
-                <br>
                 <div class="inputBox">
                     <input type = "number" step="0.01" min="0" name="valor_pedido" id="valor_pedido" class="inputUser"  required>
                     <label for="valor_pedido" class="labelInput">Valor pedido</label>
-                </div>
-                <br>
-
+                </div><br>
+                
                 <div class="inputBox" class="container">
                     <label for="probabilidade" >Probabilidade de Êxito: </label>
                     <select id="probabilidade" name="probabilidade">
@@ -146,21 +162,40 @@
                         <option value="BAIXA">Baixa: 20% a 50%</option>
                         <option value="REMOTA">Remota: abaixo de 20%</option>
                     </select>
-                </div>
-                <br>
-
+                </div><br>
+                
                 <div class="inputBox" class="container">
                     <label for="tipo_avaliacao" >Tipo de Avaliação: </label>
                     <select id="tipo_avaliacao" name="tipo_avaliacao">
-                     
                         <option value="INICIAL">Inicial</option>
-                        <option value="DECISAO PRIMEIRO GRAU">Decisão de Primeiro Grau</option>
-                        <option value="DECISAO SEGUNDO GRAU">Decisão de Segundo Grau</option>
-                        <option value="LIQUIDACAO FINAL">Liquidação final</option>
- 
                     </select>
-                </div>
-                <br><br>
+                </div><br>
+
+                <div class="inputBox" class="container">
+                    <label for="ano_aval">Ano da avaliação:</label>
+                            <select name="ano_aval" id="ano_aval"  required>
+                                <?php echo $ver_ano; ?>
+                                
+                            </select>
+                </div><br>
+                        
+                <div class="inputBox" class="container">
+                    <label for="mes_aval" >Mês da Avaliação: </label>
+                    <select id="mes_aval" name="mes_aval" >
+                        <option value="Dezembro" <?php if($datam=="12") echo 'selected="selected"'; ?>>Dezembro</option>
+                        <option value="Novembro" <?php if($datam=="11") echo 'selected="selected"'; ?>>Novembro</option>
+                        <option value="Outubro" <?php if($datam=="10") echo 'selected="selected"'; ?>>Outubro</option>
+                        <option value="Setembro" <?php if($datam=="09") echo 'selected="selected"'; ?>>Setembro</option>
+                        <option value="Agosto" <?php if($datam=="08") echo 'selected="selected"'; ?>>Agosto</option>
+                        <option value="Julho" <?php if($datam=="07") echo 'selected="selected"'; ?>>Julho</option>
+                        <option value="Junho" <?php if($datam=="06") echo 'selected="selected"'; ?>>Junho</option>
+                        <option value="Maio" <?php if($datam=="05") echo 'selected="selected"'; ?>>Maio</option>
+                        <option value="Abril" <?php if($datam=="04") echo 'selected="selected"'; ?>>Abril</option>
+                        <option value="Março" <?php if($datam=="03") echo 'selected="selected"'; ?>>Março</option>
+                        <option value="Fevereiro" <?php if($datam=="02") echo 'selected="selected"'; ?>>Fevereiro</option>
+                        <option value="Janeiro"<?php if($datam=="01") echo 'selected="selected"'; ?>>Janeiro</option>
+                    </select>
+                </div><br><br>
 
                 <input type="hidden" name="id_pasta" id="id_pasta" value="<?php echo $id_pasta;?>">
                 <input type="submit" name="submit" id="submit" value='Enviar'>

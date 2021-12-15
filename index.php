@@ -57,7 +57,7 @@
 
         <!-- CADASTRAR NOVA PASTA -->
         <div class='alignLeft '>
-        <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
+        <a class="button2 " href="pastaNova.php">Cadastrar Nova Pasta</a>
         </div>
         <br>
 
@@ -71,7 +71,7 @@
     <!-- BUSCAR PASTA SEARCH BOX -->
     <div  class=" alignLeft">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <form class="searchF" action="buscarPasta.php" method="GET">
+            <form class="searchF" action="pastaBuscar.php" method="GET">
                 <input type="text" name="search" placeholder="buscar pasta...">
                 <button type="submit" name="submit-search"><i class="fa fa-search "></i></button>
             </form>

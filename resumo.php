@@ -13,34 +13,34 @@
     $pdo = conectar();
 
     # VER OPÇÕES DE SELEÇÃO
-        $ver_ano_aval = '';
-        $query = "SELECT DISTINCT ano_aval FROM
-            view_06_resumo  ORDER BY ano_aval DESC";
+        $ver_ano_avaliacao = '';
+        $query = "SELECT DISTINCT ano_avaliacao FROM
+            view_03_cme_3  ORDER BY ano_avaliacao DESC";
         $statement = $pdo->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll();
 
         foreach($result as $row)
         {
-            $ver_ano_aval .= '<option value="'.$row['ano_aval'].'">'.$row['ano_aval'].'</option>';
+            $ver_ano_avaliacao .= '<option value="'.$row['ano_avaliacao'].'">'.$row['ano_avaliacao'].'</option>';
         }
 
 
-        $ver_mes_aval = '';
-        $query = "SELECT DISTINCT mes_aval FROM view_06_resumo 
-        ORDER BY mes_aval_n DESC";
+        $ver_mes_avaliacao = '';
+        $query = "SELECT DISTINCT mes_avaliacao FROM view_03_cme_3 
+        ORDER BY mes_avaliacao_n DESC";
         $statement = $pdo->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll();
 
         foreach($result as $row)
         {
-            $ver_mes_aval .= '<option value="'.$row['mes_aval'].'">'.$row['mes_aval'].'</option>';
+            $ver_mes_avaliacao .= '<option value="'.$row['mes_avaliacao'].'">'.$row['mes_avaliacao'].'</option>';
         }
         
         
         $ver_avaliador = "";
-        $query = "SELECT DISTINCT avaliador FROM view_06_resumo ORDER BY avaliador ASC";
+        $query = "SELECT DISTINCT avaliador FROM view_03_cme_3 ORDER BY avaliador ASC";
         $statement = $pdo->prepare($query);
         $statement->execute();
         $result2 = $statement->fetchAll();
@@ -51,7 +51,7 @@
         }
 
         $ver_unidade = "";
-        $query = "SELECT DISTINCT unidade FROM view_06_resumo ORDER BY unidade ASC";
+        $query = "SELECT DISTINCT unidade FROM view_03_cme_3 ORDER BY unidade ASC";
         $statement = $pdo->prepare($query);
         $statement->execute();
         $result3 = $statement->fetchAll();
@@ -69,8 +69,8 @@
     # AO ENVIAR A BUSCA
     if (isset($_POST['enviar_busca']))
     {
-        $mes_aval = $_POST['search_mes'];
-        $ano_aval = $_POST['search_ano'];
+        $mes_avaliacao = $_POST['search_mes'];
+        $ano_avaliacao = $_POST['search_ano'];
 
         if($_POST['search_avaliador']!="NULL"){
             $avaliador = $_POST['search_avaliador'];
@@ -83,7 +83,7 @@
         else{$unid_sentence="";}
         
 
-        $state_prep = 'SELECT * FROM view_06_resumo WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.') ORDER BY id_pasta ASC';
+        $state_prep = 'SELECT * FROM view_04_resumo WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.') ORDER BY id_pasta ASC';
         
         $teste = "1";
         
@@ -93,8 +93,8 @@
     else{$state_prep = '';
 
         $teste = "0";
-        $mes_aval = "";
-        $ano_aval = "";
+        $mes_avaliacao = "";
+        $ano_avaliacao = "";
         $contaLinhas = "";
 
 
@@ -108,20 +108,20 @@
 
 
     // SOMA VALOR TOTAL DE Classificação Global (Valor Médio)
-    $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_cme) AS valor  FROM view_06_resumo
-    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
+    $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_cme) AS valor  FROM view_03_cme_3
+    WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_val_total_cme->execute();
     $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE HONORÁRIOS ESPERADOS
-    $sum_honorarios = $pdo->prepare('SELECT SUM(honorarios_esp) AS valor FROM view_06_resumo
-    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
+    $sum_honorarios = $pdo->prepare('SELECT SUM(honorarios_esp) AS valor FROM view_03_cme_3
+    WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_honorarios->execute();
     $sum_honorarios_return = $sum_honorarios->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE Comissao
-    $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_06_resumo
-    WHERE (ano_aval=\''.$ano_aval.'\' AND mes_aval=\''.$mes_aval.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
+    $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_03_cme_3
+    WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_comissao->execute();
     $sum_comissao_return = $sum_comissao->fetch(PDO::FETCH_ASSOC);
 
@@ -187,14 +187,14 @@
 
             <!-- CADASTRAR NOVA PASTA -->
             <div class=' '>
-                <a class="button2 " href="novaPasta.php">Cadastrar Nova Pasta</a>
+                <a class="button2 " href="pastaNova.php">Cadastrar Nova Pasta</a>
             </div>
             <br>
 
             <!-- BUSCAR PASTA SEARCH BOX -->
             <div  class="buscar ">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-                    <form class="searchF" action="buscarPasta.php" method="GET">
+                    <form class="searchF" action="pastaBuscar.php" method="GET">
                         <input type="text" name="search" placeholder="buscar pasta...">
                         <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
                     </form>
@@ -215,7 +215,7 @@
         <div class="column side2 alignCenter">
         <br><br>
             <!-- PERIODO -->
-            <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_aval; echo " de "; echo $ano_aval;} else{echo "&nbsp;";} ?></p>
+            <p id="fontSize19"><?php if ($teste==="1"){echo "Resultados de "; echo $mes_avaliacao; echo " de "; echo $ano_avaliacao;} else{echo "&nbsp;";} ?></p>
             <!-- AVALIADOR -->
             <p id="fontSize19"><?php if ($avaliador!=""){echo "Filtrado por avaliador: "; echo $avaliador;} else{echo "&nbsp;";}  ?></p>
             <!-- UNIDADE -->
@@ -246,13 +246,13 @@
                 <form name="search_form" action="resumo.php" method="POST"> 
                     <select name="search_mes" id="search_mes"  required>
                         <option value="">Selecione o Mês</option>
-                        <?php echo $ver_mes_aval; ?>
+                        <?php echo $ver_mes_avaliacao; ?>
                     </select>
                 </div>
                     <div>
                         <select name="search_ano" id="search_ano"  required>
                             <option value="">Selecione o Ano</option>
-                            <?php echo $ver_ano_aval; ?>
+                            <?php echo $ver_ano_avaliacao; ?>
                         </select>
                     </div>
                     <div>

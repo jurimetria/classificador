@@ -48,18 +48,7 @@
         }
 
 
-        # VER ANO
-        $ver_ano = '';
-        $query = "SELECT DISTINCT ano FROM
-            tb_campos WHERE ano <= $ano_atual ORDER BY ano DESC ";
-        $statement = $pdo->prepare($query);
-        $statement->execute();
-        $result = $statement->fetchAll();
-        # IS NOT NULL ORDER BY ano DESC
-        foreach($result as $row)
-        {
-            $ver_ano .= '<option value="'.$row['ano'].'">'.$row['ano'].'</option>';
-        }
+
 
         # VER TIPO DE ACAO
         $ver_tipo_acao = '';
@@ -236,34 +225,6 @@
 
 
 
-                        <div class="inputBox" class="container">
-                        <label for="ano_aval">Ano da avaliação:</label>
-                                <select name="ano_aval" id="ano_aval"  required>
-                                    <?php echo $ver_ano; ?>
-                                    
-                                </select>
-                            </div>
-                        <br>
-
-                        
-                        <div class="inputBox" class="container">
-                        <label for="mes_aval" >Mês da Avaliação: </label>
-                            <select id="mes_aval" name="mes_aval" >
-                                <option value="Dezembro" <?php if($datam=="12") echo 'selected="selected"'; ?>>Dezembro</option>
-                                <option value="Novembro" <?php if($datam=="11") echo 'selected="selected"'; ?>>Novembro</option>
-                                <option value="Outubro" <?php if($datam=="10") echo 'selected="selected"'; ?>>Outubro</option>
-                                <option value="Setembro" <?php if($datam=="09") echo 'selected="selected"'; ?>>Setembro</option>
-                                <option value="Agosto" <?php if($datam=="08") echo 'selected="selected"'; ?>>Agosto</option>
-                                <option value="Julho" <?php if($datam=="07") echo 'selected="selected"'; ?>>Julho</option>
-                                <option value="Junho" <?php if($datam=="06") echo 'selected="selected"'; ?>>Junho</option>
-                                <option value="Maio" <?php if($datam=="05") echo 'selected="selected"'; ?>>Maio</option>
-                                <option value="Abril" <?php if($datam=="04") echo 'selected="selected"'; ?>>Abril</option>
-                                <option value="Março" <?php if($datam=="03") echo 'selected="selected"'; ?>>Março</option>
-                                <option value="Fevereiro" <?php if($datam=="02") echo 'selected="selected"'; ?>>Fevereiro</option>
-                                <option value="Janeiro"<?php if($datam=="01") echo 'selected="selected"'; ?>>Janeiro</option>
-                            </select>
-                        </div>
-                        <br><br>
 
                         <div class="inputBox">
                             <input type = "text" name="reclamante" id="reclamante" class="inputUser"  required>

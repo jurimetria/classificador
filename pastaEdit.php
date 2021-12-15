@@ -17,12 +17,12 @@
     {
         $pdo = conectar();
 
-        $stmt = $pdo->prepare('SELECT * FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
+        $stmt = $pdo->prepare('SELECT * FROM tb_dados_valores WHERE id_pasta=\''.$id_pasta.'\'');
         $stmt->execute();
         $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
         $db_f_aval = $db_f['avaliador'];
-
     }
+
     else
     {
         header('Location: index.php');
@@ -93,7 +93,7 @@
 
 
     <div class="box">
-        <form action="saveEditFolder.php" method="POST">
+        <form action="pastaSaveEdit.php" method="POST">
             <fieldset>
                 <legend id='padding12'><a><b>Editar Pasta: <?php echo $id_pasta ?></b></a></legend>
                 <br>
@@ -335,7 +335,7 @@
                
                 <div class='alignCenter'  >
             <?php
-                    {echo "<a id='submitRed' href='apagarPasta.php?id_pasta=$id_pasta' title='Apagar pasta'> Apagar esta pasta</a>";
+                    {echo "<a id='submitRed' href='pastaApagar.php?id_pasta=$id_pasta' title='Apagar pasta'> Apagar esta pasta</a>";
                     }
             ?>
         </div>

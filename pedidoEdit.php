@@ -76,7 +76,7 @@
     </div>
 
     <div class="box">
-        <form action="saveEditPedido.php" method="POST">
+        <form action="pedidoSaveEdit.php" method="POST">
             <fieldset>
                 <legend id='padding12'><a><b>Editar pedido # <?php echo $n_registro ?> - Pasta # <?php echo $id_pasta ?> </b></a></legend>
                 <br><br>
@@ -136,10 +136,58 @@
                         <option value="DECISAO PRIMEIRO GRAU" <?php if($db_v['tipo_avaliacao']=="DECISAO PRIMEIRO GRAU") echo 'selected="selected"'; ?>>Decisão de Primeiro Grau</option>
                         <option value="DECISAO SEGUNDO GRAU" <?php if($db_v['tipo_avaliacao']=="DECISAO SEGUNDO GRAU") echo 'selected="selected"'; ?>>Decisão de Segundo Grau</option>
                         <option value="LIQUIDACAO FINAL" <?php if($db_v['tipo_avaliacao']=="LIQUIDACAO FINAL") echo 'selected="selected"'; ?>>Liquidação final</option>
+                        <option value="ACORDO" <?php if($db_v['tipo_avaliacao']=="ACORDO") echo 'selected="selected"'; ?>>Acordo</option>
  
                     </select>
                 </div>
+                <br>
+
+                                <!-- DROPDOWN ANO AVALIAÇAO -->
+                                <div class="inputBox" class="container">
+                    <label for="ano_aval" >Ano da Avaliação: </label>
+                    <?php
+
+                        $statement = $pdo->prepare('SELECT ano_aval FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
+                        $statement->execute();
+                        $selected_ano_aval = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        $statement = $pdo->prepare("SELECT ano FROM tb_campos WHERE ano <= $ano_atual ORDER BY ano DESC");
+                        $statement->execute();
+                        $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+                       
+                        
+                        echo "<select id='ano_avaliacao' name='ano_avaliacao'>";
+                        foreach($options as $option){
+                            if($selected_ano_aval['ano_avaliacao'] == $option) {
+                                echo "<option selected='selected' value='$option'>$option</option>";
+                            }
+                            else {
+                                echo "<option value='$option'>$option</option>";
+                            }
+                        }
+                        echo "</select>";
+                    ?>
+                </div><br>
+
+                <div class="inputBox" class="container">
+                <label for="mes_avaliacao" >Mês da Avaliação: </label>
+                    <select id="mes_avaliacao" name="mes_avaliacao" >
+                        <option value="Dezembro" <?php if($db_v['mes_avaliacao']=="Dezembro") echo 'selected="selected"'; ?>>Dezembro</option>
+                        <option value="Novembro" <?php if($db_v['mes_avaliacao']=="Novembro") echo 'selected="selected"'; ?>>Novembro</option>
+                        <option value="Outubro" <?php if($db_v['mes_avaliacao']=="Outubro") echo 'selected="selected"'; ?>>Outubro</option>
+                        <option value="Setembro" <?php if($db_v['mes_avaliacao']=="Setembro") echo 'selected="selected"'; ?>>Setembro</option>
+                        <option value="Agosto" <?php if($db_v['mes_avaliacao']=="Agosto") echo 'selected="selected"'; ?>>Agosto</option>
+                        <option value="Julho" <?php if($db_v['mes_avaliacao']=="Julho") echo 'selected="selected"'; ?>>Julho</option>
+                        <option value="Junho" <?php if($db_v['mes_avaliacao']=="Junho") echo 'selected="selected"'; ?>>Junho</option>
+                        <option value="Maio" <?php if($db_v['mes_avaliacao']=="Maio") echo 'selected="selected"'; ?>>Maio</option>
+                        <option value="Abril" <?php if($db_v['mes_avaliacao']=="Abril") echo 'selected="selected"'; ?>>Abril</option>
+                        <option value="Março" <?php if($db_v['mes_avaliacao']=="Março") echo 'selected="selected"'; ?>>Março</option>
+                        <option value="Fevereiro" <?php if($db_v['mes_avaliacao']=="Fevereiro") echo 'selected="selected"'; ?>>Fevereiro</option>
+                        <option value="Janeiro"<?php if($db_v['mes_avaliacao']=="Janeiro") echo 'selected="selected"'; ?>>Janeiro</option>
+                    </select>
+                </div>
                 <br><br>
+
 
                 <input type="hidden" name="n_registro" id="n_registro" value="<?php echo $n_registro;?>">
                 <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">
