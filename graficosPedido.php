@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include_once('config.php');
+    include_once('config2.php');
     $tipoPedido = $_GET['tipo_pedido'];
     $pasta = $_GET['id_pasta'];
 
@@ -11,6 +11,14 @@
         header('Location: login.php');
         
     }
+    $pdo = conectar();
+
+    $pedido = $pdo->query('SELECT * FROM view_05_pedidos_graf  
+    WHERE (id_pasta=\''.$pasta.'\' AND tipo_pedido=\''.$tipoPedido.'\')')->fetchAll();
+
+    # print_r($pedido);
+
+
 
     include('style.css');
 
@@ -77,19 +85,20 @@
         </div><br><br>
     
 
+<div class='row'>
+<canvas class='column side2 'id="myChartPie" style="width:1000px;max-width:1000px"></canvas>
 
-<canvas id="myChartPie" style="width:1000px;max-width:1000px"></canvas>
-<br><br><br><br>
-<canvas id="myChartLine" style="width:100%;max-width:600px"></canvas>
+<canvas class='column side2 ' id="myChartLine" style="width:1000px;max-width:1000px"></canvas>
 
 
-
+  </div>
+  <br><br><br><br><br><br><br><br>
 </body>
 
 
 
 <script>
-var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var xValues = ["Inicial", "Primeira Instância", "Segunda Instância", "Decisão Final", "Acordos"];
 var yValues = [55, 49, 44, 24, 15];
 var barColors = [
   "#b91d47",
@@ -111,7 +120,7 @@ new Chart("myChartPie", {
   options: {
     title: {
       display: true,
-      text: "World Wide Wine Production 2018"
+      text: "Processos"
     }
   }
 });
@@ -129,7 +138,7 @@ new Chart("myChartLine", {
       fill: false,
       lineTension: 0,
       backgroundColor: "rgba(0,0,255,1.0)",
-      borderColor: "rgba(0,0,255,0.1)",
+      borderColor: "rgba(0,0,0,0.1)",
       data: yValues
     }]
   },
