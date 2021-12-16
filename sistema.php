@@ -103,6 +103,7 @@
 
     include('script.js');
  include('style.css');
+ include('navBar.php');
 
 ?>
 
@@ -124,24 +125,7 @@
 
 <body>
     <!-- BARRA DE NAVEGAÇÃO -->
-        <div>
-
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
-                    <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-
-
-
-                <!-- SAIR -->
-                <div class="d-flex">
-                    <a href="login.php" class="btn btn-danger me-5">Sair</a>
-                </div>
-            </nav>
-        </div><br>
+        <?php echo $navBar ?>
 
 
         <!-- NÚMERO DA PASTA -->
@@ -151,33 +135,13 @@
 
         <!-- PASTA EM EXCLUSÃO -->
         <?php
-            echo "<h1 class='text-danger'>$emExclusao</h1>";
+            echo "<h1 class='text-danger'>$emExclusao</h1><br>";
             echo "<h3 class='text-danger'>$emExclusao2</h3>";
             echo "<h3 class='text-danger'>$emExclusao4</h3>";
-            echo "<h3 class='text-danger'>$emExclusao3</h3>";
+            echo "<h3 class='text-danger'>$emExclusao3</h3><br><br>";
         ?>
 
 
-        <!-- LINK PÁGINA RESUMO -->
-        <div class="alignLeft">
-        <button type="button2" class="button" onclick="location.href='resumo.php'">Ir para Resumo</button>
-        </div><br>
-
-
-        <!-- CADASTRAR NOVA PASTA -->
-        <div class='alignLeft '>
-        <a class="button2 " href="pastaNova.php">Cadastrar Nova Pasta</a>
-        </div>
-        <br>
-
-        <!-- BUSCAR PASTA SEARCH BOX -->
-        <div  class="buscar alignLeft">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <form class="searchF" action="pastaBuscar.php" method="GET">
-        <input type="text" name="search" placeholder="buscar pasta...">
-        <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
-        </form>
-        </div><br>
 
     
     <!-- TABELAS CENTRAIS -->

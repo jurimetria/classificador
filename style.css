@@ -68,7 +68,7 @@ font-size: 22px;
 height: 44px;
 color:black;
 border: none;
-padding: 8px 12px;
+padding: 8px;
 text-align: center;
 text-decoration: none;
 display: inline-block;
@@ -87,10 +87,10 @@ color: white;
 }
 
 .button2 {
-height: 42px;
+height: 44px;
 color:black;
 border: none;
-padding: 8px 12px;
+padding: 8px;
 text-align: center;
 text-decoration: none;
 display: inline-block;
@@ -197,12 +197,12 @@ clear: both;
 
 /* SEARCH */
 form.searchF input[type=text] {
-padding: 8px;
+
 font-size: 17px;
 border: none;
 float: left;
 width: 170px;
-height: 40px;
+height: 44px;
 background: #f1f1f1;
 border-radius: 5px 0px 0px 5px;
 }
@@ -211,8 +211,8 @@ border-radius: 5px 0px 0px 5px;
 form.searchF button {
 float: left;
 width: 45px;
-height: 40px;
-padding: 8px;
+height: 44px;
+
 background: dodgerblue;
 color: white;
 font-size: 17px;
@@ -391,7 +391,7 @@ color: dodgerblue;
 background-color: dodgerblue;
 width: 100%;
 border: none;
-padding: 13px;
+padding: 12px;
 color: white;
 font-size: 19px;
 cursor: pointer;
@@ -422,6 +422,8 @@ transition-duration: 0.25s;
         transition-duration: 0.60s;
         }
     
+#topPadding{ padding-top:14px;}
+
 
 .obsBox {
 background: none;
@@ -530,6 +532,18 @@ transition-duration: 0.25s;
 .adm:hover{
     text-decoration: none;
     color:rgba(161, 148, 27, 0.589);
+}
+
+.admUp{
+    text-decoration: none;
+    text-align: right;
+    font-size: 44px;
+    color:rgba(63, 128, 128, 0.7);
+}
+
+.admUp:hover{
+    text-decoration: none;
+    color:rgba(161, 148, 27, 1);
 }
 
 </style>
