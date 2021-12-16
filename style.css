@@ -524,26 +524,18 @@ color: goldenrod;
 transition-duration: 0.25s;
 }
 
-.adm{
-    text-decoration: none;
-    color:rgba(63, 128, 128, 0.459);
-}
 
-.adm:hover{
-    text-decoration: none;
-    color:rgba(161, 148, 27, 0.589);
-}
 
 .admUp{
     text-decoration: none;
     text-align: right;
     font-size: 44px;
-    color:rgba(63, 128, 128, 0.7);
+    
 }
 
 .admUp:hover{
     text-decoration: none;
-    color:rgba(161, 148, 27, 1);
+    color:rgba(161, 148, 27, 0.6);
 }
 
 </style>

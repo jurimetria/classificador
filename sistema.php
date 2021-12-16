@@ -83,16 +83,14 @@
     }
 
     include('salvaDados.php');
+
     $dataExclusao= $db_folder['horario'];
     $dataExclusao_ts= strtotime($dataExclusao. ' + 7 days');
     $dataExclusao_format = date('d/m/Y',$dataExclusao_ts);
-
-    
     $emExclusao="";
     $emExclusao2="";
     $emExclusao3="";
     $emExclusao4="";
-
     if($db_folder['folderDel']==='SIM'){
         $emExclusao = "<br> PASTA EM PROCESSO DE EXCLUSÃO";
         $emExclusao2 = "Todo o seu conteúdo e pedidos serão apagados";
@@ -102,8 +100,8 @@
 
 
     include('script.js');
- include('style.css');
- include('navBar.php');
+    include('style.css');
+    include('navBar.php');
 
 ?>
 

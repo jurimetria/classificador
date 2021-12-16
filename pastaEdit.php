@@ -17,10 +17,10 @@
     {
         $pdo = conectar();
 
-        $stmt = $pdo->prepare('SELECT * FROM tb_dados_valores WHERE id_pasta=\''.$id_pasta.'\'');
+        $stmt = $pdo->prepare('SELECT * FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
         $stmt->execute();
         $db_f = $stmt->fetch(PDO::FETCH_ASSOC);
-        $db_f_aval = $db_f['avaliador'];
+
     }
 
     else
@@ -28,17 +28,24 @@
         header('Location: index.php');
     }
 
+    $dataExclusao= $db_f['horario'];
+    $dataExclusao_ts= strtotime($dataExclusao. ' + 7 days');
+    $dataExclusao_format = date('d/m/Y',$dataExclusao_ts);
     $emExclusao="";
     $emExclusao2="";
     $emExclusao3="";
+    $emExclusao4="";
+
     if($db_f['folderDel']==='SIM'){
-        $emExclusao = "PASTA EM PROCESSO DE EXCLUSÃO";
+        $emExclusao = "<br> PASTA EM PROCESSO DE EXCLUSÃO";
         $emExclusao2 = "Todo o seu conteúdo e pedidos serão apagados";
+        $emExclusao4 = "em $dataExclusao_format";
         $emExclusao3 = "Para reverter este procedimento entre em contato com o Administrador";
     } 
 
     include('script.js');
     include('style.css');
+    include('navBarClean.php');
 
 ?>
 
@@ -58,22 +65,8 @@
 </head>
 
 <body>
-    <!-- BARRA DE NAVEGAÇÃO -->
-    <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">L&P | Classificador de Pastas</a>
-            <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-
-        <!-- SAIR -->
-        <div class="d-flex">
-            <a href="login.php" class="btn btn-danger me-5">Sair</a>
-        </div>
-    </nav>
-</div>  
+<!-- BARRA DE NAVEGAÇÃO -->
+<?php echo $navBarClean ?>
 
     <div>
         <!-- BOTAO VOLTAR -->
