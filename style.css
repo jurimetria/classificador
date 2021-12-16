@@ -522,6 +522,9 @@ color: goldenrod;
 transition-duration: 0.25s;
 }
 
-
+.adm{
+    text-decoration: none;
+    color:rgba(26, 119, 119, 0.308);
+}
 
 </style>
