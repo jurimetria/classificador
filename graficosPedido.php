@@ -66,7 +66,7 @@
                 <button type="button" class="button" onclick="location.href='resumo.php'">Ir para Resumo</button>
                 <br><br>
 
-                <!-- LINK PÁGINA RESUMO -->
+                <!-- LINK PÁGINA GRAFICOS -->
                 <button type="button" class="button" onclick="location.href='graficos.php'">Ir para a Página de Gráficos</button>
                 <br>
         </div><br><br>
