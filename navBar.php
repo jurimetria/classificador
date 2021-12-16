@@ -4,7 +4,7 @@
         <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
 
         <div>
-            <img src='https://lp-classificador.s3.amazonaws.com/img/LogoBranco+-+P1.png' alt='logo' width='80' height='80'>
+            <img src='https://lp-classificador.s3.amazonaws.com/img/LogoBranco+-+P1.png'  alt='logo' width='80' height='80'>
         
         </div>
 
