@@ -84,6 +84,10 @@
 
     include('salvaDados.php');
     $dataExclusao= $db_folder['horario'];
+    $dataExclusao_ts= strtotime($dataExclusao. ' + 7 days');
+    $dataExclusao_format = date('d/m/Y',$dataExclusao_ts);
+
+    
     $emExclusao="";
     $emExclusao2="";
     $emExclusao3="";
@@ -92,7 +96,7 @@
     if($db_folder['folderDel']==='SIM'){
         $emExclusao = "<br> PASTA EM PROCESSO DE EXCLUSÃO";
         $emExclusao2 = "Todo o seu conteúdo e pedidos serão apagados";
-        $emExclusao4 = "em $dataExclusao";
+        $emExclusao4 = "em $dataExclusao_format";
         $emExclusao3 = "Para reverter este procedimento entre em contato com o Administrador";
     } 
 

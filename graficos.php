@@ -72,7 +72,7 @@
 
 <canvas id="myChartPie" style="width:1000px;max-width:1000px"></canvas>
 <br><br><br><br>
-<canvas id="myChartLine" style="width:100%;max-width:600px"></canvas>
+<canvas id="myChartLine" style="width:1000px;max-width:600px"></canvas>
 
 
 

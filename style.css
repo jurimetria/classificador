@@ -524,7 +524,12 @@ transition-duration: 0.25s;
 
 .adm{
     text-decoration: none;
-    color:rgba(26, 119, 119, 0.308);
+    color:rgba(63, 128, 128, 0.459);
+}
+
+.adm:hover{
+    text-decoration: none;
+    color:rgba(161, 148, 27, 0.589);
 }
 
 </style>
