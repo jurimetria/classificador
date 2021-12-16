@@ -125,7 +125,7 @@
 
 <body>
     <!-- BARRA DE NAVEGAÇÃO -->
-        <?php echo $navBar ?>
+        <?php echo $navBar ?><br>
 
 
         <!-- NÚMERO DA PASTA -->
@@ -491,10 +491,7 @@
         </div>
     <br><br><br><br><br><br>
 </body>
-<footer>
-  
-  <p><a class="adm" href="mailto:jurimetria@lp.com.br?subject=Classificador - dúvidas e sugestões"> ✉ Administrador</a></p>
-</footer>
+
 
 </html>
 
