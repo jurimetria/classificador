@@ -54,9 +54,10 @@
             $tipo_avaliacao = $_POST['tipo_avaliacao'];
             $mes_avaliacao = $_POST['mes_avaliacao'];
             $ano_avaliacao = $_POST['ano_avaliacao'];
+            $avaliador = $_POST['avaliador'];
 
-            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (logado, horario, id_pasta,tipo_pedido,valor_pedido,probabilidade,tipo_avaliacao,mes_avaliacao,ano_avaliacao) 
-            VALUES ('$logado','$horario','$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade','$tipo_avaliacao','$mes_avaliacao','$ano_avaliacao')");
+            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (logado, horario, id_pasta,tipo_pedido,valor_pedido,probabilidade,tipo_avaliacao,mes_avaliacao,ano_avaliacao,avaliador) 
+            VALUES ('$logado','$horario','$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade','$tipo_avaliacao','$mes_avaliacao','$ano_avaliacao','$avaliador')");
 
             {
                 header('Location: sistema.php?id_pasta='.$id_pasta);
@@ -81,7 +82,7 @@
          $ver_avaliador .= '<option value="'.$row['avaliador'].'">'.$row['avaliador'].'</option>';
      }
 
-     
+
     # VER ANO
         $ver_ano = '';
         $query = "SELECT DISTINCT ano FROM
@@ -182,16 +183,16 @@
                 </div><br>
 
                 <div class="inputBox" class="container">
-                    <label for="ano_aval">Ano da avaliação:</label>
-                            <select name="ano_aval" id="ano_aval"  required>
+                    <label for="ano_avaliacao">Ano da avaliação:</label>
+                            <select name="ano_avaliacao" id="ano_avaliacao"  required>
                                 <?php echo $ver_ano; ?>
                                 
                             </select>
                 </div><br>
                         
                 <div class="inputBox" class="container">
-                    <label for="mes_aval" >Mês da Avaliação: </label>
-                    <select id="mes_aval" name="mes_aval" >
+                    <label for="mes_avaliacao" >Mês da Avaliação: </label>
+                    <select id="mes_avaliacao" name="mes_avaliacao" >
                         <option value="Dezembro" <?php if($datam=="12") echo 'selected="selected"'; ?>>Dezembro</option>
                         <option value="Novembro" <?php if($datam=="11") echo 'selected="selected"'; ?>>Novembro</option>
                         <option value="Outubro" <?php if($datam=="10") echo 'selected="selected"'; ?>>Outubro</option>
