@@ -262,6 +262,7 @@
                 <thead>
                     <tr>
                         <th scope='col'>Tipo de Pedido</th>
+                        <th scope='col'>Avaliador</th>
                         <th scope='col'>Mês Avaliação</th>
                         <th scope='col'>Ano Avaliação</th>
                     
@@ -279,6 +280,7 @@
                     <?php foreach($data_pedidos_aval_primeiro as $row) {
                         echo "<tr>";
                         echo "<td>".$row['tipo_pedido']."</td>";
+                        echo "<td>".$row['avaliador']."</td>";
                         echo "<td>".$row['mes_avaliacao']."</td>";
                         echo "<td>".$row['ano_avaliacao']."</td>";
                         
@@ -318,6 +320,7 @@
                     <thead>
                         <tr>
                             <th scope='col'>Tipo de Pedido</th>
+                            <th scope='col'>Avaliador</th>
                             <th scope='col'>Mês Avaliação</th>
                             <th scope='col'>Ano Avaliação</th>
                             
@@ -335,6 +338,7 @@
                         <?php foreach($data_pedidos_aval_segundo as $row) {
                                 echo "<tr>";
                                 echo "<td>".$row['tipo_pedido']."</td>";
+                                echo "<td>".$row['avaliador']."</td>";
                                 echo "<td>".$row['mes_avaliacao']."</td>";
                                 echo "<td>".$row['ano_avaliacao']."</td>";
                                 
@@ -374,6 +378,7 @@
                 <thead>
                     <tr>
                         <th scope='col'>Tipo de Pedido</th>
+                        <th scope='col'>Avaliador</th>
                         <th scope='col'>Mês Avaliação</th>
                         <th scope='col'>Ano Avaliação</th>
                         
@@ -390,6 +395,7 @@
                     <?php foreach($data_pedidos_aval_liquidacao as $row) {
                         echo "<tr>";
                         echo "<td>".$row['tipo_pedido']."</td>";
+                        echo "<td>".$row['avaliador']."</td>";
                         echo "<td>".$row['mes_avaliacao']."</td>";
                         echo "<td>".$row['ano_avaliacao']."</td>";
                         
@@ -428,6 +434,7 @@
                 <thead>
                     <tr>
                         <th scope='col'>Tipo de Pedido</th>
+                        <th scope='col'>Avaliador</th>
                         <th scope='col'>Mês Avaliação</th>
                         <th scope='col'>Ano Avaliação</th>
                         
@@ -444,6 +451,7 @@
                     <?php foreach($data_pedidos_aval_acordo as $row) {
                         echo "<tr>";
                         echo "<td>".$row['tipo_pedido']."</td>";
+                        echo "<td>".$row['avaliador']."</td>";
                         echo "<td>".$row['mes_avaliacao']."</td>";
                         echo "<td>".$row['ano_avaliacao']."</td>";
                         echo "<td>R$ ".number_format($row['valor_pedido'],2,",",".")."</td>";
