@@ -108,19 +108,19 @@
 
 
     // SOMA VALOR TOTAL DE Classificação Global (Valor Médio)
-    $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_cme) AS valor  FROM view_03_cme_3
+    $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_cme) AS valor  FROM view_04_resumo
     WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_val_total_cme->execute();
     $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE HONORÁRIOS ESPERADOS
-    $sum_honorarios = $pdo->prepare('SELECT SUM(honorarios_esp) AS valor FROM view_03_cme_3
+    $sum_honorarios = $pdo->prepare('SELECT SUM(honorarios_esp) AS valor FROM view_04_resumo
     WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_honorarios->execute();
     $sum_honorarios_return = $sum_honorarios->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE Comissao
-    $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_03_cme_3
+    $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_04_resumo
     WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_comissao->execute();
     $sum_comissao_return = $sum_comissao->fetch(PDO::FETCH_ASSOC);
@@ -273,8 +273,7 @@
                     <th scope='col'>Honorários Esperados</th>
                     <th scope='col'>Honorários %</th>
                     <th scope='col'>Probabilidade</th>
-                    <th scope='col'>Avaliador</th>
-                    <th scope='col'>UN</th>
+     
                     <th scope='col'>Ir</th>
                 </tr>
             </thead>
@@ -295,8 +294,7 @@
                         echo "<td>R$ ".number_format($row['honorarios_esp'],2,",",".")."</td>";
                         echo "<td>".$row['honorarios_perc']."%</td>";
                         echo "<td>".$row['global_mde']."</td>";
-                        echo "<td>".$row['avaliador']."</td>";
-                        echo "<td>".$row['unidade']."</td>";
+              
                         echo "<td>
                         <a class='btn btn-sm btn-primary ' href='sistema.php?id_pasta=$row[id_pasta]' name='id_pasta' title='Ver Pasta'>
                         <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-arrow-up-right-square' viewBox='0 0 16 16'>

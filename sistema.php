@@ -147,12 +147,10 @@
             <!-- TABELA DETALHES -->
             <div class="column side alignLeft" >
                 <h3>Dados da Pasta</h3><br>
-                <?php echo "<b>Avaliador: </b>", $db_folder['avaliador'];?><br>
+              
                 <?php echo "<b>Área: </b>", $db_folder['area'];?><br>
                 <?php echo "<b>Unidade: </b>", $db_folder['unidade'];?><br>
                 <?php echo "<b>Comarca: </b>", $db_folder['comarca'];?><br>
-                <?php echo "<b>Mês Avaliado: </b>", $db_folder['mes_aval'];?><br>
-                <?php echo "<b>Ano Avaliado: </b>", $db_folder['ano_aval'];?><br>
                 <?php echo "<b>Reclamante: </b>", $db_folder['reclamante'];?><br>
                 <?php echo "<b>Reclamada: </b>", $db_folder['reclamada'];?><br>
                 <?php echo "<b>Ramo: </b>", $db_folder['ramo'];?><br>
@@ -198,6 +196,7 @@
                 <thead>
                     <tr>
                         <th scope='col'>Tipo de Pedido</th>
+                        <th scope='col'>Avaliador</th>
                         <th scope='col'>Mês Avaliação</th>
                         <th scope='col'>Ano Avaliação</th>
                         <th scope='col'>Valor Estimado do Pedido</th>
@@ -214,6 +213,7 @@
                     <?php foreach($data_pedidos_aval_inicial as $row) {
                         echo "<tr>";
                         echo "<td>".$row['tipo_pedido']."</td>";
+                        echo "<td>".$row['avaliador']."</td>";
                         echo "<td>".$row['mes_avaliacao']."</td>";
                         echo "<td>".$row['ano_avaliacao']."</td>";
                         
