@@ -56,7 +56,7 @@
         if(isset($_GET['submit-search'])) 
         {
             $search = $_GET['search'];
-            $sql6 = "SELECT DISTINCT * FROM tb_folder WHERE id_pasta LIKE '%$search%'";
+            $sql6 = "SELECT DISTINCT * FROM tb_folder WHERE id_pasta LIKE '%$search%' ORDER BY id_pasta ASC";
             $result = mysqli_query($conexao,$sql6);
             $queryResults = mysqli_num_rows($result);
 

@@ -10,7 +10,7 @@
         $id_pasta = $_POST['id_pasta'];
         $logado = $_POST['logado'];
         $horario = $_POST['horario'];
-        $avaliador = $_POST['avaliador'];
+
         $area = $_POST['area'];
         $unidade = $_POST['unidade'];
         $mes_aval = $_POST['mes_aval'];
@@ -27,11 +27,11 @@
         $tipo_acao = $_POST['tipo_acao'];
         $obs = $_POST['obs'];
 
-        $sqlUpdate = "UPDATE tb_folder SET logado='$logado',horario='$horario', avaliador='$avaliador', area='$area',unidade='$unidade', mes_aval='$mes_aval', ano_aval='$ano_aval', reclamante='$reclamante', reclamada='$reclamada', ramo='$ramo',binaria='$binaria', cargo='$cargo', periodo='$periodo', honorarios_perc='$honorarios_perc', comarca='$comarca', salario='$salario', tipo_acao='$tipo_acao', obs='$obs'
+        $sqlUpdate = "UPDATE tb_folder SET logado='$logado',horario='$horario',  area='$area',unidade='$unidade', mes_aval='$mes_aval', ano_aval='$ano_aval', reclamante='$reclamante', reclamada='$reclamada', ramo='$ramo',binaria='$binaria', cargo='$cargo', periodo='$periodo', honorarios_perc='$honorarios_perc', comarca='$comarca', salario='$salario', tipo_acao='$tipo_acao', obs='$obs'
         WHERE id_pasta='$id_pasta'";
 
         $insert = $pdo->prepare($sqlUpdate);
-        $result= $insert->execute(array($id_pasta,$logado,$horario, $avaliador,$area,$unidade,$mes_aval,$ano_aval,$reclamante,$reclamada,$ramo,$binaria,$cargo,$periodo,$honorarios_perc, $comarca,$salario,$tipo_acao,$obs));
+        $result= $insert->execute(array($id_pasta,$logado,$horario, $area,$unidade,$mes_aval,$ano_aval,$reclamante,$reclamada,$ramo,$binaria,$cargo,$periodo,$honorarios_perc, $comarca,$salario,$tipo_acao,$obs));
 
         
     }

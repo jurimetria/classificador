@@ -129,7 +129,7 @@
 
     include('script.js');
     include('style.css');
-    include('navBarClean.php');
+    include('navBar.php');
 
 ?>
 
@@ -155,7 +155,7 @@
 <body>
     
     <!-- BARRA DE NAVEGAÇÃO -->
-    <?php echo $navBarClean ?><br>
+    <?php echo $navBar ?><br>
 
     <!-- TITULO DA PAGINA -->
     <h1>Resumo das Classificações</h1>
@@ -171,19 +171,11 @@
             </div>
             <br><br>
 
-            <!-- CADASTRAR NOVA PASTA -->
-            <div class=' '>
-                <a class="button2 " href="pastaNova.php">Cadastrar Nova Pasta</a>
-            </div>
-            <br>
+           
 
             <!-- BUSCAR PASTA SEARCH BOX -->
-            <div  class="buscar ">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-                    <form class="searchF" action="pastaBuscar.php" method="GET">
-                        <input type="text" name="search" placeholder="buscar pasta...">
-                        <button type="submit" name="submit-search"><i class="fa fa-search"></i></button>
-                    </form>
+            <div  class=" ">
+               
 
                     <!-- EXPORTAR TABELA EXCEL -->
                     <br>

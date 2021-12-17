@@ -10,7 +10,7 @@
     }
     
     include('style.css');
-    include('navBarClean.php');
+    include('navBar.php');
 
  
 ?>
@@ -36,7 +36,7 @@
 
 <body>
 <!-- BARRA DE NAVEGAÇÃO -->
-<?php echo $navBarClean ?>
+<?php echo $navBar ?>
 
 <h1>Gráficos</h1>
 <div class="alignLeft">

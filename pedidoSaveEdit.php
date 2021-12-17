@@ -13,8 +13,9 @@
         $tipo_avaliacao = $_POST['tipo_avaliacao'];
         $ano_avaliacao = $_POST['ano_avaliacao'];
         $mes_avaliacao = $_POST['mes_avaliacao'];
+        $avaliador = $_POST['avaliador'];
 
-        $sqlUpdate = "UPDATE tb_dados_valores SET logado='$logado',horario='$horario',tipo_pedido='$tipo_pedido', valor_pedido='$valor_pedido', probabilidade='$probabilidade', tipo_avaliacao='$tipo_avaliacao', ano_avaliacao='$ano_avaliacao', mes_avaliacao='$mes_avaliacao'
+        $sqlUpdate = "UPDATE tb_dados_valores SET logado='$logado',horario='$horario',tipo_pedido='$tipo_pedido', valor_pedido='$valor_pedido', probabilidade='$probabilidade', tipo_avaliacao='$tipo_avaliacao', ano_avaliacao='$ano_avaliacao', mes_avaliacao='$mes_avaliacao', avaliador='$avaliador'
         WHERE n_registro='$n_registro'";
 
         $result = $conexao->query($sqlUpdate);

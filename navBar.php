@@ -26,15 +26,22 @@
                 </div>
             
 
-            <!-- LINK PÁGINA RESUMO -->
-            <div class=' container-fluid'>
-            <a class='button' href='resumo.php'>Ir para Resumo</a>
-            </div>
-            <br>
-
+            
             <!-- CADASTRAR NOVA PASTA -->
             <div class=' container-fluid'>
                 <a class='button' href='pastaNova.php'>Cadastrar Nova Pasta</a>
+            </div>
+            <br>
+
+            <!-- LINK PÁGINA RESUMO -->
+            <div class=' container-fluid'>
+            <a class='button' href='resumo.php'> &nbsp;Resumo &nbsp;</a>
+            </div>
+            <br>
+
+            <!-- LINK PÁGINA GRAFICOS-->
+            <div class=' container-fluid'>
+            <a class='button' href='graficos.php'> &nbsp; Gráficos &nbsp;</a>
             </div>
             <br>
 

@@ -91,32 +91,7 @@
                 <legend id='padding12'><a><b>Editar Pasta: <?php echo $id_pasta ?></b></a></legend>
                 <br>
 
-                <!-- DROPDOWN AVALIADOR -->
-                <div class="inputBox" class="container">
-                    <label for="avaliador" >Avaliador: </label>
-                    <?php
 
-                        $statement = $pdo->prepare('SELECT avaliador FROM tb_folder WHERE id_pasta=\''.$id_pasta.'\'');
-                        $statement->execute();
-                        $selected_avaliador = $statement->fetch(PDO::FETCH_ASSOC);
-
-                        $statement = $pdo->prepare("SELECT avaliador FROM tb_campos WHERE avaliador IS NOT NULL ");
-                        $statement->execute();
-                        $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
-                       
-                        
-                        echo "<select id='avaliador' name='avaliador'>";
-                        foreach($options as $option){
-                            if($selected_avaliador['avaliador'] == $option) {
-                                echo "<option selected='selected' value='$option'>$option</option>";
-                            }
-                            else {
-                                echo "<option value='$option'>$option</option>";
-                            }
-                        }
-                        echo "</select>";
-                    ?>
-                </div><br>
 
                 <!-- DROPDOWN AREA -->
                 <div class="inputBox" class="container">

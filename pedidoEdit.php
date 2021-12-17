@@ -95,6 +95,32 @@
                     ?>
                 </div><br>
 
+                                <!-- DROPDOWN AVALIADOR -->
+                                <div class="inputBox" class="container">
+                    <label for="avaliador" >Avaliador: </label>
+                    <?php
+
+                        $statement = $pdo->prepare('SELECT avaliador FROM tb_dados_valores WHERE n_registro=\''.$n_registro.'\'');
+                        $statement->execute();
+                        $selected_avaliador = $statement->fetch(PDO::FETCH_ASSOC);
+
+                        $statement = $pdo->prepare("SELECT avaliador FROM tb_campos WHERE avaliador IS NOT NULL ");
+                        $statement->execute();
+                        $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
+                       
+                        
+                        echo "<select id='avaliador' name='avaliador'>";
+                        foreach($options as $option){
+                            if($selected_avaliador['avaliador'] == $option) {
+                                echo "<option selected='selected' value='$option'>$option</option>";
+                            }
+                            else {
+                                echo "<option value='$option'>$option</option>";
+                            }
+                        }
+                        echo "</select>";
+                    ?>
+                </div><br>
 
                 <br>
                 <div class="inputBox">

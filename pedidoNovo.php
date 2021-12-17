@@ -68,6 +68,20 @@
         header('Location: index.php');
     }
 
+     # VER AVALIADOR
+     $ver_avaliador = '';
+     $query = "SELECT DISTINCT avaliador FROM
+         tb_campos WHERE avaliador IS NOT NULL ORDER BY avaliador ASC ";
+     $statement = $pdo->prepare($query);
+     $statement->execute();
+     $result = $statement->fetchAll();
+
+     foreach($result as $row)
+     {
+         $ver_avaliador .= '<option value="'.$row['avaliador'].'">'.$row['avaliador'].'</option>';
+     }
+
+     
     # VER ANO
         $ver_ano = '';
         $query = "SELECT DISTINCT ano FROM
@@ -132,6 +146,16 @@
                             <?php echo $ver_tipo_pedido; ?>
                         </select>
                 </div><br>
+
+                <div class="inputBox" class="container">
+                        <label for="avaliador">Avaliador:</label>
+                                <select name="avaliador" id="avaliador"  required>
+                                <option value="" >Escolha um avaliador</option>
+                                    <?php echo $ver_avaliador; ?>
+                                </select>
+                            </div>
+                        <br>
+
                 
                 <div class="inputBox">
                     <input type = "number" step="0.01" min="0" name="valor_pedido" id="valor_pedido" class="inputUser"  required>
