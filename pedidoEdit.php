@@ -12,7 +12,7 @@
         header('Location: login.php');
     }
 
-    $pdo = conectar();
+   
 
     if(!empty($n_registro = $_GET['n_registro']))
     {
@@ -104,7 +104,7 @@
                         $statement->execute();
                         $selected_avaliador = $statement->fetch(PDO::FETCH_ASSOC);
 
-                        $statement = $pdo->prepare("SELECT avaliador FROM tb_campos WHERE avaliador IS NOT NULL ");
+                        $statement = $pdo->prepare("SELECT nome FROM tb_usuarios WHERE secGroup='avaliador' ORDER BY nome ASC ");
                         $statement->execute();
                         $options = $statement->fetchAll(PDO::FETCH_COLUMN, 0);
                        

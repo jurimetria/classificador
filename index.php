@@ -1,6 +1,8 @@
 <?php
     session_start();
     include_once('config.php');
+    include_once('config2.php');
+    include('salvaDados.php');
     
 
     if((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true))

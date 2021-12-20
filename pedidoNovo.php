@@ -2,6 +2,7 @@
     session_start();
     include('config2.php');
     include('salvaDados.php');
+    
     $pdo = conectar();
     
 
@@ -12,7 +13,7 @@
         header('Location: login.php');
     }
 
-    include('salvaDados.php');
+    
     $id_pasta = $_GET['id_pasta'];
 
     # VER OPÇÕES DE SELEÇÃO
@@ -69,18 +70,22 @@
         header('Location: index.php');
     }
 
-     # VER AVALIADOR
-     $ver_avaliador = '';
-     $query = "SELECT DISTINCT avaliador FROM
-         tb_campos WHERE avaliador IS NOT NULL ORDER BY avaliador ASC ";
-     $statement = $pdo->prepare($query);
-     $statement->execute();
-     $result = $statement->fetchAll();
 
-     foreach($result as $row)
-     {
-         $ver_avaliador .= '<option value="'.$row['avaliador'].'">'.$row['avaliador'].'</option>';
-     }
+    
+    
+
+    # VER AVALIADOR
+
+    $query = "SELECT nome FROM tb_usuarios WHERE secGroup='avaliador' ORDER BY nome ASC ";
+
+    $statement = $pdo->prepare($query);
+    $statement->execute();
+    $result = $statement->fetchAll();
+    $ver_avaliador = '';
+    foreach($result as $row)
+    {
+        $ver_avaliador .= '<option value="'.$row['nome'].'">'.$row['nome'].'</option>';
+    }
 
 
     # VER ANO
@@ -151,7 +156,7 @@
                 <div class="inputBox" class="container">
                         <label for="avaliador">Avaliador:</label>
                                 <select name="avaliador" id="avaliador"  required>
-                                <option value="" >Escolha um avaliador</option>
+                                
                                     <?php echo $ver_avaliador; ?>
                                 </select>
                             </div>

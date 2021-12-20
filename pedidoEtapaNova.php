@@ -87,17 +87,17 @@
                }
 
                 # VER AVALIADOR
-     $ver_avaliador = '';
-     $query = "SELECT DISTINCT avaliador FROM
-         tb_campos WHERE avaliador IS NOT NULL ORDER BY avaliador ASC ";
-     $statement = $pdo->prepare($query);
-     $statement->execute();
-     $result = $statement->fetchAll();
 
-     foreach($result as $row)
-     {
-         $ver_avaliador .= '<option value="'.$row['avaliador'].'">'.$row['avaliador'].'</option>';
-     }
+                $query = "SELECT nome FROM tb_usuarios WHERE secGroup='avaliador' ORDER BY nome ASC ";
+
+                $statement = $pdo->prepare($query);
+                $statement->execute();
+                $result = $statement->fetchAll();
+                $ver_avaliador = '';
+                foreach($result as $row)
+                {
+                    $ver_avaliador .= '<option value="'.$row['nome'].'">'.$row['nome'].'</option>';
+                }
 
     include('style.css');
     include('navBarClean.php');

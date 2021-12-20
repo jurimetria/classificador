@@ -1,6 +1,9 @@
 <?php
     session_start();
-    include_once('config2.php');
+    
+    include('config2.php');
+    include('salvaDados.php');
+    
     $tipoPedido = $_GET['tipo_pedido'];
     $pasta = $_GET['id_pasta'];
 

@@ -14,8 +14,10 @@
                     <span class='navbar-toggler-icon'></span>
                 </button>
             </div>
-
-
+<div class='container-fluid'><a style='color:gray'>Logado como: $logadoAvaliador</a></div>
+<div class='container-fluid'></div>
+<div class='container-fluid'></div>
+<div class='container-fluid'></div>
             <div class='d-flex'>
             <p><a class='admUp' href='mailto:jurimetria@lp.com.br?subject=Classificador - dúvidas e sugestões' title='Contatar Administrador'> ✉  </a></p>
             </div>
