@@ -29,8 +29,34 @@
         header('Location: index.php');
     }
 
+    $query = "SELECT tipo_avaliacao FROM tb_dados_valores WHERE n_registro=\''.$n_registro.'\'"; 
+
+    $verificaTipo = $pdo->prepare('SELECT tipo_avaliacao FROM tb_dados_valores WHERE n_registro=\''.$n_registro.'\'');
+    $verificaTipo->execute();
+    $logadoResult = $verificaTipo->fetch(PDO::FETCH_ASSOC);
+    $verificaTipo = $logadoResult['tipo_avaliacao'];
+    
 
     
+if($verificaTipo<>'INICIAL'){$plotdecisao="
+    <div class='inputBox' class='container'>
+        <label for='decisao' >Tipo de Decisão: </label>
+        <select id='decisao' name='decisao'>
+            <option value='PROCEDENDE'>Procedente</option>
+            <option value='IMPROCEDENTE'>Improcedente</option>
+            <option value='PROCEDENTE EM PARTE'>Procedente em Parte</option>
+            <option value='EXTINTO'>Extinto</option>
+            
+            </select>
+        </div><br>
+        ";} else{$plotdecisao="";
+
+    # PLOTAR DECISAO
+    }
+
+        
+
+
     include('script.js');
     include('style.css');
     include('navBarClean.php');
@@ -140,6 +166,8 @@
                     </select>
                 </div>
                 <br>
+                <!-- DROPDOWN ANO AVALIAÇAO CONDICIONAL -->
+                <?php echo $plotdecisao;  ?>
 
                 <div class="inputBox" class="container">
                     <label for="tipo_avaliacao" >Tipo de Avaliação: </label>

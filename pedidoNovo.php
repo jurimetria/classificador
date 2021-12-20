@@ -72,15 +72,18 @@
 
 
     
-    
+    #print_r($logadoAvaliadorTipo);
+    #print_r("<br>");
+    #print_r($logadoAvaliador);
 
     # VER AVALIADOR
-
-    $query = "SELECT nome FROM tb_usuarios WHERE secGroup='avaliador' ORDER BY nome ASC ";
-
+    if ($logadoAvaliadorTipo==='avaliador'){$query = "SELECT nome FROM tb_usuarios WHERE nome='$logadoAvaliador'"; }
+    else {$query = "SELECT nome FROM tb_usuarios WHERE secGroup='avaliador' ORDER BY nome ASC ";}
+    
     $statement = $pdo->prepare($query);
     $statement->execute();
     $result = $statement->fetchAll();
+   
     $ver_avaliador = '';
     foreach($result as $row)
     {

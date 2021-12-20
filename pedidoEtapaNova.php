@@ -54,9 +54,10 @@
             $tipo_avaliacao = $_POST['tipo_avaliacao'];
             $mes_avaliacao = $_POST['mes_avaliacao'];
             $ano_avaliacao = $_POST['ano_avaliacao'];
+            $decisao = $_POST['decisao'];
 
-            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (logado, horario, id_pasta,tipo_pedido,valor_pedido,probabilidade,tipo_avaliacao,mes_avaliacao,ano_avaliacao) 
-            VALUES ('$logado','$horario','$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade','$tipo_avaliacao','$mes_avaliacao','$ano_avaliacao')");
+            $result = mysqli_query($conexao, "INSERT INTO tb_dados_valores (logado, horario, id_pasta,tipo_pedido,valor_pedido,probabilidade,tipo_avaliacao,mes_avaliacao,ano_avaliacao,decisao) 
+            VALUES ('$logado','$horario','$id_pasta','$tipo_pedido','$valor_pedido','$probabilidade','$tipo_avaliacao','$mes_avaliacao','$ano_avaliacao','$decisao')");
 
             {
                 header('Location: sistema.php?id_pasta='.$id_pasta);
@@ -87,8 +88,8 @@
                }
 
                 # VER AVALIADOR
-
-                $query = "SELECT nome FROM tb_usuarios WHERE secGroup='avaliador' ORDER BY nome ASC ";
+                if ($logadoAvaliadorTipo==='avaliador'){$query = "SELECT nome FROM tb_usuarios WHERE nome='$logadoAvaliador'"; }
+                else {$query = "SELECT nome FROM tb_usuarios WHERE secGroup='avaliador' ORDER BY nome ASC ";}
 
                 $statement = $pdo->prepare($query);
                 $statement->execute();
@@ -98,6 +99,11 @@
                 {
                     $ver_avaliador .= '<option value="'.$row['nome'].'">'.$row['nome'].'</option>';
                 }
+
+
+
+                
+
 
     include('style.css');
     include('navBarClean.php');
@@ -147,7 +153,7 @@
                     <div class="inputBox" class="container">
                         <label for="avaliador">Avaliador:</label>
                                 <select name="avaliador" id="avaliador"  required>
-                                <option value="" >Escolha um avaliador</option>
+                                
                                     <?php echo $ver_avaliador; ?>
                                 </select>
                             </div>
@@ -171,6 +177,21 @@
                         <option value="REMOTA">Remota: abaixo de 20%</option>
                     </select>
                 </div>
+                <br>
+
+                
+                <div class='inputBox' class='container'>
+                    <label for='decisao' >Tipo de Decisão: </label>
+                    <select id='decisao' name='decisao'>
+                        <option value='PROCEDENDE'>Procedente</option>
+                        <option value='IMPROCEDENTE'>Improcedente</option>
+                        <option value='PROCEDENTE EM PARTE'>Procedente em Parte</option>
+                        <option value='EXTINTO'>Extinto</option>
+                        
+                        </select>
+                    </div>
+                
+                
                 <br>
 
                 <div class="inputBox" class="container">
