@@ -163,6 +163,7 @@ if($verificaTipo<>'INICIAL'){$plotdecisao="
                         <option value="POSSÍVEL" <?php if($db_v['probabilidade']=="POSSÍVEL") echo 'selected="selected"'; ?>>Possível: 50% a 70%</option>
                         <option value="BAIXA" <?php if($db_v['probabilidade']=="BAIXA") echo 'selected="selected"'; ?>>Baixa: 20% a 50%</option>
                         <option value="REMOTA" <?php if($db_v['probabilidade']=="REMOTA") echo 'selected="selected"'; ?>>Remota: abaixo de 20%</option>
+                        <option value="NAO SE APLICA / ENCERRADO" <?php if($db_v['probabilidade']=="NAO SE APLICA / ENCERRADO") echo 'selected="selected"'; ?>>Não se Aplica / Encerrado</option>
                     </select>
                 </div>
                 <br>

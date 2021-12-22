@@ -166,15 +166,17 @@
                 </div>
                 <br>
 
-                <div class="inputBox" class="container">
+                <div class="inputBox" class="container" required>
                     <label for="probabilidade" >Probabilidade de Êxito: </label>
                     <select id="probabilidade" name="probabilidade">
-                    
+                        <option value="">Selecione um valor...</option>
+                        
                         <option value="ALTA">Alta: 90% a 100%</option>
                         <option value="PROVÁVEL">Provável: 70% a 90%</option>
                         <option value="POSSÍVEL">Possível: 50% a 70%</option>
                         <option value="BAIXA">Baixa: 20% a 50%</option>
                         <option value="REMOTA">Remota: abaixo de 20%</option>
+                        <option value="NAO SE APLICA / ENCERRADO">Não se Aplica / Encerrado</option>
                     </select>
                 </div>
                 <br>
@@ -190,8 +192,6 @@
                         
                         </select>
                     </div>
-                
-                
                 <br>
 
                 <div class="inputBox" class="container">
