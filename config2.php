@@ -3,7 +3,7 @@
     function conectar(){
         $hostname="database-2.cjtvzbllncaj.us-east-1.rds.amazonaws.com";
         $username="admin";
-        $password="lp2410@";
+        $password="Lp1406@";
 
         #$hostname="ec2-54-157-224-251.compute-1.amazonaws.com";
         #$username="root";
