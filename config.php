@@ -8,7 +8,7 @@
 	
 
 	$hostname="ec2-54-157-224-251.compute-1.amazonaws.com:3306";
-	$username="root";
+	$username="admin";
 	$password="Lp1406@";
 
 	$dbname="lp_db";
