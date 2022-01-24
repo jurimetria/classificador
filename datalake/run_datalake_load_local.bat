@@ -11,4 +11,3 @@ mysql -S localhost --user=root --password=Lp1406@ --database="lp_db" < C:\xampp\
 
 
 
-pause
