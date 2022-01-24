@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     session_start();
     include_once('config.php');
     include('config2.php');
@@ -58,7 +58,7 @@
         if(isset($_GET['submit-search'])) 
         {
             $search = $_GET['search'];
-            $sql6 = "SELECT DISTINCT * FROM tb_datalake WHERE pasta LIKE '%$search%' ORDER BY id_pasta ASC";
+            $sql6 = "SELECT * FROM tb_datalake WHERE pasta LIKE '%$search%' ORDER BY pasta ASC";
             $result = mysqli_query($conexao,$sql6);
             $queryResults = mysqli_num_rows($result);
 
@@ -68,8 +68,8 @@
             {
                 while ($rowx = mysqli_fetch_assoc($result)) 
                 {
-                    echo "<div class='alignLeft'><a class='resultBusca' href='sistema.php?id_pasta=".$rowx['id_pasta'].
-                    "'<div class='alignLeft '>".$rowx['id_pasta']."<br><br></div></div>" 
+                    echo "<div class='alignLeft'><a class='resultBusca' href='sistema.php?id_pasta=".$rowx['pasta'].
+                    "'<div class='alignLeft '>".$rowx['pasta']."<br><br></div></div>" 
                     ;
                 }
 
