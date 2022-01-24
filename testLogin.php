@@ -1,8 +1,10 @@
-<?php
+﻿<?php
    
 
     session_start();
     // print_r($_REQUEST);
+echo $sql;
+echo $conexao;
     if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']))
     {
         // Acessa
