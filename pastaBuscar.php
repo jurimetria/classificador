@@ -43,10 +43,12 @@
                 </form>
         </div>
 
+<!-- NOVA PASTA -->
         <div>
             <br>
             <a class="button2" href="pastaNova.php">Cadastrar Nova Pasta</a>
         </div>
+
 
     </div>
 
@@ -58,7 +60,8 @@
         if(isset($_GET['submit-search'])) 
         {
             $search = $_GET['search'];
-            $sql6 = "SELECT * FROM tb_datalake WHERE pasta LIKE '%$search%' ORDER BY pasta ASC";
+            # SELECIONA SOMENTE OS TRABALHISTAS
+            $sql6 = "SELECT * FROM tb_datalake WHERE (pasta LIKE '%$search%' AND (area='TRABALHISTA' OR area='INDENIZATÓRIA')) ORDER BY pasta ASC";
             $result = mysqli_query($conexao,$sql6);
             $queryResults = mysqli_num_rows($result);
 

@@ -15,10 +15,15 @@
     if(!empty($id_pasta = $_GET['id_pasta']))
     {
 
-        $stmt_folder = $pdo->prepare('SELECT * FROM tb_folder  
+        $stmt_tb_folder = $pdo->prepare('SELECT * FROM tb_folder  
         WHERE id_pasta=\''.$id_pasta.'\'');
-        $stmt_folder->execute(array('id_pasta' => $id_pasta));
-        $db_folder = $stmt_folder->fetch(PDO::FETCH_ASSOC);
+        $stmt_tb_folder->execute(array('id_pasta' => $id_pasta));
+        $db_tb_folder = $stmt_tb_folder->fetch(PDO::FETCH_ASSOC);
+
+        $stmt_tb_dl = $pdo->prepare('SELECT * FROM tb_datalake 
+        WHERE pasta=\''.$id_pasta.'\'');
+        $stmt_tb_dl->execute(array('pasta' => $id_pasta));
+        $db_tb_dl = $stmt_tb_dl->fetch(PDO::FETCH_ASSOC);
 
         $data_res = $pdo->prepare('SELECT * FROM view_03_cme_3  WHERE id_pasta=\''.$id_pasta.'\'');
         $data_res->execute();
@@ -84,14 +89,14 @@
 
     include('salvaDados.php');
 
-    $dataExclusao= $db_folder['horario'];
+    $dataExclusao= $db_tb_folder['horario'];
     $dataExclusao_ts= strtotime($dataExclusao. ' + 7 days');
     $dataExclusao_format = date('d/m/Y',$dataExclusao_ts);
     $emExclusao="";
     $emExclusao2="";
     $emExclusao3="";
     $emExclusao4="";
-    if($db_folder['folderDel']==='SIM'){
+    if($db_tb_folder['folderDel']==='SIM'){
         $emExclusao = "<br> PASTA EM PROCESSO DE EXCLUSÃO";
         $emExclusao2 = "Todo o seu conteúdo e pedidos serão apagados";
         $emExclusao4 = "em $dataExclusao_format";
@@ -129,15 +134,9 @@
         <!-- NÚMERO DA PASTA -->
         <?php
             echo "<h1>Pasta: $id_pasta</h1>";
-        ?>
+        ?><br><br>
 
-        <!-- PASTA EM EXCLUSÃO -->
-        <?php
-            echo "<h1 class='text-danger'>$emExclusao</h1><br>";
-            echo "<h3 class='text-danger'>$emExclusao2</h3>";
-            echo "<h3 class='text-danger'>$emExclusao4</h3>";
-            echo "<h3 class='text-danger'>$emExclusao3</h3><br><br>";
-        ?>
+
 
 
 
@@ -148,19 +147,19 @@
             <div class="column side alignLeft" >
                 <h3>Dados da Pasta</h3><br>
               
-                <?php echo "<b>Área: </b>", $db_folder['area'];?><br>
-                <?php echo "<b>Unidade: </b>", $db_folder['unidade'];?><br>
-                <?php echo "<b>Comarca: </b>", $db_folder['comarca'];?><br>
-                <?php echo "<b>Reclamante: </b>", $db_folder['reclamante'];?><br>
-                <?php echo "<b>Reclamada: </b>", $db_folder['reclamada'];?><br>
-                <?php echo "<b>Ramo: </b>", $db_folder['ramo'];?><br>
-                <?php echo "<b>É binária: </b>", $db_folder['binaria'];?><br>
-                <?php echo "<b>Cargo: </b>", $db_folder['cargo'];?><br>
-                <?php echo "<b>Período Discutido: </b>", $db_folder['periodo'];?><br>
-                <?php echo "<b>Última Remuneração: </b>R$ ", number_format( $db_folder['salario'],2,",",".");?><br>
-                <?php echo "<b>Tipo de Ação: </b>", $db_folder['tipo_acao'];?><br>
-                <?php echo "<b>Obs: </b>", $db_folder['obs'];?><br><br>
-                <?php echo "<a class='btn btn-sm btn-primary' href='pastaEdit.php?id_pasta=$db_folder[id_pasta]' title='Editar Pasta'>
+                <?php echo "<b>Área: </b>", $db_tb_dl['area'];?><br>
+                <?php echo "<b>Unidade: </b>", $db_tb_dl['unidade'];?><br>
+                <?php echo "<b>Comarca: </b>", $db_tb_dl['comarca'];?><br>
+                <?php echo "<b>Reclamante: </b>", $db_tb_dl['cliente'];?><br>
+                <?php echo "<b>Reclamada: </b>", $db_tb_dl['parte'];?><br>
+                <?php echo "<b>Ramo: </b>", $db_tb_dl['ramo'];?><br>
+                <?php echo "<b>Tipo de Ação: </b>", $db_tb_dl['tipo_de_acao'];?><br>
+                <?php echo "<b>É binária: </b>", $db_tb_folder['binaria'];?><br>
+                <?php echo "<b>Cargo: </b>", $db_tb_folder['cargo'];?><br>
+                <?php echo "<b>Período Discutido: </b>", $db_tb_folder['periodo'];?><br>
+                <?php echo "<b>Última Remuneração: </b>R$ ", number_format( $db_tb_folder['salario'],2,",",".");?><br>
+                <?php echo "<b>Obs: </b>", $db_tb_folder['obs'];?><br><br>
+                <?php echo "<a class='btn btn-sm btn-primary' href='pastaEdit.php?id_pasta=$id_pasta' title='Editar Pasta'>
                         <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
                             <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
                         </svg>   Editar dados da Pasta
@@ -176,7 +175,7 @@
                 <h3>Classificação Relacionamento</h3><br>
                 <?php echo "<b>Valor: </b>R$ ", number_format( $data_resumo_rel['valor_global'],2,",",".");?><br>
                 <?php echo "<b>Classificação da Ação: </b>", $data_resumo_rel['rating'];?><br>
-                <?php if ($db_folder['binaria']==="Não") {echo "<b>Comissão: </b>R$ ", number_format( $data_resumo_rel['comissao'],2,",",".");} else {echo "<b>Comissão: </b>R$ 300,00";}?><br>
+                <?php if ($db_tb_folder['binaria']==="Não") {echo "<b>Comissão: </b>R$ ", number_format( $data_resumo_rel['comissao'],2,",",".");} else {echo "<b>Comissão: </b>R$ 300,00";}?><br>
                 
                 <!--     GERENCIAL        -->
                 <br><br><h3>Classificação Gerencial</h3><br>
@@ -247,7 +246,7 @@
     <!-- BOTAO ADICIONAR PEDIDO INICIAL-->
         <?php
             echo "
-            <a class='btn btn-sm btn-primary' href='pedidoNovo.php?id_pasta=$db_folder[id_pasta]' title='Adicionar Pedido'>
+            <a class='btn btn-sm btn-primary' href='pedidoNovo.php?id_pasta=$db_tb_folder[id_pasta]' title='Adicionar Pedido'>
                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
                     <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
                 </svg> Adicionar Pedido Inicial
@@ -299,7 +298,7 @@
                                     <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                                 </svg>
                             </a>
-                            <a class='btn btn-sm btn-warning' href='graficosPedido.php?tipo_pedido=$row[tipo_pedido]&id_pasta=$row[id_pasta]' title='Ver gráfico do pedido'>
+                            <a class='btn btn-sm btn-warning' href='graficosPedido.php?tipo_pedido=$row[tipo_pedido]&id_pasta=$row[pasta]' title='Ver gráfico do pedido'>
                                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-graph-up' viewBox='0 0 16 16'>
                                     <path fill-rule='evenodd' d='M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z'/>
                                 </svg>
@@ -357,7 +356,7 @@
                                             <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                                         </svg>
                                     </a>
-                                    <a class='btn btn-sm btn-warning' href='graficosPedido.php?tipo_pedido=$row[tipo_pedido]&id_pasta=$row[id_pasta]' title='Ver gráfico do pedido'>
+                                    <a class='btn btn-sm btn-warning' href='graficosPedido.php?tipo_pedido=$row[tipo_pedido]&id_pasta=$row[pasta]' title='Ver gráfico do pedido'>
                                         <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-graph-up' viewBox='0 0 16 16'>
                                             <path fill-rule='evenodd' d='M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z'/>
                                         </svg>
@@ -414,7 +413,7 @@
                                     <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                                 </svg>
                             </a>
-                            <a class='btn btn-sm btn-warning' href='graficosPedido.php?tipo_pedido=$row[tipo_pedido]&id_pasta=$row[id_pasta]' title='Ver gráfico do pedido'>
+                            <a class='btn btn-sm btn-warning' href='graficosPedido.php?tipo_pedido=$row[tipo_pedido]&id_pasta=$row[pasta]' title='Ver gráfico do pedido'>
                                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-graph-up' viewBox='0 0 16 16'>
                                 <path fill-rule='evenodd' d='M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z'/>
                                 </svg>
@@ -469,7 +468,7 @@
                                     <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
                                 </svg>
                             </a>
-                            <a class='btn btn-sm btn-warning' href='graficosPedido.php?tipo_pedido=$row[tipo_pedido]&id_pasta=$row[id_pasta]' title='Ver gráfico do pedido'>
+                            <a class='btn btn-sm btn-warning' href='graficosPedido.php?tipo_pedido=$row[tipo_pedido]&id_pasta=$row[pasta]' title='Ver gráfico do pedido'>
                                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-graph-up' viewBox='0 0 16 16'>
                                     <path fill-rule='evenodd' d='M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z'/>
                                 </svg>
@@ -486,7 +485,7 @@
             <?php
                     
                 echo "
-                <a class='btn btn-sm btn-secondary' href='pedidoEtapaNova.php?id_pasta=$db_folder[id_pasta]' title='Adicionar Nova Etapa'>
+                <a class='btn btn-sm btn-secondary' href='pedidoEtapaNova.php?id_pasta=$db_tb_folder[id_pasta]' title='Adicionar Nova Etapa'>
                 <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
                 <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
                 <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>

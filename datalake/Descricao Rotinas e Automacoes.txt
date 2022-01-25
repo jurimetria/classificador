@@ -1,0 +1,19 @@
+1.Judice envia, diariamente para uma pasta no S3(lp-judice-csv), um retrato (query) da base de dados do dia. 
+Como ele faz isso as 5h da manhã, os dados são sempre do dia anterior.
+
+2.Criei uma rotina para executar um script em Python diariamente as 6h da manhã. 
+Primeiramente o script faz o download da última query e o salva como "ultima_query.gz"
+Em seguida executa toda a ETL necessária para extrair os dados mais fielmente possível
+Este script cria os arquivos "datalake.csv" , "ipca_idx.csv", "tb_calc_linear.csv"
+O script se chama "aws-py-xlsx.py" 
+O BAT que o executa se chama "run_conda_datalake.bat"
+A automação está no task manager como "datalake_diario"
+
+3.As 6:25 roda uma rotina chamada "run_datalake_load_local.bat" que carrega no banco de dados "lp_db" o datalake na tabela "tb_datalake"
+O script se chama "datalake_load_local.sql"
+O BAT se chama "run_datalake_load_local.bat"
+A automação está no task manager como "upload_datalake_no_lpdb"
+
+4.As 7:30 o Power BI atualiza os painéis "Operacional", "Gerencial", "Gerencial-Master" e "Estrategico"
+com os dados do datalake
+

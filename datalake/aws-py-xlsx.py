@@ -32,7 +32,7 @@ df = pd.read_csv("C:\\xampp\\htdocs\\dashboard\\datalake\\ultima_query.gz", deli
 df = pd.DataFrame(df)
 
 # Escolhe as colunas e coloca na base
-base = df.iloc[:,[1,2,3,4,5,6,8,9,10,11,12,13,14,15,16,23,24,45]]
+base = df.iloc[:,[1,2,3,4,5,6,8,9,10,11,12,13,14,15,16,23,24,25,26,36,37,38,45]]
 
 print("Dataframe montado")
 ######################
@@ -528,10 +528,10 @@ xdata_out['unidade'] = xdata_out['unidade'].replace("Passo Fundo","Porto Alegre"
 xdata_out = xdata_out.replace(np.nan, '', regex=True)
 
 # Renomeia colunas
-xdata_out.rename(columns={'namefolder':'pasta','namearea':'area', 'nameactiontype':'tipo_de_acao','namephase':'fase','nameclient':'cliente','distributiondate':'data_ajuizamento','nameparticipant':'parte','reativacao_date':'data_reativacao','date_requerimento':'data_requerimento','closereason':'motivo_encerramento','closedate':'data_encerramento_processo','closedatefolder':'data_encerramento_pasta','emailclient':'email'}, inplace=True)
+xdata_out.rename(columns={'namefolder':'pasta','namearea':'area', 'nameactiontype':'tipo_de_acao','namephase':'fase','namedistrict':'comarca','nameclient':'cliente','distributiondate':'data_ajuizamento','nameparticipant':'parte','reativacao_date':'data_reativacao','date_requerimento':'data_requerimento','closereason':'motivo_encerramento','closedate':'data_encerramento_processo','closedatefolder':'data_encerramento_pasta','emailclient':'email'}, inplace=True)
 
 # escolhe as colunas da saída
-xdata_out_dl = xdata_out[['n_processo','pasta','cliente','email','unidade','area','ramo','tipo_de_acao','fase','parte','motivo_encerramento','data_abertura','data_encerramento_processo','data_encerramento_pasta','data_reativacao','data_requerimento','data_ajuizamento','status','demora_aj_meses','demora_req_meses','decorrido_meses']]
+xdata_out_dl = xdata_out[['n_processo','pasta','cliente','email','unidade','area','ramo','tipo_de_acao','fase','parte','comarca','motivo_encerramento','data_abertura','data_encerramento_processo','data_encerramento_pasta','data_reativacao','data_requerimento','data_ajuizamento','status','demora_aj_meses','demora_req_meses','decorrido_meses']]
 
 
 print("Arquivos preparados para a saída")

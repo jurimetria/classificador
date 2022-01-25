@@ -27,7 +27,7 @@
             
 
             
-            <!-- CADASTRAR NOVA PASTA -->
+            <!-- CADASTRAR NOVA PASTA 
             <div class=' container-fluid'>
                 <a class='button' href='pastaNova.php'>Cadastrar Nova Pasta</a>
             </div>
