@@ -76,7 +76,7 @@
     #print_r("<br>");
     #print_r($logadoAvaliador);
 
-    # VER AVALIADOR
+    # VER AVALIADOR - Trava o nome do avaliador = sem opção de escolher um terceiro
     if ($logadoAvaliadorTipo==='avaliador'){$query = "SELECT nome FROM tb_usuarios WHERE nome='$logadoAvaliador'"; }
     else {$query = "SELECT nome FROM tb_usuarios WHERE secGroup='avaliador' ORDER BY nome ASC ";}
     

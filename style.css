@@ -489,7 +489,15 @@ transition-duration: 0.25s;
     transition-duration: 0.25s;
     }
 
+.centerBox{
+    width: 300px;
+height: 200px;
+top: 50%;
+left: 50%;
+margin-left: -150px;
+margin-top: -100px;
 
+}
 .botoesAcoes{
 background-color: dodgerblue;
 text-decoration: none;

@@ -223,46 +223,39 @@
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>
                     </div>
-                </div>
-                <br><br>
-
-
-                <!-- PARTE DISCRICIONÁRIA -->
-                <p><b> Informações Discricionárias: </b></p>
-
+                </div><br><br>
                 
+                <!-- PARTE DISCRICIONÁRIA -->
+                <p><b> Informações Complementares: </b></p>
+
                 <div class="inputBox" class="container">
                 <label for="binaria" >É Binária: </label>
                     <select id="binaria" name="binaria">
                     <option value="Sim" <?php if($db_f['binaria']=="Sim") echo 'selected="selected"'; ?>>Sim</option>
                     <option value="Não" <?php if($db_f['binaria']=="Não") echo 'selected="selected"'; ?>>Não</option>
                     </select>
-                </div>
-                <br><br>
-
+                </div><br><br>
+                
                 <div class="inputBox">
                     <input type = "number" step="0.01" min="0" name="salario" id="salario" class="inputUser" value="<?php echo $db_f['salario'] ?>" >
                     <label for="salario" class="labelInput">Última Remuneração</label>
-                </div>
-                <br> 
-
+                </div><br>
+                 
                 <div class="inputBox">
                     <input type = "text" name="cargo" id="cargo" class="inputUser" value="<?php echo $db_f['cargo'] ?>" >
                     <label for="cargo" class="labelInput">Cargo</label>
-                </div>
-                <br>
-
+                </div><br>
+                
                 <div class="inputBox">
                     <input type = "text" name="periodo" id="periodo" class="inputUser" value="<?php echo $db_f['periodo'] ?>" >
                     <label for="periodo" class="labelInput">Período Discutido</label>
-                </div>
-                <br>
-
+                </div><br>
+                
                 <div class="inputBox">
                 <label for="obs" class="label">Observações</label>
                     <textarea name="obs" id="obs" class="obsBox" rows="4" cols="50"><?php echo $db_f['obs'] ?></textarea>
-                </div>
-                <br>
+                </div><br>
+                
                 <input type="hidden" name="novapasta" id="novapasta" value="<?php echo $novapasta;?>">
                 <input type="hidden" name="id_pasta" id="id_pasta" value="<?php echo $id_pasta;?>">
                 <input type="hidden" name="logado" id="logado" value="<?php echo $logado;?>">

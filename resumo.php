@@ -83,7 +83,7 @@
         else{$unid_sentence="";}
         
 
-        $state_prep = 'SELECT * FROM view_04_resumo WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.') ORDER BY id_pasta ASC';
+        $state_prep = 'SELECT * FROM view_04_resumo WHERE (ano_avaliacao=\''.$ano_avaliacao.'\'  AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.') ORDER BY id_pasta ASC';
         
         $teste = "1";
         
@@ -109,19 +109,19 @@
 
     // SOMA VALOR TOTAL DE Classificação Global (Valor Médio)
     $sum_val_total_cme = $pdo->prepare('SELECT SUM(valor_cme) AS valor  FROM view_04_resumo
-    WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
+    WHERE (ano_avaliacao=\''.$ano_avaliacao.'\'  AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_val_total_cme->execute();
     $sum_val_total_cme_return = $sum_val_total_cme->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE HONORÁRIOS ESPERADOS
     $sum_honorarios = $pdo->prepare('SELECT SUM(honorarios_esp) AS valor FROM view_04_resumo
-    WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
+    WHERE (ano_avaliacao=\''.$ano_avaliacao.'\'  AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_honorarios->execute();
     $sum_honorarios_return = $sum_honorarios->fetch(PDO::FETCH_ASSOC);
 
     // SOMA VALOR TOTAL DE Comissao
     $sum_comissao = $pdo->prepare('SELECT SUM(comissao) AS valor FROM view_04_resumo
-    WHERE (ano_avaliacao=\''.$ano_avaliacao.'\' AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
+    WHERE (ano_avaliacao=\''.$ano_avaliacao.'\'  AND mes_avaliacao=\''.$mes_avaliacao.'\' '.$aval_sentence.' '.$unid_sentence.')  ;');
     $sum_comissao->execute();
     $sum_comissao_return = $sum_comissao->fetch(PDO::FETCH_ASSOC);
 

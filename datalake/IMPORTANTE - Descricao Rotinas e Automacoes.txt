@@ -1,0 +1,74 @@
+1.JUDICE PARA S3-AWS.Judice envia, diariamente para uma pasta no S3(lp-judice-csv), um retrato (query) da base de dados do dia. 
+Como ele faz isso as 5h da manhã, os dados são sempre do dia anterior.
+Horario: 8h UTC
+Periodicidade: Diário
+
+2.ETL NO JUDICE. Criei uma rotina para executar um script em Python diariamente as 6h (9h utc) da manhã. 
+Primeiramente o script faz o download da última query e o salva como "ultima_query.gz"
+Em seguida executa toda a ETL necessária para extrair os dados mais fielmente possível
+Este script cria os arquivos "datalake.csv" , "ipca_idx.csv", "tb_calc_linear.csv"
+Horario: 9h UTC
+Periodicidade: Diário
+O script se chama "py-aws-xlsx.py" 
+O BAT que o executa se chama "run_conda_datalake.bat"
+A automação está no task manager como "datalake_diario"
+
+3.CARREGA DL NO LPDB. As 6:25 (9h25m utc) roda uma rotina chamada "run_datalake_load_local.bat" que 
+carrega no banco de dados "lp_db" o datalake na tabela "tb_datalake"
+Horario: 9:25 UTC
+Periodicidade: Diário
+O script se chama "sql_datalake_load_local.sql"
+O BAT se chama "run_datalake_load_local.bat"
+A automação está no task manager como "upload_datalake_no_lpdb"
+
+4.POWER BI DASHBOARDS. As 7:30 o Power BI atualiza os painéis "Operacional", "Gerencial", "Gerencial-Master" e "Estrategico"
+com os dados do datalake
+Horario: 10:30 UTC
+
+5.IPCA IDX. Toda segunda feira as 5h da manha (8h utc) roda uma rotina para buscar os valores atualizados de IPCA no BACEN
+Horario: 8h UTC 
+Periodicidade: as segundas-feiras
+O script se chama "py_ipca_idx_bacen.py"
+O BAT se chama "run_py_ipca_idx_bacen.bat"
+A automação está no task manager como "ipca_idx_semanal"
+
+6.Rastreador de alteração de FASE. Todos os dias, as 9:30 UTC, roda uma rotina para comparar se houve alteração de ontem para hoje 
+na coluna FASE do arquivo datalake.csv. São considerados todas as linhas do arquivo. Caso houve alteração de um dia para o outro, 
+os números da pasta e processo são adicionados ao arquivo dl-fase.csv.
+Horário: 9:30 UTC
+Periodicidade: Diário
+O script se chama "py_datalake_fase.py"
+O BAT se chama "run_py_datalake_fase.bat"
+A automação está no task manager como "dl_fase_diario"
+
+7.Exporta as Pastas que atualmente estão no Classificador sendo avaliadas. Diariamente. Converte para CSV
+Horário: 9:30 UTC
+Periodicidade: Diário
+O script se chama "sql_pastas_no_lpdb.sql"
+O BAT se chama "run_lpdb_pastas.bat"
+A automação está no task manager como "pastas_no_lpdb_diario"
+
+8.Seleciona ass pastas do classy que sofreram alteração nos  últimos 7 dias. Semanalmente.
+Horário: 9:35 UTC 
+Periodicidade: as segundas-feiras
+O script se chama "py_alts_fase_class.py"
+O BAT se chama "run_py_alts_fase_class.bat"
+A automação está no task manager como "pastas_do_class_alteradas"
+
+9.Backup do lp_db
+Horário: 5:00 UTC 
+Periodicidade: domingos e quintas
+O BAT se chama "run_shell_backup_lpdb.bat"
+A automação está no task manager como "backup_lpdb"
+
+10.Backup do script do site classificador
+Horário: 5:00 UTC 
+Periodicidade: Diário
+O BAT se chama "run_shell_backup_script_classificador.bat"
+A automação está no task manager como "run_shell_backup_script_classificador"
+
+
+
+
+
+

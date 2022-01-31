@@ -33,6 +33,10 @@
     <!-- BARRA DE NAVEGAÇÃO -->
     <?php echo $navBarClean ?><br>
 
+<!-- COLUNAS CENTRAIS -->
+<div class="row">
+        <!-- COLUNA DA ESQUERDA -->
+        <div class="column side2 alignLeft">
 
     <br><br>
         <!-- LINK PÁGINA RESUMO -->
@@ -63,5 +67,70 @@
             </form>
     </div>
 
+    </div>
+
+    <!-- Prepara o csv para ser lido como uma tabela array -->
+    <?php
+    $lines = file('C:/xampp/htdocs/dashboard/datalake/alts_fase_class.csv');
+    $header = array_shift($lines);
+    $states = array_map(function ($line) use ($header) {
+        $state = array_combine(
+            str_getcsv($header),
+            str_getcsv($line)
+        );
+        return $state;
+    }, $lines);
+    ?>
+    
+        
+
+    <div class="column side2 alignCenter">
+    <br><br>
+        <h1 class='alignRight'>Pastas com nova alteração de Fase</h1>  <br>
+        <h3 class='alignRight'>Atualizado sempre nas segundas-feiras às 7h</h3><br><br>
+        
+        
+            <table  class='table text-white table-bg'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Pasta</th>
+                        <th scope='col'>Nova Fase</th>
+                        <th scope='col'>Unidade</th>
+                        <th scope='col'>Área</th>
+                        <th scope='col'>Ir</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php
+                    foreach($states as $row) 
+                        {echo "<tr>";
+                            echo "<td>".$row['pasta']."</td>";
+                            echo "<td>".$row['novo_status_fase']."</td>";
+                            echo "<td>".$row['unidade']."</td>";
+                            echo "<td>".$row['area']."</td>";
+                            echo "<td>
+                        <a class='btn btn-sm btn-primary ' href='sistema.php?id_pasta=$row[pasta]' name='id_pasta' title='Ver Pasta'>
+                        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-arrow-up-right-square' viewBox='0 0 16 16'>
+                            <path fill-rule='evenodd' d='M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z'/>
+                        </svg>
+                        </a> 
+                        </td>";
+                            echo "</tr>";
+                    }
+                    ?>
+                
+                </tbody> 
+            </table> 
+        
+    </div>
+                
+   
+
+    
 </body>
 </html>
+
+
+    

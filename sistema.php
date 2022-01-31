@@ -89,19 +89,7 @@
 
     include('salvaDados.php');
 
-    $dataExclusao= $db_tb_folder['horario'];
-    $dataExclusao_ts= strtotime($dataExclusao. ' + 7 days');
-    $dataExclusao_format = date('d/m/Y',$dataExclusao_ts);
-    $emExclusao="";
-    $emExclusao2="";
-    $emExclusao3="";
-    $emExclusao4="";
-    if($db_tb_folder['folderDel']==='SIM'){
-        $emExclusao = "<br> PASTA EM PROCESSO DE EXCLUSÃO";
-        $emExclusao2 = "Todo o seu conteúdo e pedidos serão apagados";
-        $emExclusao4 = "em $dataExclusao_format";
-        $emExclusao3 = "Para reverter este procedimento entre em contato com o Administrador";
-    } 
+
 
 
     include('script.js');
@@ -146,14 +134,15 @@
             <!-- TABELA DETALHES -->
             <div class="column side alignLeft" >
                 <h3>Dados da Pasta</h3><br>
-              
+                <p>Dados do Judice:</p>
                 <?php echo "<b>Área: </b>", $db_tb_dl['area'];?><br>
                 <?php echo "<b>Unidade: </b>", $db_tb_dl['unidade'];?><br>
                 <?php echo "<b>Comarca: </b>", $db_tb_dl['comarca'];?><br>
                 <?php echo "<b>Reclamante: </b>", $db_tb_dl['cliente'];?><br>
                 <?php echo "<b>Reclamada: </b>", $db_tb_dl['parte'];?><br>
                 <?php echo "<b>Ramo: </b>", $db_tb_dl['ramo'];?><br>
-                <?php echo "<b>Tipo de Ação: </b>", $db_tb_dl['tipo_de_acao'];?><br>
+                <?php echo "<b>Tipo de Ação: </b>", $db_tb_dl['tipo_de_acao'];?><br><br>
+                <p>Dados Complementares:</p>
                 <?php echo "<b>É binária: </b>", $db_tb_folder['binaria'];?><br>
                 <?php echo "<b>Cargo: </b>", $db_tb_folder['cargo'];?><br>
                 <?php echo "<b>Período Discutido: </b>", $db_tb_folder['periodo'];?><br>
@@ -210,6 +199,7 @@
                 <?php if(count($data_pedidos_aval_inicial) === 0) {} else {echo $tabela_aval_inicial;} ?>
                 <tbody>
                     <?php foreach($data_pedidos_aval_inicial as $row) {
+                    
                         echo "<tr>";
                         echo "<td>".$row['tipo_pedido']."</td>";
                         echo "<td>".$row['avaliador']."</td>";
